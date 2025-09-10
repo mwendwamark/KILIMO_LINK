@@ -1,4 +1,179 @@
-img{
-  height: 120px;
-  width: 120px;
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&family=Outfit:wght@100..900&display=swap");
+:root {
+  --bg_color: #ffffff;
+  --white_alt_color: #f3f5f7;
+  --green_color: #40bf40;
+  --light_green_color: #eff8ce;
+  --text_color: #322f30;
+  --grey_alt_color: #f0f4f9;
+  --light_grey_color: #808080;
+  --dark_grey_color: #404040;
+
+  --bright_green: #50d050;
+  --deep_green: #30a030;
+  --emerald_green: #2dd4bf;
+  --lime_accent: #84cc16;
+
+  --league_spartan: "League Spartan", sans-serif;
+  --outfit: "Outfit", sans-serif;
+
+  --hero_fs: 5rem;
+  --section_fs: 3rem;
+  --sub_section_fs: 2.25rem;
+  --pre_title_fs: 1.125rem;
+  --button_fs: 1.1rem;
+  --text_fs: 1rem;
+  --link_fs: 0.9375rem;
+
+  --fw_regular: 400;
+  --fw_medium: 500;
+  --fw_bold: 700;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--outfit);
+  background-color: var(--bg_color);
+  color: var(--text_color);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+button {
+  border: none;
+  outline: none;
+  background: none;
+}
+
+.container {
+  max-width: 94%;
+  margin: 0 auto;
+}
+
+.section {
+  padding: 7rem 0 1rem 0;
+}
+
+.normal_button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 2rem;
+  font-family: var(--league_spartan);
+  font-size: var(--button_fs);
+  font-weight: var(--fw_regular);
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 3rem;
+  gap: 1rem;
+  background-color: var(--green_color);
+  color: var(--bg_color);
+  transition: all 0.3s ease-in-out;
+}
+
+.normal_button:hover {
+  background-color: var(--bg_color);
+  color: var(--green_color);
+  border: 2px solid var(--green_color);
+  transition: all 0.3s ease-in-out;
+}
+
+.normal_button_icon {
+  color: var(--bg_color);
+  width: 16px;
+  height: 16px;
+}
+
+.normal_button:hover .normal_button_icon {
+  color: var(--green_color);
+  transform: rotate(-45deg);
+}
+
+.normal_button_white {
+  background-color: var(--bg_color);
+  color: var(--text_color);
+}
+
+.custom_arrow_button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding: 0.8rem 1.25rem 0.8em 1.75rem;
+  font-family: var(--league_spartan);
+  font-size: var(--button_fs);
+  font-weight: var(--fw_regular);
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  border-radius: 50px;
+  min-width: 160px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.custom_arrow_button:hover {
+  background: linear-gradient(135deg, var(--deep_green), var(--green_color));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(64, 191, 64, 0.3);
+}
+
+.custom_arrow_button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(64, 191, 64, 0.2);
+}
+
+.button_text {
+  flex: 1;
+  text-align: left;
+}
+
+.button_arrow_circle {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  background-color: var(--text_color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 15px;
+  transition: all 0.3s ease;
+}
+
+.custom_arrow_button:hover .button_arrow_circle {
+  background-color: var(--dark_grey_color);
+  transform: rotate(45deg);
+}
+
+.arrow_icon {
+  color: var(--bg_color);
+  width: 18px;
+  height: 18px;
+  transition: all 0.3s ease;
+}
+
+.custom_arrow_button:hover .arrow_icon {
+  transform: rotate(-45deg);
+}
+
+.custom_arrow_button.white {
+  background-color: var(--bg_color);
+  color: var(--text_color);
 }
