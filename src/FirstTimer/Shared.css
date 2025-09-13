@@ -1,0 +1,57 @@
+.section-headers {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.section-title {
+  font-family: var(--league_spartan);
+  font-size: var(--section_fs);
+  font-weight: var(--fw_medium);
+  letter-spacing: -1px;
+  line-height: 1.2;
+  margin: 0;
+}
+.pre-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.pre-title-line {
+  width: 3rem;
+  height: 2px;
+}
+
+.pre-title-text {
+  font-family: var(--league_spartan);
+  font-size: var(--pre_title_fs);
+  font-weight: var(--fw_medium);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* White */
+.pre-title-text.white {
+  color: var(--bg_color);
+}
+
+.pre-title-line.white {
+  background-color: var(--bg_color);
+}
+
+/* Green */
+.pre-title-text.green {
+  color: var(--lime_accent);
+}
+
+.pre-title-line.green {
+  background-color: var(--lime_accent);
+}
+
+@media screen and (max-width: 900px) {
+  .pre-title-line.hero {
+    background-color: var(--bg_color);
+  }
+}

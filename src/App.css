@@ -27,7 +27,7 @@
 
   --fw_regular: 400;
   --fw_medium: 500;
-  --fw_bold: 700;
+  --fw_bold: 600;
 }
 
 * {
@@ -61,12 +61,16 @@ button {
 }
 
 .container {
-  max-width: 94%;
+  max-width: 90%;
   margin: 0 auto;
 }
 
+.below_navbar {
+  padding: 11rem 0;
+}
+
 .section {
-  padding: 7rem 0 1rem 0;
+  padding: 10rem 0 1rem 0;
 }
 
 .normal_button {
@@ -115,7 +119,7 @@ button {
   align-items: center;
   justify-content: space-between;
   position: relative;
-  padding: 0.8rem 1.25rem 0.8em 1.75rem;
+  padding: 0.7rem 1.25rem 0.7em 1.75rem;
   font-family: var(--league_spartan);
   font-size: var(--button_fs);
   font-weight: var(--fw_regular);
@@ -176,4 +180,15 @@ button {
 .custom_arrow_button.white {
   background-color: var(--bg_color);
   color: var(--text_color);
+}
+
+.custom_arrow_button.green {
+  background-color: var(--green_color);
+  color: var(--bg_color);
+}
+
+@media screen and (max-width: 900px) {
+  .pre-title-line.white {
+    background-color: var(--bg_color);
+  }
 }

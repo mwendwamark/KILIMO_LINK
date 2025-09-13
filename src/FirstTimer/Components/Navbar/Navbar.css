@@ -6,6 +6,11 @@
   z-index: 10;
   border-bottom: none;
 }
+.scroll_navbar {
+  /* background-color: rgba(209, 206, 206, 0.8); */
+  border-bottom: 1px solid var(--white_alt_color);
+  background-color: var(--bg_color);
+}
 
 .main_navbar-container {
   width: 100%;
@@ -38,7 +43,7 @@
 }
 
 .main_navbar-menu li a {
-  color: var(--dark_grey_color);
+  color: var(--bg_color);
   font-size: var(--fw_regular);
   font-family: var(--league_spartan);
 }
@@ -49,6 +54,16 @@
 
 .main_navbar-menu li a:hover {
   color: var(--green_color);
+  transition: all 0.3s ease-in-out;
+}
+
+.scroll_navbar .main_navbar-menu li a {
+  color: var(--text_color);
+}
+
+.scroll_navbar .main_navbar-menu li a.active {
+  color: var(--green_color);
+  text-decoration: underline;
   transition: all 0.3s ease-in-out;
 }
 
