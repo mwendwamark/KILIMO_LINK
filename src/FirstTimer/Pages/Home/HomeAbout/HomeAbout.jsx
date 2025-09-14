@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Handshake, Lightbulb, Users } from "lucide-react";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import "./HomeAbout.css";
 import "../../../Shared.css";
 
@@ -9,6 +11,14 @@ const HomeAbout = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 100,
+    });
+
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 1000);
     };
@@ -89,7 +99,11 @@ const HomeAbout = () => {
       <div className="container section">
         {/* Header Section */}
         <div className="three-ways-header">
-          <div className="header-left section-headers">
+          <div 
+            className="header-left section-headers"
+            data-aos="fade-right"
+            data-aos-delay="100"
+          >
             <div className="pre-title">
               <span className="pre-title-line green"></span>
               <span className="pre-title-text green">HOW IT WORKS</span>
@@ -98,7 +112,11 @@ const HomeAbout = () => {
               Three Ways to Grow with Kilimo Link
             </h1>
           </div>
-          <div className="header-right">
+          <div 
+            className="header-right"
+            data-aos="fade-left"
+            data-aos-delay="200"
+          >
             <p className="home-about-description">
               Whether you're looking to sell your harvest, learn new techniques,
               or build lasting partnerships, our platform connects you with
@@ -109,7 +127,7 @@ const HomeAbout = () => {
 
         {/* Cards Section */}
         <div className="three-ways-cards">
-          {cards.map((card) => {
+          {cards.map((card, index) => {
             const IconComponent = card.icon;
             const isExpanded = isMobile
               ? activeCard === card.id
@@ -126,10 +144,15 @@ const HomeAbout = () => {
                   boxShadow: isExpanded
                     ? `0 20px 60px ${card.shadowColor}, 0 0 40px ${card.glowColor}`
                     : `0 8px 32px ${card.shadowColor}`,
+                  opacity: 1,
+                  transform: 'none',
                 }}
                 onClick={() => handleCardClick(card.id)}
                 onMouseEnter={() => handleMouseEnter(card.id)}
                 onMouseLeave={handleMouseLeave}
+                data-aos="fade-up"
+                data-aos-delay={300 + (card.id * 100)}
+                data-aos-duration="600"
               >
                 <div
                   className="card-glow"

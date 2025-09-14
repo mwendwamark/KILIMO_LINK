@@ -12,6 +12,7 @@
   line-height: 1.2;
   margin: 0;
 }
+
 .pre-title {
   display: flex;
   align-items: center;
@@ -49,9 +50,16 @@
 .pre-title-line.green {
   background-color: var(--lime_accent);
 }
-
+@media (max-width: 1165px) {
+  .section-title {
+    font-size: 2rem;
+  }
+}
 @media screen and (max-width: 900px) {
   .pre-title-line.hero {
     background-color: var(--bg_color);
+  }
+  .pre-title-text.hero {
+    color: var(--bg_color);
   }
 }

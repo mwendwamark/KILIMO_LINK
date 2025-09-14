@@ -1,0 +1,340 @@
+/* WhyChooseUs.css - Modern Version */
+
+.why-choose-us-section {
+  background: linear-gradient(135deg, #f8fffe 0%, #f0fff4 100%);
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+.why-choose-us-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(100, 200, 100, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.why-choose-us-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  position: relative;
+  z-index: 2;
+}
+
+.why-choose-us-title{
+  max-width: 50%;
+}
+
+.why-choose-us-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  margin-bottom: 4rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.why-choose-us-description {
+  max-width: 80%;
+  font-family: var(--outfit);
+  font-size: var(--text_fs);
+  color: var(--light_grey_color);
+  line-height: 1.6;
+  margin: 0;
+}
+.why-choose-us-benefits {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  gap: 2rem;
+}
+
+.highlight-text{
+  color: var(--green_color);
+}
+
+/* Left Benefits Section */
+.benefits-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.benefits-top {
+  display: flex;
+  gap: 2rem;
+}
+
+.benefits-top-card {
+  flex: 1;
+}
+
+.benefits-bottom {
+  width: 100%;
+}
+
+/* Modern Card Styles */
+.modern-card {
+  position: relative;
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  background-color: var(--white_alt_color);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.benefits-right-card.modern-card {
+  background: linear-gradient(135deg, var(--green_color) 0%, var(--deep_green) 100%);
+  color: white;
+}
+
+.modern-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(64, 191, 64, 0.15);
+}
+
+.benefits-right-card.modern-card:hover {
+  box-shadow: 0 15px 40px rgba(64, 191, 64, 0.3);
+}
+
+/* Card Icon */
+.card-icon-container {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  background: rgba(64, 191, 64, 0.1);
+  color: var(--green_color);
+  transition: all 0.3s ease;
+}
+
+.benefits-right-card .card-icon-container {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.modern-card:hover .card-icon-container {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.card-icon {
+  width: 28px;
+  height: 28px;
+}
+
+/* Card Headings */
+.modern-card h2 {
+  font-size: 1.5rem;
+  font-weight: var(--fw_medium);
+  font-family: var(--league_spartan);
+  letter-spacing: -0.5px;
+  margin-bottom: 1rem;
+  color: var(--text_color);
+}
+
+.benefits-right-card h2 {
+  color: white;
+  font-size: 1.8rem;
+}
+
+/* Card Paragraphs */
+.modern-card p {
+  font-family: var(--outfit);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--light_grey_color);
+  margin-bottom: 1.5rem;
+}
+
+.benefits-right-card p {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.benefits-texts p:first-child {
+  margin-bottom: 1.5rem;
+}
+
+/* Right Benefits Section */
+.benefits-right {
+  flex: 1;
+}
+
+/* Button in Highlight Card */
+.benefits-right-card .custom_arrow_button {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+/* Card Decorations */
+.card-decoration {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  opacity: 0.1;
+}
+
+.card-decoration::after {
+  content: '';
+  position: absolute;
+  bottom: -40px;
+  right: -40px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--green_color);
+}
+
+.benefits-right-card .card-decoration::after {
+  background: white;
+}
+
+/* Highlight Card Decorations */
+.highlight-decoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.decoration-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.circle-1 {
+  width: 120px;
+  height: 120px;
+  top: -40px;
+  right: -40px;
+}
+
+.circle-2 {
+  width: 80px;
+  height: 80px;
+  bottom: 60px;
+  left: -20px;
+}
+
+.circle-3 {
+  width: 60px;
+  height: 60px;
+  bottom: -20px;
+  right: 60px;
+}
+
+/* Responsive Design */
+@media (max-width: 1165px) {
+  .section-title {
+    font-size: 2.5rem;
+  }
+
+  .why-choose-us-title {
+    max-width: 100%;
+  }
+
+  .benefits-top {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 1028px) {
+  .why-choose-us-header {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .why-choose-us-description {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 992px) {
+  .why-choose-us-benefits {
+    flex-direction: column;
+  }
+  
+  .benefits-left, .benefits-right {
+    max-width: 100%;
+  }
+  
+  .benefits-right-card {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .why-choose-us-section {
+    padding: 4rem 0;
+  }
+  
+  .why-choose-us-container {
+    gap: 3rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .modern-card {
+    padding: 2rem;
+  }
+  
+  .modern-card h2 {
+    font-size: 1.4rem;
+  }
+  
+  .benefits-right-card h2 {
+    font-size: 1.6rem;
+  }
+  
+  .card-icon-container {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 1rem;
+  }
+  
+  .card-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modern-card {
+    padding: 1.5rem;
+  }
+  
+  .modern-card h2 {
+    font-size: 1.3rem;
+  }
+  
+  .benefits-right-card h2 {
+    font-size: 1.4rem;
+  }
+  
+  .modern-card p {
+    font-size: 0.95rem;
+  }
+}

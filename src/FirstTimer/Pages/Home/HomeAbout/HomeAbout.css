@@ -205,6 +205,9 @@
 }
 
 @media (max-width: 1165px) {
+  .home-about-title {
+    max-width: 100%;
+  }
   .three-ways-cards {
     height: 450px;
   }
@@ -220,7 +223,6 @@
 
   .home-about-title {
     font-size: 2rem;
-    max-width: 100%;
   }
 
   .home-about-description {
