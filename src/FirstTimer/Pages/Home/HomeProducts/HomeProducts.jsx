@@ -77,6 +77,7 @@ const HomeProducts = () => {
             <div key={product.id} className="product-card">
               <div className="product-image-container">
                 <img
+                loading="lazy"
                   src={product.image}
                   alt={product.productName}
                   className="product-image"
