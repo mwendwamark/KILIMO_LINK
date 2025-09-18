@@ -50,6 +50,10 @@
 .pre-title-line.green {
   background-color: var(--lime_accent);
 }
+
+.highlight-text {
+  color: var(--green_color);
+}
 @media (max-width: 1165px) {
   .section-title {
     font-size: 2rem;

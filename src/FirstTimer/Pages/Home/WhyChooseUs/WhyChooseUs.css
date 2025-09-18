@@ -8,13 +8,17 @@
 }
 
 .why-choose-us-section::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -50%;
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle at center, rgba(100, 200, 100, 0.05) 0%, transparent 70%);
+  background: radial-gradient(
+    circle at center,
+    rgba(100, 200, 100, 0.05) 0%,
+    transparent 70%
+  );
   pointer-events: none;
 }
 
@@ -27,7 +31,7 @@
   z-index: 2;
 }
 
-.why-choose-us-title{
+.why-choose-us-title {
   max-width: 50%;
 }
 
@@ -53,10 +57,6 @@
   display: flex;
   align-items: stretch;
   gap: 2rem;
-}
-
-.highlight-text{
-  color: var(--green_color);
 }
 
 /* Left Benefits Section */
@@ -95,7 +95,11 @@
 }
 
 .benefits-right-card.modern-card {
-  background: linear-gradient(135deg, var(--green_color) 0%, var(--deep_green) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--green_color) 0%,
+    var(--deep_green) 100%
+  );
   color: white;
 }
 
@@ -191,7 +195,7 @@
 }
 
 .card-decoration::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -40px;
   right: -40px;
@@ -245,10 +249,6 @@
 
 /* Responsive Design */
 @media (max-width: 1165px) {
-  .section-title {
-    font-size: 2.5rem;
-  }
-
   .why-choose-us-title {
     max-width: 100%;
   }
@@ -274,11 +274,12 @@
   .why-choose-us-benefits {
     flex-direction: column;
   }
-  
-  .benefits-left, .benefits-right {
+
+  .benefits-left,
+  .benefits-right {
     max-width: 100%;
   }
-  
+
   .benefits-right-card {
     min-height: auto;
   }
@@ -288,33 +289,29 @@
   .why-choose-us-section {
     padding: 4rem 0;
   }
-  
+
   .why-choose-us-container {
     gap: 3rem;
   }
-  
-  .section-title {
-    font-size: 2rem;
-  }
-  
+
   .modern-card {
     padding: 2rem;
   }
-  
+
   .modern-card h2 {
     font-size: 1.4rem;
   }
-  
+
   .benefits-right-card h2 {
     font-size: 1.6rem;
   }
-  
+
   .card-icon-container {
     width: 50px;
     height: 50px;
     margin-bottom: 1rem;
   }
-  
+
   .card-icon {
     width: 24px;
     height: 24px;
@@ -325,15 +322,15 @@
   .modern-card {
     padding: 1.5rem;
   }
-  
+
   .modern-card h2 {
     font-size: 1.3rem;
   }
-  
+
   .benefits-right-card h2 {
     font-size: 1.4rem;
   }
-  
+
   .modern-card p {
     font-size: 0.95rem;
   }
