@@ -54,16 +54,75 @@
 .highlight-text {
   color: var(--green_color);
 }
+
 @media (max-width: 1165px) {
   .section-title {
     font-size: 2rem;
   }
 }
+
 @media screen and (max-width: 900px) {
   .pre-title-line.hero {
     background-color: var(--bg_color);
   }
   .pre-title-text.hero {
     color: var(--bg_color);
+  }
+}
+
+/* Shared utilities extracted from section CSS files */
+.two-col-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  margin-bottom: 4rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section-description {
+  max-width: 80%;
+  font-family: var(--outfit);
+  font-size: var(--text_fs);
+  color: var(--light_grey_color);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.section-description.white{
+  color: var(--bg_color);
+}
+
+.title-max-50 {
+  max-width: 50%;
+}
+
+.section-flex-col {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  position: relative;
+  z-index: 2;
+}
+
+.min-h-viewport {
+  min-height: 100vh;
+}
+
+@media (max-width: 1028px) {
+  .two-col-header {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+  .section-description {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 1165px) {
+  .title-max-50 {
+    max-width: 100%;
   }
 }

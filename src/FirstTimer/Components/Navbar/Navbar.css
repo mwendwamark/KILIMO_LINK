@@ -127,6 +127,10 @@
     color: var(--text_color);
     z-index: 15;
   }
+  
+  .main_navbar-container {
+    padding: 0.5rem 0;
+  }
 
   .main_navbar-menu {
     position: fixed;

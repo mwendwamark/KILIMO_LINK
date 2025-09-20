@@ -6,27 +6,8 @@
   margin: auto 0;
 }
 
-.three-ways-header {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  margin-bottom: 4rem;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .home-about-title {
-  max-width: 50%;
   color: var(--text_color);
-}
-
-.home-about-description {
-  max-width: 80%;
-  font-family: var(--outfit);
-  font-size: var(--text_fs);
-  color: var(--light_grey_color);
-  line-height: 1.6;
-  margin: 0;
 }
 
 .three-ways-cards {
@@ -205,9 +186,6 @@
 }
 
 @media (max-width: 1165px) {
-  .home-about-title {
-    max-width: 100%;
-  }
   .three-ways-cards {
     height: 450px;
   }
@@ -215,18 +193,8 @@
 
 /* Mobile Styles */
 @media (max-width: 1028px) {
-  .three-ways-header {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    margin-bottom: 3rem;
-  }
-
   .home-about-title {
     font-size: 2rem;
-  }
-
-  .home-about-description {
-    max-width: 100%;
   }
 
   .three-ways-cards {

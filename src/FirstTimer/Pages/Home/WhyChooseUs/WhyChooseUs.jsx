@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import "./WhyChooseUs.css";
+import "../../../Shared.css";
 import { Users, Globe, Shield, ArrowRight } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import AOS from "aos";
@@ -16,15 +17,15 @@ const WhyChooseUs = () => {
   }, []);
 
   return (
-    <section className="why-choose-us-section section">
-      <div className="why-choose-us-container container">
-        <div className="why-choose-us-header">
+    <section className="why-choose-us-section section min-h-viewport">
+      <div className="why-choose-us-container container section-flex-col">
+        <div className="why-choose-us-header two-col-header">
           <div className="header-left section-headers" data-aos="fade-up">
             <div className="pre-title">
               <span className="pre-title-line green"></span>
               <span className="pre-title-text green">Why choose us</span>
             </div>
-            <h1 className="section-title why-choose-us-title">
+            <h1 className="section-title why-choose-us-title title-max-50">
               Why <span className="highlight-text">Kilimo Link</span> is the
               right choice for you
             </h1>
@@ -34,7 +35,7 @@ const WhyChooseUs = () => {
             data-aos="fade-left"
             data-aos-delay="200"
           >
-            <p className="why-choose-us-description">
+            <p className="why-choose-us-description section-description">
               Experience the power of direct farmer-to-buyer connections that
               strengthen Kenya's agricultural community and promote sustainable
               farming practices.

@@ -95,10 +95,10 @@ const HomeAbout = () => {
   };
 
   return (
-    <section className="three-ways-section">
-      <div className="container section">
+    <section className="three-ways-section min-h-viewport">
+      <div className="container section section-flex-col">
         {/* Header Section */}
-        <div className="three-ways-header">
+        <div className="three-ways-header two-col-header">
           <div 
             className="header-left section-headers"
             data-aos="fade-right"
@@ -108,7 +108,7 @@ const HomeAbout = () => {
               <span className="pre-title-line green"></span>
               <span className="pre-title-text green">HOW IT WORKS</span>
             </div>
-            <h1 className="home-about-title section-title ">
+            <h1 className="home-about-title section-title title-max-50">
               Three Ways to Grow with Kilimo Link
             </h1>
           </div>
@@ -117,7 +117,7 @@ const HomeAbout = () => {
             data-aos="fade-left"
             data-aos-delay="200"
           >
-            <p className="home-about-description">
+            <p className="home-about-description section-description">
               Whether you're looking to sell your harvest, learn new techniques,
               or build lasting partnerships, our platform connects you with
               opportunities to thrive in Kenya's agricultural community.

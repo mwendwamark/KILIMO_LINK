@@ -1,35 +1,17 @@
 .home-products-section {
   width: 100%;
-  min-height: 100vh;
+  /* min-height handled by .min-h-viewport utility */
 }
+
 .home-products-container {
   display: flex;
   flex-direction: column;
   gap: 4rem;
 }
-.home-products-headers {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  margin-bottom: 4rem;
-  align-items: center;
-  justify-content: space-between;
-}
+
 .home-products-right-header,
 .home-products-left-header {
   max-width: 100%;
-}
-
-.home-products-title {
-  max-width: 50%;
-}
-.home-products-description {
-  max-width: 80%;
-  font-family: var(--outfit);
-  font-size: var(--text_fs);
-  color: var(--light_grey_color);
-  line-height: 1.6;
-  margin: 0;
 }
 
 .home-products-filters {
@@ -112,10 +94,13 @@
 }
 
 .product-name {
-  font-size: 1.25rem;
-  font-weight: var(--fw_medium);
-  color: var(--text_color);
-  margin: 0;
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+  color: var(--text-color);
+  font-weight: 600;
+  font-size: 1.1rem;
+  line-height: 1.4;
+  margin-bottom: 0.75rem;
   font-family: var(--league_spartan);
 }
 
@@ -171,29 +156,7 @@
 }
 
 /* Media Queries */
-@media (max-width: 1165px) {
-  .home-products-title {
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 1028px) {
-  .home-products-headers {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    margin-bottom: 3rem;
-  }
-  .home-products-description {
-    max-width: 100%;
-  }
-}
-
 @media (max-width: 768px) {
-  .home-products-headers {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   .home-products-grid{
     grid-template-columns: 1fr;
   }

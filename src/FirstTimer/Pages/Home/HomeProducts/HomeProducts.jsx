@@ -34,23 +34,23 @@ const HomeProducts = () => {
   }, []);
 
   return (
-    <div className="home-products-section section">
-      <div className="home-products-container container">
-        <div className="home-products-headers">
+    <div className="home-products-section section min-h-viewport">
+      <div className="home-products-container container section-flex-col">
+        <div className="home-products-headers two-col-header">
           <div className="home-products-left-header">
             <div className="header-left section-headers" data-aos="fade-up">
-              <div className="pre-title">
+              <div className="pre-title" role="doc-subtitle">
                 <span className="pre-title-line green"></span>
                 <span className="pre-title-text green">Marketplace</span>
               </div>
-              <h1 className="section-title home-products-title">
+              <h1 className="section-title home-products-title title-max-50">
                 View what <span className="highlight-text">Farmers</span> are
                 selling on the platform
               </h1>
             </div>
           </div>
           <div className="home-products-right-header" data-aos="fade-left" data-aos-delay="200">
-            <p className="home-products-description">
+            <p className="home-products-description section-description">
               Experience the power of direct farmer-to-buyer connections that
               strengthen Kenya's agricultural community and promote sustainable
               farming practices.
@@ -84,7 +84,7 @@ const HomeProducts = () => {
                 />
               </div>
               <div className="product-details">
-                <h3 className="product-name">{product.productName}</h3>
+                <h2 className="product-name">{product.productName}</h2>
                 <div className="product-price">
                   <span className="price">
                     KES {product.price}

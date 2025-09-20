@@ -1,0 +1,296 @@
+/* Testimonials Section Styling */
+.testimonials-section {
+  /* background: linear-gradient(135deg, var(--green_color) 0%,var(--emerald_green) 100%); */
+  background-color: var(--green_color);
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonials-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+      circle at 00% 80%,
+      rgba(132, 204, 22, 0.9) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 100% 20%,
+      rgba(45, 212, 191, 0.6) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+}
+
+.testimonals-container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Testimonials Headers */
+.testimonials-headers {
+  margin-bottom: 4rem;
+}
+
+.testimonials-title {
+  color: var(--bg_color);
+}
+
+/* Testimonials Swiper */
+.testimonials-swiper-wrapper {
+  position: relative;
+}
+
+.testimonials-swiper {
+  padding: 2rem 0;
+  overflow: visible;
+}
+
+.testimonials-swiper .swiper-slide {
+  height: auto;
+}
+
+/* Testimonial Card */
+.testimonial-card {
+  height: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background: rgba(255, 255, 255, 0.17);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  border-radius: 20px;
+  position: relative;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Role Badge */
+.testimonial-role {
+  align-self: flex-start;
+}
+
+.testimonial-role p {
+  /* background: linear-gradient(135deg, var(--lime_accent), var(--emerald_green)); */
+  color: var(--light_green_color);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-family: var(--league_spartan);
+  font-size: 0.875rem;
+  font-weight: var(--fw_medium);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+/* Testimonial Owner */
+.testimonial-owner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1;
+}
+
+/* Testimonial Image & Info */
+.testimonial-image {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.testimonial-image img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--lime_accent);
+  transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover .testimonial-image img {
+  transform: scale(1.1);
+}
+
+.person-names {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.person-names p {
+  font-family: var(--league_spartan);
+  font-size: 1.125rem;
+  font-weight: var(--fw_medium);
+  color: var(--text_color);
+  margin: 0;
+}
+
+.person-names span {
+  font-family: var(--outfit);
+  font-size: 0.875rem;
+  color: var(--light_green_color);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Testimonial Text */
+.testimonial-text {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.testimonial-text p {
+  font-family: var(--outfit);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--grey_alt_color);
+  margin: 0;
+  position: relative;
+}
+
+.testimonial-text p::before {
+  content: '"';
+  font-size: 3rem;
+  color: var(--white_alt_color);
+  position: absolute;
+  top: -1rem;
+  left: -1.5rem;
+  font-family: serif;
+  opacity: 0.6;
+}
+
+/* Navigation Buttons */
+.testimonials-nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.nav-btn {
+  width: 50px;
+  height: 30px;
+  border-radius: 2rem;
+  background: var(--bg_color);
+  color: var(--text_color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.nav-btn:hover {
+  background: var(--lime_accent);
+  color: var(--bg_color);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(132, 204, 22, 0.3);
+}
+
+.nav-btn:active {
+  transform: translateY(0);
+}
+
+/* Star Rating (if you want to add it later) */
+.testimonial-rating {
+  display: flex;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+.star {
+  color: #ffd700;
+  font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .testimonial-card {
+    padding: 1.5rem;
+  }
+
+  .testimonials-nav {
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .testimonials-section {
+    min-height: auto;
+  }
+
+  .testimonial-card {
+    padding: 1.25rem;
+    gap: 1rem;
+  }
+
+  .testimonial-image {
+    gap: 0.75rem;
+  }
+
+  .testimonial-image img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .person-names p {
+    font-size: 1.1rem;
+  }
+
+  .person-names span {
+    font-size: 0.9rem;
+  }
+
+  .testimonial-text p {
+    font-size: 1rem;
+  }
+
+  .testimonial-role p {
+    font-size: 0.9rem;
+  }
+
+  .nav-btn {
+    width: 45px;
+    height: 25px;
+  }
+}
+
+@media (max-width: 640px) {
+  .testimonials-swiper {
+    padding: 1rem 0;
+  }
+
+  .testimonial-card {
+    margin: 0 0.5rem;
+  }
+
+  .testimonials-nav {
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+}
+
+/* Accessibility */
+.nav-btn:focus {
+  outline: 2px solid var(--lime_accent);
+  outline-offset: 2px;
+}
+
+.testimonial-card:focus-within {
+  outline: 2px solid var(--lime_accent);
+  outline-offset: 4px;
+}
