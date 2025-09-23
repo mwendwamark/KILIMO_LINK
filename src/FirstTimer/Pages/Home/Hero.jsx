@@ -7,6 +7,7 @@ import { ArrowRight } from "lucide-react";
 import { annotate } from "rough-notation";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import heroImg from '../../../assets/heroImg2.webp';
 
 const Hero = () => {
   useEffect(() => {
@@ -34,6 +35,13 @@ const Hero = () => {
 
   return (
     <section className="landing_hero-section below_navbar">
+      <img 
+        src={heroImg} 
+        alt="Kenyan farm landscape with fresh produce" 
+        className="landing_hero-background" 
+        fetchpriority="high" 
+        loading="eager" 
+      />
       <div className="landing_hero-container container">
         <div className="landing_hero-contents">
           <div className="landing_hero_title" data-aos="fade-up">

@@ -76,7 +76,7 @@ const Testimonials = () => {
 
                   <div className="testimonial-owner">
                     <div className="testimonial-image">
-                      <img src={t.image} alt={t.personName} />
+                      <img src={t.image} alt={t.personName} loading="lazy" />
                       <div className="person-names">
                         <p>{t.personName}</p>
                         <span>{t.location}</span>

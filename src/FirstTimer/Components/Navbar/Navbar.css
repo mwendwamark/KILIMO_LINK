@@ -3,7 +3,7 @@
   background-color: transparent;
   padding: 0rem;
   position: fixed;
-  z-index: 10;
+  z-index: 100;
   border-bottom: none;
 }
 .scroll_navbar {

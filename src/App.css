@@ -180,6 +180,7 @@ button {
 .custom_arrow_button.white {
   background-color: var(--bg_color);
   color: var(--text_color);
+  width: fit-content;
 }
 
 .custom_arrow_button.green {
