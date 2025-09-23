@@ -1,3 +1,4 @@
+import Faqs from "./Faqs/Faqs";
 import Hero from "./Hero";
 import HomeAbout from "./HomeAbout/HomeAbout";
 import HomeProducts from "./HomeProducts/HomeProducts";
@@ -12,6 +13,7 @@ const Home = () => {
       <WhyChooseUs />
       <HomeProducts />
       <Testimonials />
+      <Faqs/>
       <JoinCommunity />
     </div>
   );

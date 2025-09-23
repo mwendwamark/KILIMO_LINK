@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import "./Hero.css";
 import "../../../App.css";
-import "../../Shared.css"
+import "../../Shared.css";
 import { NavLink } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { annotate } from "rough-notation";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import heroImg from '../../../assets/heroImg2.webp';
+import AOS from "aos";
+import "aos/dist/aos.css";
+import heroImg from "../../../assets/heroImg2.webp";
 
 const Hero = () => {
   useEffect(() => {
@@ -26,7 +26,7 @@ const Hero = () => {
         type: "box",
         color: "#2dd4bf",
         strokeWidth: 3,
-        padding: 2
+        padding: 2,
       });
 
       a1.show();
@@ -35,12 +35,12 @@ const Hero = () => {
 
   return (
     <section className="landing_hero-section below_navbar">
-      <img 
-        src={heroImg} 
-        alt="Kenyan farm landscape with fresh produce" 
-        className="landing_hero-background" 
-        fetchpriority="high" 
-        loading="eager" 
+      <img
+        src={heroImg}
+        alt="Kenyan farm landscape with fresh produce"
+        className="landing_hero-background"
+        fetchPriority="high"
+        loading="eager"
       />
       <div className="landing_hero-container container">
         <div className="landing_hero-contents">
@@ -49,8 +49,9 @@ const Hero = () => {
               <span className="pre-title-line green hero"></span>
               <span className="pre-title-text green hero">Kilimo link</span>
             </div>{" "}
-            <h1>
-              Bypass <strong id="middlemen">middlemen</strong>, and sell your farm produce directly to buyers
+            <h1 fetchPriority="high">
+              Bypass <strong id="middlemen">middlemen</strong>, and sell your
+              farm produce directly to buyers
             </h1>
           </div>
           <p data-aos="fade-up" data-aos-delay="200">
@@ -59,7 +60,11 @@ const Hero = () => {
             share crop tips and business hacks, fostering innovation and
             prosperity in agriculture
           </p>
-          <div className="landing_hero-button" data-aos="fade-up" data-aos-delay="400">
+          <div
+            className="landing_hero-button"
+            data-aos="fade-up"
+            data-aos-delay="400"
+          >
             <NavLink
               to="/select_role"
               aria-label="Get Started as a Buyer or Seller"
