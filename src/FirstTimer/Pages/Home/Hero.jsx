@@ -7,7 +7,8 @@ import { ArrowRight } from "lucide-react";
 import { annotate } from "rough-notation";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import heroImg from "../../../assets/heroImg2.webp";
+// Import the hero image from src/assets so Vite can resolve the URL
+import heroImg2 from "../../../assets/heroImg2.webp";
 
 const Hero = () => {
   useEffect(() => {
@@ -18,9 +19,7 @@ const Hero = () => {
       offset: 50,
     });
 
-    // Wait for the component to be mounted and DOM elements to be available
     const middlemenElement = document.querySelector("#middlemen");
-
     if (middlemenElement) {
       const a1 = annotate(middlemenElement, {
         type: "box",
@@ -28,20 +27,25 @@ const Hero = () => {
         strokeWidth: 3,
         padding: 2,
       });
-
       a1.show();
     }
-  }, []); // Empty dependency array means this runs once after component mounts
+  }, []);
 
   return (
     <section className="landing_hero-section below_navbar">
-      <img
-        src={heroImg}
-        alt="Kenyan farm landscape with fresh produce"
-        className="landing_hero-background"
-        fetchPriority="high"
-        loading="eager"
-      />
+      <picture>
+        {/* Using a single optimized WebP source from src/assets. If you add AVIF/WebP variants later (and place them in public/), you can reintroduce <source> tags. */}
+        <img
+          src={heroImg2}
+          alt="Kenyan farm landscape with fresh produce"
+          className="landing_hero-background"
+          fetchPriority="high" // High priority for LCP
+          width="2046" // Intrinsic width to prevent shifts
+          height="4000"
+          style={{ aspectRatio: '2046 / 4000', objectFit: 'cover' }} // CSS fallback
+          loading="eager"
+        />
+      </picture>
       <div className="landing_hero-container container">
         <div className="landing_hero-contents">
           <div className="landing_hero_title" data-aos="fade-up">

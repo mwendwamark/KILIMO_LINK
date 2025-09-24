@@ -107,7 +107,7 @@
 }
 
 .min-h-viewport {
-  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 @media (max-width: 1028px) {
@@ -118,6 +118,10 @@
   }
   .section-description {
     max-width: 100%;
+  }
+
+  .min-h-viewport{
+    min-height: 100svh;
   }
 }
 
