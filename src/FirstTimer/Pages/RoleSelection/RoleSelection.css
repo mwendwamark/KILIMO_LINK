@@ -1,0 +1,167 @@
+.role-selection-logo-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 2rem;
+  margin-bottom: 3rem;
+}
+
+.role-selection-logo {
+  height: 60px;
+  width: auto;
+}
+
+.role-selection-page-wrapper {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.role-selection-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.role-selection-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+  padding: 0 1rem;
+  margin-bottom: 3rem;
+}
+
+.role-selection-header p {
+  color: var(--light_grey_color);
+  font-size: var(--text_fs);
+}
+
+.role-selection-cards {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  padding: 0 1rem;
+}
+
+.role-card {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  border: 2px solid var(--white_alt_color);
+  border-radius: 1rem;
+  width: 400px;
+  height: 500px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--text_color);
+}
+
+.role-card:hover {
+  border: 2px solid var(--green_color);
+
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+}
+
+.farmer-card {
+  background-color: var(--light_green_color);
+}
+
+.buyer-card {
+  background-color: var(--white_alt_color);
+}
+
+.role-card-img {
+  height: 70%;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 1.5rem;
+}
+
+.role-card-img img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.role-card-information {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  /* text-align: center; */
+}
+
+.role-card .role-card-information h2 {
+  font-family: var(--league_spartan);
+  font-size: 1.8rem;
+  font-weight: var(--fw_medium);
+  margin: 0;
+  color: var(--text_color);
+}
+
+.role-card .role-card-information p {
+  font-size: 1rem;
+  color: var(--dark_grey_color);
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .role-selection-logo {
+    height: 50px;
+  }
+
+  .role-selection-page-wrapper {
+    min-height: 100svh;
+  }
+
+  .role-selection-container {
+    justify-content: flex-start;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .role-selection-cards {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .role-card {
+    width: 85%;
+    max-width: 400px;
+  }
+
+  .role-card .role-card-information h2 {
+    font-size: 1.5rem;
+  }
+
+  .role-card .role-card-information p {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .role-selection-header h1 {
+    font-size: 2.25rem;
+  }
+
+  .role-card {
+    height: auto;
+    width: 100%;
+    max-width: 300px;
+    padding: 1.5rem;
+  }
+
+  .role-card-img {
+    height: auto;
+    margin-bottom: 1rem;
+  }
+}

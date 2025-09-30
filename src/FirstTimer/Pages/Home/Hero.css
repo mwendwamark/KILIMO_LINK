@@ -1,3 +1,11 @@
+/*
+  Hero.css - Updated to support the <picture> element wrapper
+
+  Key Changes:
+  1. The .landing_hero-background class is now applied to the <img> inside <picture>.
+  2. <picture> is styled to be absolute and cover the section.
+*/
+
 .landing_hero-section {
   position: relative;
   width: 100%;
@@ -7,15 +15,23 @@
   justify-content: center;
 }
 
-.landing_hero-background {
+/* New: Style the <picture> element to take up the full space */
+.landing_hero-section picture {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: -1; /* Place below content */
+}
+
+/* Keep styling on the img for object-fit/position */
+.landing_hero-background {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: center;
-  z-index: -1;
+  /* Removed absolute positioning since the parent <picture> is now absolute */
 }
 
 .landing_hero-section::before {
@@ -42,7 +58,7 @@
   flex-direction: column;
   gap: 1.5rem;
   margin-top: 4rem;
-  animation: fadeIn 1s ease-out both;
+  animation: fadeIn 1s ease-out both; /* AOS will override this, but good as a fallback */
 }
 
 .landing_hero_title {
@@ -85,6 +101,10 @@
   height: 28px;
 }
 
+/* =========================================================
+   Media Queries - Adjusted for Responsive Image Implementation
+   ========================================================= */
+
 @media screen and (max-width: 1370px) {
   .landing_hero-contents {
     max-width: 65%;
@@ -119,8 +139,9 @@
   .landing_hero-section {
     min-height: 80vh;
   }
+  /* The narrow, art-directed image has a different focal point */
   .landing_hero-background {
-    object-position: 60% center;
+    object-position: center; 
   }
   .landing_hero-contents {
     max-width: 85%;
@@ -141,7 +162,7 @@
     padding-top: 6rem;
   }
   .landing_hero-background {
-    object-position: 70% 20%;
+    object-position: center; /* Center the narrow/cropped image */
   }
   .landing_hero-contents {
     max-width: 100%;
@@ -154,17 +175,14 @@
   }
   .landing_hero_title span {
     font-size: calc(var(--pre_title_fs) * 1);
-    padding-left: 1rem;
+    padding-left: 0; /* Removed padding */
     color: var(--white_alt_color);
   }
+  /* Remove the CSS line modification if you want to keep it simple, 
+     otherwise, simplify it to just the color for a cleaner look
   .landing_hero_title span::before {
-    width: 1rem;
-    background: linear-gradient(
-      90deg,
-      var(--white_alt_color),
-      var(--bright_green)
-    );
-  }
+    background: var(--white_alt_color);
+  } */
   .landing_hero-container p {
     font-size: calc(var(--text_fs) * 0.9);
     max-width: 100%;
