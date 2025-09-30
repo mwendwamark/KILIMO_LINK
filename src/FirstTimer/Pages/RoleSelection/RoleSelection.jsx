@@ -22,7 +22,7 @@ const RoleSelection = () => {
 
             <div className="role-selection-cards">
                 {/* Farmer Card - Entire card is the link */}
-                <NavLink to="/farmer-signup" className="role-card farmer-card">
+                <NavLink to="/farmers/signup" className="role-card farmer-card">
                     <div className="role-card-information">
                         <h2>Farmer</h2>
                         <p>Sign up as a farmer to access farming resources.</p>
@@ -33,7 +33,7 @@ const RoleSelection = () => {
                 </NavLink>
 
                 {/* Buyer Card - Entire card is the link */}
-                <NavLink to="/buyer-signup" className="role-card buyer-card">
+                <NavLink to="/buyers/signup" className="role-card buyer-card">
                     <div className="role-card-information">
                         <h2>Buyer</h2>
                         <p>Sign up as a buyer to purchase agricultural products.</p>
