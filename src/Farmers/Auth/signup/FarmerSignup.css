@@ -1,304 +1,436 @@
-/* Farmer Signup Component Styles */
-
-/* Base styles */
-.min-h-screen {
-  background-color: #f9fafb;
-}
-
-/* Form container */
-.max-w-md {
-  background-color: #ffffff;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
-/* Headings */
-.text-3xl {
-  color: #1f2937;
-  font-weight: 800;
-  letter-spacing: -0.025em;
-}
-
-/* Links */
-.text-green-600 {
-  color: #059669;
-  transition: color 0.2s ease-in-out;
-}
-
-.text-green-600:hover {
-  color: #047857;
-  text-decoration: none;
-}
-
-/* Form inputs */
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="password"] {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  padding: 0.5rem 0.75rem;
-  border-width: 1px;
-  border-radius: 0.375rem;
-  width: 100%;
-  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="tel"]:focus,
-input[type="password"]:focus {
-  border-color: #10b981;
-  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
-  outline: none;
-}
-
-/* Checkbox */
-input[type="checkbox"] {
-  border-color: #d1d5db;
-  border-radius: 0.25rem;
-  color: #059669;
-  height: 1rem;
-  width: 1rem;
-}
-
-input[type="checkbox"]:focus {
-  border-color: #059669;
-  box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.2);
-}
-
-/* Buttons */
-button[type="submit"] {
-  font-weight: 500;
-  transition: all 0.2s ease-in-out;
-}
-
-button[type="submit"]:not(:disabled):hover {
-  transform: translateY(-1px);
-}
-
-button[type="submit"]:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
-
-/* Error messages */
-.text-red-600 {
-  color: #dc2626;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  margin-top: 0.25rem;
-}
-
-/* Divider */
-.relative > .absolute {
-  z-index: 0;
-}
-
-.relative > .relative {
-  z-index: 1;
-  padding: 0 1rem;
-  background-color: #ffffff;
-}
-
-/* Responsive adjustments */
-@media (max-width: 640px) {
-  .px-4 {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-  
-  .sm\:px-10 {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-  
-  .grid-cols-2 {
-    grid-template-columns: 1fr;
-  }
-  
-  .gap-y-6 {
-    row-gap: 1.5rem;
-  }
-  
-  .gap-x-4 {
-    column-gap: 1rem;
-  }
-}
-
-/* Animation for form elements */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-form > * {
-  animation: fadeIn 0.3s ease-out forwards;
-}
-
-/* Style the terms and conditions link */
-.text-sm a {
-  transition: color 0.2s ease-in-out;
-  text-decoration: underline;
-}
-
-.text-sm a:hover {
-  color: #047857;
-}
-
-/* Style the buyer signup button */
-.bg-white {
-  transition: all 0.2s ease-in-out;
-}
-
-.bg-white:hover {
-  background-color: #f3f4f6 !important;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
-/* Form labels */
-label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  color: #374151;
-}
-
-/* Form input containers */
-.mt-1 {
-  margin-top: 0.25rem;
-}
-
-/* Form input focus states */
-.focus\:ring-green-500:focus {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgba(16, 185, 129, var(--tw-ring-opacity));
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-}
-
-/* Button focus states */
-.focus\:ring-2:focus {
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-}
-
-/* Responsive padding */
-.py-8 {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
-
-.px-4 {
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-/* Responsive margins */
-.mt-6 {
-  margin-top: 1.5rem;
-}
-
-.mt-8 {
-  margin-top: 2rem;
-}
-
-/* Responsive width */
-.w-full {
-  width: 100%;
-}
-
-/* Responsive max-width */
-.max-w-md {
-  max-width: 28rem;
-}
-
-/* Responsive shadow */
-.shadow {
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-}
-
-/* Rounded corners */
-.rounded-lg {
-  border-radius: 0.5rem;
-}
-
-/* Flex utilities */
-.flex {
+/* FarmerSignup.css */
+.farmer-signup-page {
   display: flex;
+  flex-direction: column;
+  padding: 2rem 0;
 }
 
-.flex-col {
+.farmer-signup-logo {
+  align-self: flex-start;
+  margin-bottom: 2rem;
+}
+
+.farmer-signup-main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.farmer-signup-error-alert {
+  background-color: var(--white_alt_color);
+  border: 1px solid var(--light_grey_color);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: 90%;
+}
+
+.farmer-signup-error-icon {
+  flex-shrink: 0;
+}
+
+.farmer-signup-error-svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--light_grey_color);
+}
+
+.farmer-signup-error-content {
+  flex: 1;
+}
+
+.farmer-signup-error-title {
+  font-size: var(--text_fs);
+  color: var(--light_grey_color);
+  margin: 0;
+}
+
+.farmer-signup-form-wrapper {
+  display: flex;
+  width: 100%;
+  background-color: var(--bg_color);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.farmer-signup-form-fields {
+  flex: 1;
+  padding: 3rem;
+  display: flex;
   flex-direction: column;
 }
 
-.items-center {
-  align-items: center;
+.farmer-signup-header-section {
+  margin-bottom: 2rem;
 }
 
-.justify-center {
-  justify-content: center;
+.farmer-signup-title {
+  color: var(--text_color);
+  margin-bottom: 0.5rem;
 }
 
-/* Text utilities */
-.text-center {
-  text-align: center;
+.farmer-signup-description {
+  color: var(--light_grey_color);
+  font-size: var(--text_fs);
+  line-height: 1.6;
+  margin: 0;
 }
 
-/* Spacing utilities */
-.space-y-6 > * + * {
-  margin-top: 1.5rem;
-}
-
-/* Grid utilities */
-.grid {
-  display: grid;
-}
-
-.grid-cols-1 {
-  grid-template-columns: repeat(1, minmax(0, 1fr));
-}
-
-/* Responsive grid */
-@media (min-width: 640px) {
-  .sm\:grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-/* Animation utilities */
-.animate-fade-in {
-  animation: fadeIn 0.3s ease-out forwards;
-}
-
-/* Custom styles for the terms checkbox */
-.terms-checkbox {
+.farmer-signup-email-phone-row,
+.farmer-signup-inputs {
   display: flex;
-  align-items: flex-start;
-  margin-top: 1.5rem;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.farmer-signup-names-grid ,
+.farmer-signup-password-row {
+  display: flex;
+  gap: 1rem;
 }
 
-.terms-checkbox input[type="checkbox"] {
+.farmer-signup-field-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.farmer-signup-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--grey_alt_color);
+  border-radius: 0.5rem;
+  font-size: var(--text_fs);
+  transition: border-color 0.3s ease;
+}
+
+.farmer-signup-input:focus {
+  outline: none;
+  border-color: var(--green_color);
+  box-shadow: 0 0 0 3px rgba(64, 128, 0, 0.1);
+}
+
+.farmer-signup-input-error {
+  border-color: var(--light_grey_color);
+}
+
+.farmer-signup-error-text {
+  color: var(--light_grey_color);
+  font-size: 0.875rem;
   margin-top: 0.25rem;
 }
 
-.terms-text {
-  margin-left: 0.75rem;
+.farmer-signup-hint-text {
+  color: var(--light_grey_color);
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.farmer-signup-terms-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin: 1.5rem;
+}
+
+.farmer-signup-terms-checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.farmer-signup-terms-checkbox {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--green_color);
+}
+
+.farmer-signup-terms-label {
   font-size: 0.875rem;
-  line-height: 1.25rem;
-  color: #4b5563;
+  color: var(--text_color);
+  line-height: 1.5;
 }
 
-.terms-link {
-  color: #059669;
-  font-weight: 500;
-  text-decoration: underline;
-  transition: color 0.2s ease-in-out;
+.farmer-signup-terms-link {
+  color: var(--green_color);
+  font-weight: var(--fw_medium);
+  transition: color 0.3s ease;
 }
 
-.terms-link:hover {
-  color: #047857;
+.farmer-signup-terms-link:hover {
+  color: var(--deep_green);
+}
+
+.farmer-signup-submit-wrapper {
+  margin-bottom: 2rem;
+}
+
+.farmer-signup-submit-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--green_color);
+  color: var(--bg_color);
+  border-radius: 0.5rem;
+  font-size: var(--button_fs);
+  font-weight: var(--fw_medium);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.farmer-signup-submit-btn:hover:not(.farmer-signup-submit-disabled) {
+  background-color: var(--deep_green);
+}
+
+.farmer-signup-submit-disabled {
+  background-color: var(--light_grey_color);
+  cursor: not-allowed;
+}
+
+.farmer-signup-social-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.farmer-signup-google-btn,
+.farmer-signup-apple-btn {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border: 1px solid var(--green_color);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  transition: border-color 0.3s ease;
+}
+
+.farmer-signup-google-btn:hover,
+.farmer-signup-apple-btn:hover {
+  border-color: var(--green_color);
+}
+
+.farmer-signup-google-icon,
+.farmer-signup-apple-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.farmer-signup-divider-wrapper {
+  text-align: center;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.farmer-signup-divider {
+  position: relative;
+}
+
+.farmer-signup-divider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: var(--grey_alt_color);
+}
+
+.farmer-signup-divider-text {
+  background-color: var(--bg_color);
+  color: var(--light_grey_color);
+  padding: 0 1rem;
+  position: relative;
+}
+
+.farmer-signup-login-link-wrapper {
+  margin-top: 1rem;
+}
+
+.farmer-signup-login-link {
+  color: var(--green_color);
+  font-weight: var(--fw_medium);
+}
+
+.farmer-signup-login-link:hover {
+  color: var(--deep_green);
+}
+
+.farmer-signup-buyer-section {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.farmer-signup-buyer-divider {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.farmer-signup-buyer-divider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: var(--grey_alt_color);
+}
+
+.farmer-signup-buyer-divider-text {
+  background-color: var(--bg_color);
+  color: var(--light_grey_color);
+  padding: 0 1rem;
+  position: relative;
+}
+
+.farmer-signup-buyer-link-wrapper {
+  margin-top: 1rem;
+}
+
+.farmer-signup-buyer-link {
+  color: var(--green_color);
+  font-weight: var(--fw_medium);
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--grey_alt_color);
+  border-radius: 0.5rem;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.farmer-signup-buyer-link:hover {
+  background-color: var(--grey_alt_color);
+  color: var(--deep_green);
+}
+
+.farmer-signup-image-wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 300px;
+  padding: 2rem;
+}
+
+.farmer-signup-image-badge {
+  position: absolute;
+  top: 3rem;
+  right: 3rem;
+  background-color: var(--light_green_color);
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  font-weight: var(--fw_medium);
+  z-index: 2;
+}
+
+.farmer-signup-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 2rem;
+}
+
+.farmer-signup-image-overlay {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  right: 2rem;
+  background: rgba(255, 255, 255, 0);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2.4px);
+  -webkit-backdrop-filter: blur(2.4px);
+  padding: 4rem 2rem;
+  border-radius: 0.5rem;
+}
+
+.farmer-signup-overlay-title {
+  font-size: 2.5rem;
+  font-weight: var(--fw_medium);
+  color: var(--bg_color);
+  margin-bottom: 0.5rem;
+  max-width: 70%;
+}
+
+.farmer-signup-overlay-description {
+  font-size: var(--text_fs);
+  color: var(--light_green_color);
+  line-height: 1.6;
+}
+
+@media (max-width: 993px) {
+  .farmer-signup-form-wrapper {
+    flex-direction: column;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  .farmer-signup-form-fields {
+    padding: 0rem;
+  }
+
+  .farmer-signup-names-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .farmer-signup-email-phone-row,
+  .farmer-signup-password-row {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .farmer-signup-image-wrapper {
+    min-height: 250px;
+    padding: 0;
+  }
+
+  .farmer-signup-hero-image {
+    border-radius: 1rem;
+  }
+
+  .farmer-signup-image-overlay {
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+    padding: 1rem;
+  }
+
+  .farmer-signup-overlay-title {
+    font-size: 2rem;
+  }
+
+  .farmer-signup-social-wrapper {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .farmer-signup-google-btn,
+  .farmer-signup-apple-btn {
+    width: 100%;
+  }
+}
+@media (max-width: 730px) {
+  .farmer-signup-image-overlay {
+    padding: 1rem 1rem;
+    bottom: 0.5rem;
+    border-radius: 1rem;
+  }
+  .farmer-signup-image-badge {
+    top: 1rem;
+    right: 1rem;
+  }
+}
+@media (max-width: 500px) {
+  .farmer-signup-image-wrapper {
+    display: none;
+  }
+  .farmer-signup-image-badge {
+    top: 1rem;
+    right: 1rem;
+  }
 }
