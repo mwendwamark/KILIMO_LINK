@@ -14,6 +14,14 @@
   --emerald_green: #2dd4bf;
   --lime_accent: #84cc16;
 
+  --error_color: #dc2626;
+  --error_bg: #fee2e2;
+  --error_border: #fca5a5;
+  --success_color: #16a34a;
+  --success_bg: #dcfce7;
+  --warning_color: #ea580c;
+  --warning_bg: #ffedd5;
+
   --league_spartan: "League Spartan", sans-serif;
   --outfit: "Outfit", sans-serif;
 

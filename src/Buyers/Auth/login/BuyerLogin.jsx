@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./BuyerLogin.css";
 import logo from "../../../../public/logo.svg";
@@ -8,11 +8,13 @@ import Img from "../../../assets/heroImg.webp";
 import google from "../../../FirstTimer/assets/google.svg";
 import apple from "../../../FirstTimer/assets/apple.svg";
 import { authenticate, validateLoginForm, storeAuthData } from "../../../services/api";
+import { ArrowLeft, Eye, EyeOff } from "lucide-react";
 
 const BuyerLogin = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -22,11 +24,21 @@ const BuyerLogin = () => {
   const [errors, setErrors] = useState({});
   const [serverError, setServerError] = useState("");
 
+  // Auto-clear server error after 8 seconds
+  useEffect(() => {
+    if (serverError) {
+      const timer = setTimeout(() => {
+        setServerError("");
+      }, 8000);
+      return () => clearTimeout(timer);
+    }
+  }, [serverError]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    
-    if (errors[name]) setErrors(prev => ({ ...prev, [name]: "" }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
     if (serverError) setServerError("");
   };
 
@@ -36,6 +48,7 @@ const BuyerLogin = () => {
     const validationErrors = validateLoginForm(formData);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
+      toast.error("Please fix the errors in the form");
       return;
     }
 
@@ -52,10 +65,10 @@ const BuyerLogin = () => {
 
     if (!result.success) {
       setServerError(result.error);
+      toast.error(result.error);
       return;
     }
 
-    // Store auth data
     if (result.data.token) {
       storeAuthData(result.data.token, "buyer", result.data.user, rememberMe);
     }
@@ -65,97 +78,156 @@ const BuyerLogin = () => {
   };
 
   return (
-    <div className="buyer-login-page container min-h-viewport">
-      <Link className="buyer-login-logo" to="/">
-        <img src={logo} alt="Kilimo Link" loading="eager" style={{ width: "auto", height: "50px" }} />
-      </Link>
-      <div className="buyer-login-main-container">
-        {serverError && (
-          <div className="buyer-login-error-alert">
-            <div className="buyer-login-error-icon">
-              <svg className="buyer-login-error-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+    <div className="buyer-login-page min-h-viewport">
+      <ToastContainer
+        position="top-right"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+
+      <div className="buyer-login-content">
+        <div className="buyer-login-form-section">
+          <Link className="buyer-login-logo" to="/">
+            <img src={logo} alt="Kilimo Link" loading="eager" />
+          </Link>
+
+          {serverError && (
+            <div className="error-alert">
+              <svg className="error-alert-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clipRule="evenodd" />
               </svg>
+              <div className="error-alert-content">
+                <h3 className="error-alert-title">{serverError}</h3>
+              </div>
             </div>
-            <div className="buyer-login-error-content">
-              <h3 className="buyer-login-error-title">{serverError}</h3>
-            </div>
-          </div>
-        )}
-        <div className="buyer-login-form-wrapper container">
-          <form className="buyer-login-form-fields" onSubmit={handleSubmit}>
-            <div className="buyer-login-header-section">
-              <h2 className="buyer-login-title section-title">Login</h2>
+          )}
+
+          <form className="buyer-login-form" onSubmit={handleSubmit}>
+            <div className="buyer-login-header">
+              <h2 className="section-title">Login</h2>
               <p className="buyer-login-description">
                 Log in to explore fresh listings, contact farmers directly, and enjoy authentic farm produce.
               </p>
             </div>
-            <div className="buyer-login-fields-group">
-              <div className="buyer-login-field-wrapper">
-                <label htmlFor="email-address" className="buyer-login-sr-only">Email address</label>
-                <input id="email-address" name="email" type="email" autoComplete="email" required
-                  className={`buyer-login-input ${errors.email ? "buyer-login-input-error" : ""}`}
-                  placeholder="Email" value={formData.email} onChange={handleChange} />
-                {errors.email && <p className="buyer-login-error-text">{errors.email}</p>}
+
+            <div className="buyer-login-fields">
+              <div className="buyer-login-field">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  className={`buyer-login-input ${errors.email ? "input-error" : ""}`}
+                  placeholder="Email"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+                {errors.email && <span className="field-error-text">{errors.email}</span>}
               </div>
-              <div className="buyer-login-field-wrapper">
-                <label htmlFor="password" className="buyer-login-sr-only">Password</label>
-                <input id="password" name="password" type="password" autoComplete="current-password" required
-                  className={`buyer-login-input ${errors.password ? "buyer-login-input-error" : ""}`}
-                  placeholder="Password" value={formData.password} onChange={handleChange} />
-                {errors.password && <p className="buyer-login-error-text">{errors.password}</p>}
-                <p className="buyer-login-password-hint">Must be at least 8 characters</p>
+
+              <div className="buyer-login-field">
+                <div className="buyer-login-password-wrapper">
+                  <input
+                    id="password"
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    autoComplete="current-password"
+                    required
+                    className={`buyer-login-input ${errors.password ? "input-error" : ""}`}
+                    placeholder="Password"
+                    value={formData.password}
+                    onChange={handleChange}
+                  />
+                  <button
+                    type="button"
+                    className="buyer-login-password-toggle"
+                    onClick={() => setShowPassword(!showPassword)}
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                  >
+                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
+                {errors.password ? (
+                  <span className="field-error-text">{errors.password}</span>
+                ) : (
+                  <span className="hint-text">Must be at least 8 characters</span>
+                )}
               </div>
             </div>
-            <div className="buyer-login-options-group">
-              <div className="buyer-login-remember-wrapper">
-                <input id="remember-me" name="rememberMe" type="checkbox" className="buyer-login-remember-checkbox"
-                  checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)} />
-                <label htmlFor="remember-me" className="buyer-login-remember-label">Remember me</label>
+
+            <div className="buyer-login-options">
+              <div className="buyer-login-remember">
+                <input
+                  id="remember-me"
+                  name="rememberMe"
+                  type="checkbox"
+                  className="buyer-login-checkbox"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                />
+                <label htmlFor="remember-me" className="buyer-login-remember-label">
+                  Remember me
+                </label>
               </div>
-              <div className="buyer-login-forgot-wrapper">
-                <Link to="/buyers/forgot-password" className="buyer-login-forgot-link">Forgot your password?</Link>
-              </div>
+              <Link to="/buyers/forgot-password" className="buyer-login-link">
+                Forgot password?
+              </Link>
             </div>
-            <div className="buyer-login-submit-wrapper">
-              <button type="submit" disabled={isSubmitting}
-                className={`buyer-login-submit-btn ${isSubmitting ? "buyer-login-submit-disabled" : ""}`}>
-                {isSubmitting ? "Signing in..." : "Login"}
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="buyer-login-submit"
+            >
+              {isSubmitting ? "Signing in..." : "Login"}
+            </button>
+
+            <div className="buyer-login-social">
+              <button type="button" className="buyer-login-social-btn">
+                <img src={google} alt="Google" />
+                <span>Sign in with Google</span>
+              </button>
+              <button type="button" className="buyer-login-social-btn">
+                <img src={apple} alt="Apple" />
+                <span>Sign in with Apple</span>
               </button>
             </div>
-            <div className="buyer-login-social-wrapper">
-              <div className="buyer-login-google-btn">
-                <div className="buyer-login-google-icon">
-                  <img src={google} alt="Google" loading="lazy" style={{ width: "1.25rem", height: "1.25rem" }} />
-                </div>
-                <span>Sign in with Google</span>
-              </div>
-              <div className="buyer-login-apple-btn">
-                <div className="buyer-login-apple-icon">
-                  <img src={apple} alt="Apple" loading="lazy" style={{ width: "1.25rem", height: "1.25rem" }} />
-                </div>
-                <span>Sign in with Apple</span>
-              </div>
+
+            <div className="buyer-login-footer">
+              <span className="buyer-login-footer-text">Don't have an account?</span>
+              <Link to="/buyers/signup" className="buyer-login-link">Create an account</Link>
             </div>
-            <div className="buyer-login-divider-wrapper">
-              <div className="buyer-login-divider">
-                <span className="buyer-login-divider-text">Don't have an account?</span>
-              </div>
-              <div className="buyer-login-farmer-link-wrapper">
-                <Link to="/buyers/signup" className="buyer-login-farmer-link">Create an account</Link>
-              </div>
+
+            <div className="buyer-login-footer">
+              <span className="buyer-login-footer-text">Are you a farmer?</span>
+              <Link to="/farmers/login" className="buyer-login-link">Sign in as a farmer</Link>
             </div>
           </form>
-          <div className="buyer-login-image-wrapper">
-            <div className="buyer-login-image-badge">Buyer's Account</div>
-            <img src={Img} alt="Happy farmer with produce" className="buyer-login-hero-image" />
-            <div className="buyer-login-image-overlay">
+        </div>
+
+        <div className="buyer-login-image-section">
+          <div className="buyer-login-image-badge">Buyer's Account</div>
+          <img src={Img} alt="Happy farmer with produce" className="buyer-login-image" />
+          <div className="buyer-login-image-overlay">
+            <div className="buyer-login-overlay-content">
               <h3 className="buyer-login-overlay-title">Your marketplace for trusted produce</h3>
               <p className="buyer-login-overlay-description">
                 Easily discover crops, fruits, livestock from verified farmers across Kenya.
               </p>
             </div>
           </div>
+          <button onClick={() => navigate("/select_role")} className="buyer-login-back-btn">
+            <ArrowLeft size={18} />
+            <span>Back to Roles</span>
+          </button>
         </div>
       </div>
     </div>

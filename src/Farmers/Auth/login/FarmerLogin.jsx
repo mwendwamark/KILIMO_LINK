@@ -1,22 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./FarmerLogin.css";
 import logo from "../../../../public/logo.svg";
 import Img from "../../../assets/heroImg.webp";
 import google from "../../../FirstTimer/assets/google.svg";
 import apple from "../../../FirstTimer/assets/apple.svg";
-import {
-  authenticate,
-  validateLoginForm,
-  storeAuthData,
-} from "../../../services/api";
+import { authenticate, validateLoginForm, storeAuthData } from "../../../services/api";
+import { ArrowLeft, Eye, EyeOff } from "lucide-react";
 
 const FarmerLogin = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -25,6 +23,16 @@ const FarmerLogin = () => {
 
   const [errors, setErrors] = useState({});
   const [serverError, setServerError] = useState("");
+
+  // Auto-clear server error after 8 seconds
+  useEffect(() => {
+    if (serverError) {
+      const timer = setTimeout(() => {
+        setServerError("");
+      }, 8000);
+      return () => clearTimeout(timer);
+    }
+  }, [serverError]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,6 +48,7 @@ const FarmerLogin = () => {
     const validationErrors = validateLoginForm(formData);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
+      toast.error("Please fix the errors in the form");
       return;
     }
 
@@ -56,10 +65,10 @@ const FarmerLogin = () => {
 
     if (!result.success) {
       setServerError(result.error);
+      toast.error(result.error);
       return;
     }
 
-    // Store auth data
     if (result.data.token) {
       storeAuthData(result.data.token, "farmer", result.data.user, rememberMe);
     }
@@ -69,197 +78,156 @@ const FarmerLogin = () => {
   };
 
   return (
-    <div className="farmer-login-page container min-h-viewport">
-      <Link className="farmer-login-logo" to="/">
-        <img
-          src={logo}
-          alt="Kilimo Link"
-          loading="eager"
-          style={{ width: "auto", height: "50px" }}
-        />
-      </Link>{" "}
-      {serverError && (
-        <div className="farmer-login-error-alert">
-          <div className="farmer-login-error-icon">
-            <svg
-              className="farmer-login-error-svg"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                fillRule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </div>
-          <div className="farmer-login-error-content">
-            <h3 className="farmer-login-error-title">{serverError}</h3>
-          </div>
-        </div>
-      )}
-      <div className="farmer-login-main-container">
-        <div className="farmer-login-form-wrapper container">
-          <form className="farmer-login-form-fields" onSubmit={handleSubmit}>
-            <div className="farmer-login-header-section">
-              <h2 className="farmer-login-title section-title">Login</h2>
+    <div className="farmer-login-page min-h-viewport">
+      <ToastContainer
+        position="top-right"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+
+      <div className="farmer-login-content">
+        <div className="farmer-login-form-section">
+          <Link className="farmer-login-logo" to="/">
+            <img src={logo} alt="Kilimo Link" loading="eager" />
+          </Link>
+
+          {serverError && (
+            <div className="error-alert">
+              <svg className="error-alert-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clipRule="evenodd" />
+              </svg>
+              <div className="error-alert-content">
+                <h3 className="error-alert-title">{serverError}</h3>
+              </div>
+            </div>
+          )}
+
+          <form className="farmer-login-form" onSubmit={handleSubmit}>
+            <div className="farmer-login-header">
+              <h2 className="section-title">Login</h2>
               <p className="farmer-login-description">
-                Log in to start showcasing your farm produce and connect
-                directly with buyers across Kenya.
+                Log in to start showcasing your farm produce and connect directly with buyers across Kenya.
               </p>
             </div>
-            <div className="farmer-login-fields-group">
-              <div className="farmer-login-field-wrapper">
-                <label htmlFor="email-address" className="farmer-login-sr-only">
-                  Email address
-                </label>
+
+            <div className="farmer-login-fields">
+              <div className="farmer-login-field">
                 <input
-                  id="email-address"
+                  id="email"
                   name="email"
                   type="email"
                   autoComplete="email"
                   required
-                  className={`farmer-login-input ${
-                    errors.email ? "farmer-login-input-error" : ""
-                  }`}
+                  className={`farmer-login-input ${errors.email ? "input-error" : ""}`}
                   placeholder="Email"
                   value={formData.email}
                   onChange={handleChange}
                 />
-                {errors.email && (
-                  <p className="farmer-login-error-text">{errors.email}</p>
-                )}
+                {errors.email && <span className="field-error-text">{errors.email}</span>}
               </div>
-              <div className="farmer-login-field-wrapper">
-                <label htmlFor="password" className="farmer-login-sr-only">
-                  Password
-                </label>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  className={`farmer-login-input ${
-                    errors.password ? "farmer-login-input-error" : ""
-                  }`}
-                  placeholder="Password"
-                  value={formData.password}
-                  onChange={handleChange}
-                />
-                {errors.password && (
-                  <p className="farmer-login-error-text">{errors.password}</p>
+
+              <div className="farmer-login-field">
+                <div className="farmer-login-password-wrapper">
+                  <input
+                    id="password"
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    autoComplete="current-password"
+                    required
+                    className={`farmer-login-input ${errors.password ? "input-error" : ""}`}
+                    placeholder="Password"
+                    value={formData.password}
+                    onChange={handleChange}
+                  />
+                  <button
+                    type="button"
+                    className="farmer-login-password-toggle"
+                    onClick={() => setShowPassword(!showPassword)}
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                  >
+                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
+                {errors.password ? (
+                  <span className="field-error-text">{errors.password}</span>
+                ) : (
+                  <span className="hint-text">Must be at least 8 characters</span>
                 )}
-                <p className="farmer-login-password-hint">
-                  Must be at least 8 characters
-                </p>
               </div>
             </div>
-            <div className="farmer-login-options-group">
-              <div className="farmer-login-remember-wrapper">
+
+            <div className="farmer-login-options">
+              <div className="farmer-login-remember">
                 <input
                   id="remember-me"
                   name="rememberMe"
                   type="checkbox"
-                  className="farmer-login-remember-checkbox"
+                  className="farmer-login-checkbox"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
                 />
-                <label
-                  htmlFor="remember-me"
-                  className="farmer-login-remember-label"
-                >
+                <label htmlFor="remember-me" className="farmer-login-remember-label">
                   Remember me
                 </label>
               </div>
-              <div className="farmer-login-forgot-wrapper">
-                <Link
-                  to="/farmers/forgot-password"
-                  className="farmer-login-forgot-link"
-                >
-                  Forgot your password?
-                </Link>
-              </div>
+              <Link to="/farmers/forgot-password" className="farmer-login-link">
+                Forgot password?
+              </Link>
             </div>
-            <div className="farmer-login-submit-wrapper">
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className={`farmer-login-submit-btn ${
-                  isSubmitting ? "farmer-login-submit-disabled" : ""
-                }`}
-              >
-                {isSubmitting ? "Signing in..." : "Login"}
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="farmer-login-submit"
+            >
+              {isSubmitting ? "Signing in..." : "Login"}
+            </button>
+
+            <div className="farmer-login-social">
+              <button type="button" className="farmer-login-social-btn">
+                <img src={google} alt="Google" />
+                <span>Sign in with Google</span>
+              </button>
+              <button type="button" className="farmer-login-social-btn">
+                <img src={apple} alt="Apple" />
+                <span>Sign in with Apple</span>
               </button>
             </div>
-            <div className="farmer-login-social-wrapper">
-              <div className="farmer-login-google-btn">
-                <div className="farmer-login-google-icon">
-                  <img
-                    src={google}
-                    alt="Google"
-                    loading="lazy"
-                    style={{ width: "1.25rem", height: "1.25rem" }}
-                  />
-                </div>
-                <span>Sign in with Google</span>
-              </div>
-              <div className="farmer-login-apple-btn">
-                <div className="farmer-login-apple-icon">
-                  <img
-                    src={apple}
-                    alt="Apple"
-                    loading="lazy"
-                    style={{ width: "1.25rem", height: "1.25rem" }}
-                  />
-                </div>
-                <span>Sign in with Apple</span>
-              </div>
+
+            <div className="farmer-login-footer">
+              <span className="farmer-login-footer-text">Don't have an account?</span>
+              <Link to="/farmers/signup" className="farmer-login-link">Create an account</Link>
             </div>
-            <div className="farmer-login-divider-wrapper">
-              <div className="farmer-login-divider">
-                <span className="farmer-login-divider-text">
-                  Don't have an account?
-                </span>
-              </div>
-              <div className="farmer-login-signup-link-wrapper">
-                <Link to="/farmers/signup" className="farmer-login-signup-link">
-                  Create an Account
-                </Link>
-              </div>
-            </div>
-            <div className="farmer-login-buyer-section">
-              <div className="farmer-login-buyer-divider">
-                <span className="farmer-login-buyer-divider-text">
-                  Looking to buy produce?
-                </span>
-              </div>
-              <div className="farmer-login-buyer-link-wrapper">
-                <Link to="/buyers/login" className="farmer-login-buyer-link">
-                  Sign in as a buyer
-                </Link>
-              </div>
+
+            <div className="farmer-login-footer">
+              <span className="farmer-login-footer-text">Looking to buy produce?</span>
+              <Link to="/buyers/login" className="farmer-login-link">Sign in as a buyer</Link>
             </div>
           </form>
-          <div className="farmer-login-image-wrapper">
-            <div className="farmer-login-image-badge">Farmer's Account</div>
-            <img
-              src={Img}
-              alt="Happy farmer with produce"
-              className="farmer-login-hero-image"
-            />
-            <div className="farmer-login-image-overlay">
-              <h3 className="farmer-login-overlay-title">
-                Sell smarter, not harder.
-              </h3>
+        </div>
+
+        <div className="farmer-login-image-section">
+          <div className="farmer-login-image-badge">Farmer's Account</div>
+          <img src={Img} alt="Happy farmer with produce" className="farmer-login-image" />
+          <div className="farmer-login-image-overlay">
+            <div className="farmer-login-overlay-content">
+              <h3 className="farmer-login-overlay-title">Sell smarter, not harder.</h3>
               <p className="farmer-login-overlay-description">
-                List your crops, livestock, or produce, and let buyers reach you
-                directly—no middlemen, no hidden costs.
+                List your crops, livestock, or produce, and let buyers reach you directly—no middlemen, no hidden costs.
               </p>
             </div>
           </div>
+          <button onClick={() => navigate("/select_role")} className="farmer-login-back-btn">
+            <ArrowLeft size={18} />
+            <span>Back to Roles</span>
+          </button>
         </div>
       </div>
     </div>
