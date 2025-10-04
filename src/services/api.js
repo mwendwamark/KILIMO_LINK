@@ -1,10 +1,246 @@
 // Base API configuration
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
 
-// API endpoints configuration
+// ==================== AUTHENTICATION HELPERS ====================
+
+/**
+ * Main authentication function - handles signup and login for both farmers and buyers
+ * @param {string} userType - 'farmer' or 'buyer'
+ * @param {string} action - 'signup' or 'login'
+ * @param {object} data - Form data to send
+ * @returns {Promise} - Response from the server
+ */
+export const authenticate = async (userType, action, data) => {
+  const endpoint = `${API_BASE_URL}/${userType}s/${action}`;
+
+  try {
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ user: data }),
+    });
+
+    const responseData = await response.json();
+
+    if (!response.ok) {
+      // Return error in a structured way
+      return {
+        success: false,
+        error: extractError(responseData),
+        status: response.status,
+      };
+    }
+
+    // Success
+    return {
+      success: true,
+      data: responseData,
+      status: response.status,
+    };
+  } catch (error) {
+    console.error(`${action} error:`, error);
+    return {
+      success: false,
+      error: "Network error. Please check your connection and try again.",
+      status: 0,
+    };
+  }
+};
+
+/**
+ * Extract error message from backend response
+ * @param {object} data - Response data from backend
+ * @returns {string} - Error message
+ */
+const extractError = (data) => {
+  if (data.errors && Array.isArray(data.errors)) {
+    return data.errors.join(". ");
+  } else if (data.error) {
+    return data.error;
+  } else if (data.message) {
+    return data.message;
+  }
+  return "An error occurred. Please try again.";
+};
+
+/**
+ * Store authentication token
+ * @param {string} token - JWT token
+ * @param {string} userType - 'farmer' or 'buyer'
+ * @param {object} user - User data
+ * @param {boolean} rememberMe - Whether to use localStorage or sessionStorage
+ */
+export const storeAuthData = (token, userType, user, rememberMe = false) => {
+  const storage = rememberMe ? localStorage : sessionStorage;
+
+  storage.setItem("authToken", token);
+  storage.setItem("userType", userType);
+  storage.setItem("user", JSON.stringify(user));
+};
+
+/**
+ * Clear authentication data
+ */
+export const clearAuthData = () => {
+  localStorage.removeItem("authToken");
+  localStorage.removeItem("userType");
+  localStorage.removeItem("user");
+  sessionStorage.removeItem("authToken");
+  sessionStorage.removeItem("userType");
+  sessionStorage.removeItem("user");
+};
+
+/**
+ * Get current auth token
+ * @returns {string|null} - Auth token or null
+ */
+export const getAuthToken = () => {
+  return (
+    localStorage.getItem("authToken") || sessionStorage.getItem("authToken")
+  );
+};
+
+/**
+ * Check if user is authenticated
+ * @returns {boolean}
+ */
+export const isAuthenticated = () => {
+  return !!getAuthToken();
+};
+
+/**
+ * Get current user data
+ * @returns {object|null}
+ */
+export const getCurrentUser = () => {
+  const userStr =
+    localStorage.getItem("user") || sessionStorage.getItem("user");
+  return userStr ? JSON.parse(userStr) : null;
+};
+
+// ==================== FORM VALIDATION HELPERS ====================
+
+/**
+ * Validate email format
+ * @param {string} email
+ * @returns {string|null} - Error message or null if valid
+ */
+export const validateEmail = (email) => {
+  if (!email.trim()) return "Email is required";
+  if (!/\S+@\S+\.\S+/.test(email)) return "Email is invalid";
+  return null;
+};
+
+/**
+ * Validate password
+ * @param {string} password
+ * @returns {string|null} - Error message or null if valid
+ */
+export const validatePassword = (password) => {
+  if (!password) return "Password is required";
+  if (password.length < 8) return "Password must be at least 8 characters";
+  return null;
+};
+
+/**
+ * Validate phone number (Kenya format)
+ * @param {string} phoneNumber
+ * @returns {string|null} - Error message or null if valid
+ */
+export const validatePhoneNumber = (phoneNumber) => {
+  if (!phoneNumber) return "Phone number is required";
+  if (!/^\+254\d{9}$/.test(phoneNumber)) {
+    return "Phone number must be in format +254XXXXXXXXX";
+  }
+  return null;
+};
+
+/**
+ * Validate required field
+ * @param {string} value
+ * @param {string} fieldName
+ * @returns {string|null} - Error message or null if valid
+ */
+export const validateRequired = (value, fieldName) => {
+  if (!value || !value.trim()) return `${fieldName} is required`;
+  return null;
+};
+
+/**
+ * Validate form data for signup
+ * @param {object} formData
+ * @returns {object} - Object with field names as keys and error messages as values
+ */
+export const validateSignupForm = (formData) => {
+  const errors = {};
+
+  const firstNameError = validateRequired(formData.firstName, "First name");
+  if (firstNameError) errors.firstName = firstNameError;
+
+  const lastNameError = validateRequired(formData.lastName, "Last name");
+  if (lastNameError) errors.lastName = lastNameError;
+
+  const emailError = validateEmail(formData.email);
+  if (emailError) errors.email = emailError;
+
+  const phoneError = validatePhoneNumber(formData.phoneNumber);
+  if (phoneError) errors.phoneNumber = phoneError;
+
+  const passwordError = validatePassword(formData.password);
+  if (passwordError) errors.password = passwordError;
+
+  if (!formData.confirmPassword) {
+    errors.confirmPassword = "Please confirm your password";
+  } else if (formData.password !== formData.confirmPassword) {
+    errors.confirmPassword = "Passwords do not match";
+  }
+
+  return errors;
+};
+
+/**
+ * Validate form data for login
+ * @param {object} formData
+ * @returns {object} - Object with field names as keys and error messages as values
+ */
+export const validateLoginForm = (formData) => {
+  const errors = {};
+
+  const emailError = validateEmail(formData.email);
+  if (emailError) errors.email = emailError;
+
+  const passwordError = validatePassword(formData.password);
+  if (passwordError) errors.password = passwordError;
+
+  return errors;
+};
+
+export const resendConfirmation = async (email, userType) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/${userType}s/confirmation`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ user: { email } }),
+    });
+
+    const data = await response.json();
+    return { success: response.ok, data };
+  } catch (error) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+// ==================== LEGACY API (for other parts of your app) ====================
+
 const API_ENDPOINTS = {
   AUTH: {
-    // Farmer auth endpoints
     FARMER: {
       SIGN_UP: `${API_BASE_URL}/farmers/signup`,
       SIGN_IN: `${API_BASE_URL}/farmers/login`,
@@ -12,7 +248,6 @@ const API_ENDPOINTS = {
       FORGOT_PASSWORD: `${API_BASE_URL}/farmers/password`,
       RESET_PASSWORD: `${API_BASE_URL}/farmers/password`,
     },
-    // Buyer auth endpoints
     BUYER: {
       SIGN_UP: `${API_BASE_URL}/buyers/signup`,
       SIGN_IN: `${API_BASE_URL}/buyers/login`,
@@ -20,172 +255,7 @@ const API_ENDPOINTS = {
       FORGOT_PASSWORD: `${API_BASE_URL}/buyers/password`,
       RESET_PASSWORD: `${API_BASE_URL}/buyers/password`,
     },
-    // Email confirmation
-    CONFIRM_EMAIL: (token) => `${API_BASE_URL}/auth/confirmation?confirmation_token=${token}`,
   },
 };
 
-// Helper function for API calls
-const apiCall = async (url, options = {}) => {
-  const defaultOptions = {
-    headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json",
-    },
-    // credentials: 'include', // Important for cookies/JWT
-  };
-
-  // Get auth token from storage if it exists
-  const token = sessionStorage.getItem("authToken") || localStorage.getItem("authToken");
-  if (token) {
-    defaultOptions.headers["Authorization"] = `Bearer ${token}`;
-  }
-
-  const mergedOptions = {
-    ...defaultOptions,
-    ...options,
-    headers: {
-      ...defaultOptions.headers,
-      ...options.headers,
-    },
-  };
-
-  try {
-    const response = await fetch(url, mergedOptions);
-    const data = await response.json().catch(() => ({}));
-
-    if (!response.ok) {
-      throw new Error(
-        data.error || data.message || `HTTP error! status: ${response.status}`
-      );
-    }
-
-    return { data };
-  } catch (error) {
-    console.error("API call failed:", error);
-    throw error;
-  }
-};
-
-// Auth API service
-export const authAPI = {
-  // Farmer authentication
-  farmer: {
-    signUp: (userData) => {
-      return apiCall(API_ENDPOINTS.AUTH.FARMER.SIGN_UP, {
-        method: "POST",
-        body: JSON.stringify({ user: userData }),
-      });
-    },
-
-    signIn: (credentials) => {
-      return apiCall(API_ENDPOINTS.AUTH.FARMER.SIGN_IN, {
-        method: "POST",
-        body: JSON.stringify({ user: credentials }),
-      });
-    },
-
-    signOut: () => {
-      return apiCall(API_ENDPOINTS.AUTH.FARMER.SIGN_OUT, {
-        method: "DELETE",
-      });
-    },
-
-    forgotPassword: (email) => {
-      return apiCall(API_ENDPOINTS.AUTH.FARMER.FORGOT_PASSWORD, {
-        method: "POST",
-        body: JSON.stringify({ user: { email } }),
-      });
-    },
-
-    resetPassword: (password, passwordConfirmation, resetPasswordToken) => {
-      return apiCall(API_ENDPOINTS.AUTH.FARMER.RESET_PASSWORD, {
-        method: "PUT",
-        body: JSON.stringify({
-          user: {
-            password,
-            password_confirmation: passwordConfirmation,
-            reset_password_token: resetPasswordToken,
-          },
-        }),
-      });
-    },
-  },
-
-  // Buyer authentication (same methods as farmer, but with buyer endpoints)
-  buyer: {
-    signUp: (userData) => {
-      return apiCall(API_ENDPOINTS.AUTH.BUYER.SIGN_UP, {
-        method: "POST",
-        body: JSON.stringify({ user: userData }),
-      });
-    },
-
-    signIn: (credentials) => {
-      return apiCall(API_ENDPOINTS.AUTH.BUYER.SIGN_IN, {
-        method: "POST",
-        body: JSON.stringify({ user: credentials }),
-      });
-    },
-
-    signOut: () => {
-      return apiCall(API_ENDPOINTS.AUTH.BUYER.SIGN_OUT, {
-        method: "DELETE",
-      });
-    },
-
-    forgotPassword: (email) => {
-      return apiCall(API_ENDPOINTS.AUTH.BUYER.FORGOT_PASSWORD, {
-        method: "POST",
-        body: JSON.stringify({ user: { email } }),
-      });
-    },
-
-    resetPassword: (password, passwordConfirmation, resetPasswordToken) => {
-      return apiCall(API_ENDPOINTS.AUTH.BUYER.RESET_PASSWORD, {
-        method: "PUT",
-        body: JSON.stringify({
-          user: {
-            password,
-            password_confirmation: passwordConfirmation,
-            reset_password_token: resetPasswordToken,
-          },
-        }),
-      });
-    },
-  },
-
-  // Common auth methods
-  confirmEmail: (token) => {
-    return apiCall(API_ENDPOINTS.AUTH.CONFIRM_EMAIL(token), {
-      method: "GET",
-    });
-  },
-
-  // Store auth tokens
-  storeAuthToken: (token, rememberMe = false) => {
-    if (rememberMe) {
-      localStorage.setItem("authToken", token);
-    } else {
-      sessionStorage.setItem("authToken", token);
-    }
-  },
-
-  // Clear auth tokens
-  clearAuthToken: () => {
-    localStorage.removeItem("authToken");
-    sessionStorage.removeItem("authToken");
-  },
-
-  // Check if user is authenticated
-  isAuthenticated: () => {
-    return !!(localStorage.getItem("authToken") || sessionStorage.getItem("authToken"));
-  },
-
-  // Get auth token
-  getAuthToken: () => {
-    return localStorage.getItem("authToken") || sessionStorage.getItem("authToken");
-  },
-};
-
-export { API_BASE_URL, API_ENDPOINTS, apiCall };
+export { API_BASE_URL, API_ENDPOINTS };

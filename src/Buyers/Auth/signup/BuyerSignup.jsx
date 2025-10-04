@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuthForm } from "../../../hooks/useAuthForm";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./BuyerSignup.css";
@@ -8,33 +7,34 @@ import logo from "../../../../public/logo.svg";
 import Img from "../../../assets/heroImg.webp";
 import google from "../../../FirstTimer/assets/google.svg";
 import apple from "../../../FirstTimer/assets/apple.svg";
+import { authenticate, validateSignupForm } from "../../../services/api";
 
 const BuyerSignup = () => {
   const navigate = useNavigate();
   const [agreed, setAgreed] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const {
-    formData,
-    errors,
-    serverError,
-    isSubmitting,
-    handleChange,
-    handleSubmit,
-  } = useAuthForm({
-    formType: "signup",
-    userType: "buyer",
-    onSuccess: (response) => {
-      toast.success(
-        "Registration successful! Please check your email to confirm your account."
-      );
-      // Redirect to login after a short delay
-      setTimeout(() => {
-        navigate("/buyers/login");
-      }, 3000);
-    },
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    password: "",
+    confirmPassword: "",
   });
 
-  const handleFormSubmit = async (e) => {
+  const [errors, setErrors] = useState({});
+  const [serverError, setServerError] = useState("");
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
+    if (serverError) setServerError("");
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!agreed) {
@@ -42,12 +42,48 @@ const BuyerSignup = () => {
       return;
     }
 
-    try {
-      await handleSubmit(e);
-    } catch (error) {
-      // Error is already handled by the useAuthForm hook
-      console.error("Signup error:", error);
+    const validationErrors = validateSignupForm(formData);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
     }
+
+    setIsSubmitting(true);
+    setServerError("");
+
+    const result = await authenticate("buyer", "signup", {
+      first_name: formData.firstName,
+      last_name: formData.lastName,
+      email: formData.email,
+      phone_number: formData.phoneNumber,
+      password: formData.password,
+      password_confirmation: formData.confirmPassword,
+    });
+
+    setIsSubmitting(false);
+
+    // if (!result.success) {
+    //   setServerError(result.error);
+    //   return;
+    // }
+
+    // toast.success(
+    //   "Registration successful! Please check your email to confirm your account."
+    // );
+    // setTimeout(() => navigate("/buyers/login"), 3000);
+
+    if (!result.success) {
+      setServerError(result.error);
+      return;
+    }
+
+    // Success - redirect to check email page
+    navigate("/check-email", {
+      state: {
+        email: formData.email,
+        userType: "buyer", // or "farmer" depending on which component
+      },
+    });
   };
 
   return (
@@ -84,10 +120,7 @@ const BuyerSignup = () => {
           </div>
         )}
         <div className="buyer-signup-form-wrapper">
-          <form
-            className="buyer-signup-form-fields"
-            onSubmit={handleFormSubmit}
-          >
+          <form className="buyer-signup-form-fields" onSubmit={handleSubmit}>
             <div className="buyer-signup-header-section">
               <h2 className="buyer-signup-title section-title">Sign up</h2>
               <p className="buyer-signup-description">
@@ -268,7 +301,7 @@ const BuyerSignup = () => {
                     alt="Google"
                     loading="lazy"
                     style={{ width: "1.25rem", height: "1.25rem" }}
-                  />{" "}
+                  />
                 </div>
                 <span>Sign up with Google</span>
               </div>
@@ -296,18 +329,6 @@ const BuyerSignup = () => {
                 </Link>
               </div>
             </div>
-            {/* <div className="buyer-signup-farmer-section">
-              <div className="buyer-signup-farmer-divider">
-                <span className="buyer-signup-farmer-divider-text">
-                  Are you a farmer?
-                </span>
-              </div>
-              <div className="buyer-signup-farmer-link-wrapper">
-                <Link to="/farmers/signup" className="buyer-signup-farmer-link">
-                  Sign up as a farmer
-                </Link>
-              </div>
-            </div> */}
           </form>
           <div className="buyer-signup-image-wrapper">
             <div className="buyer-signup-image-badge">Buyer's Account</div>

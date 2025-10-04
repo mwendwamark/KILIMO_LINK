@@ -1,0 +1,36 @@
+.check-email-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--bg_color);
+  padding: 20px;
+}
+
+.check-email-container {
+  background-color: var(--bg_color);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 4rem;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+}
+
+.check-email-icon {
+  /* background-color: var(--bright_green);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px; */
+}
+
+.check-email-instructions{
+    color: var(--light_grey_color);
+    margin-bottom: 2rem;
+    font-weight: var(--fw_medium);
+    font-size: var(--pre_title_fs);
+}

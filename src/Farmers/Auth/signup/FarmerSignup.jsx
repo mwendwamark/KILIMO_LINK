@@ -1,51 +1,87 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import {useAuthForm} from '../../../hooks/useAuthForm';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import './FarmerSignup.css';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./FarmerSignup.css";
 import logo from "../../../../public/logo.svg";
 import Img from "../../../assets/heroImg.webp";
 import google from "../../../FirstTimer/assets/google.svg";
 import apple from "../../../FirstTimer/assets/apple.svg";
+import { authenticate, validateSignupForm } from "../../../services/api";
 
 const FarmerSignup = () => {
   const navigate = useNavigate();
   const [agreed, setAgreed] = useState(false);
-  
-  const { 
-    formData, 
-    errors, 
-    serverError, 
-    isSubmitting, 
-    handleChange, 
-    handleSubmit 
-  } = useAuthForm({
-    formType: 'signup',
-    userType: 'farmer',
-    onSuccess: (response) => {
-      toast.success('Registration successful! Please check your email to confirm your account.');
-      // Redirect to login after a short delay
-      setTimeout(() => {
-        navigate('/farmers/login');
-      }, 3000);
-    },
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    password: "",
+    confirmPassword: "",
   });
 
-  const handleFormSubmit = async (e) => {
+  const [errors, setErrors] = useState({});
+  const [serverError, setServerError] = useState("");
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
+    if (serverError) setServerError("");
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!agreed) {
-      toast.error('You must agree to the terms and conditions');
+      toast.error("You must agree to the terms and conditions");
       return;
     }
-    
-    try {
-      await handleSubmit(e);
-    } catch (error) {
-      // Error is already handled by the useAuthForm hook
-      console.error('Signup error:', error);
+
+    const validationErrors = validateSignupForm(formData);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
     }
+
+    setIsSubmitting(true);
+    setServerError("");
+
+    const result = await authenticate("farmer", "signup", {
+      first_name: formData.firstName,
+      last_name: formData.lastName,
+      email: formData.email,
+      phone_number: formData.phoneNumber,
+      password: formData.password,
+      password_confirmation: formData.confirmPassword,
+    });
+
+    setIsSubmitting(false);
+
+    // if (!result.success) {
+    //   setServerError(result.error);
+    //   return;
+    // }
+
+    // toast.success("Registration successful! Please check your email to confirm your account.");
+    // setTimeout(() => navigate("/farmers/login"), 3000);
+
+    if (!result.success) {
+      setServerError(result.error);
+      return;
+    }
+
+    // Changed this part
+    navigate("/check-email", {
+      state: {
+        email: formData.email,
+        userType: "farmer",
+      },
+    });
   };
 
   return (
@@ -57,35 +93,32 @@ const FarmerSignup = () => {
           loading="eager"
           style={{ width: "auto", height: "50px" }}
         />
-      </Link>
-      <div className="farmer-signup-main-container">
-        {serverError && (
-          <div className="farmer-signup-error-alert">
-            <div className="farmer-signup-error-icon">
-              <svg
-                className="farmer-signup-error-svg"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </div>
-            <div className="farmer-signup-error-content">
-              <h3 className="farmer-signup-error-title">{serverError}</h3>
-            </div>
+      </Link>{" "}
+      {serverError && (
+        <div className="farmer-signup-error-alert">
+          <div className="farmer-signup-error-icon">
+            <svg
+              className="farmer-signup-error-svg"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                clipRule="evenodd"
+              />
+            </svg>
           </div>
-        )}
+          <div className="farmer-signup-error-content">
+            <h3 className="farmer-signup-error-title">{serverError}</h3>
+          </div>
+        </div>
+      )}
+      <div className="farmer-signup-main-container">
         <div className="farmer-signup-form-wrapper">
-          <form
-            className="farmer-signup-form-fields"
-            onSubmit={handleFormSubmit}
-          >
+          <form className="farmer-signup-form-fields" onSubmit={handleSubmit}>
             <div className="farmer-signup-header-section">
               <h2 className="farmer-signup-title section-title">Sign up</h2>
               <p className="farmer-signup-description">
@@ -130,7 +163,9 @@ const FarmerSignup = () => {
                     onChange={handleChange}
                   />
                   {errors.lastName && (
-                    <p className="farmer-signup-error-text">{errors.lastName}</p>
+                    <p className="farmer-signup-error-text">
+                      {errors.lastName}
+                    </p>
                   )}
                 </div>
               </div>
@@ -196,7 +231,9 @@ const FarmerSignup = () => {
                     onChange={handleChange}
                   />
                   {errors.password ? (
-                    <p className="farmer-signup-error-text">{errors.password}</p>
+                    <p className="farmer-signup-error-text">
+                      {errors.password}
+                    </p>
                   ) : (
                     <p className="farmer-signup-hint-text">
                       Must be at least 8 characters long
@@ -266,7 +303,7 @@ const FarmerSignup = () => {
                     alt="Google"
                     loading="lazy"
                     style={{ width: "1.25rem", height: "1.25rem" }}
-                  />{" "}
+                  />
                 </div>
                 <span>Sign up with Google</span>
               </div>
