@@ -8,7 +8,9 @@ import BuyerSignup from "./Buyers/Auth/signup/BuyerSignup";
 import BuyerLogin from "./Buyers/Auth/login/BuyerLogin";
 import EmailConfirmed from "./pages/EmailConfirmed";
 import CheckEmail from "./pages/CheckEmail";
-
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
+import ResetPassword from "./pages/ForgotPassword/ResetPassword";
+import Dashboard from "./Farmers/Dashboard/Dashboard";
 const App = () => {
   return (
     <BrowserRouter>
@@ -21,6 +23,13 @@ const App = () => {
         <Route path="/buyers/login" element={<BuyerLogin />} />
         <Route path="/check-email" element={<CheckEmail />} />
         <Route path="/email-confirmed" element={<EmailConfirmed />} />
+        
+        {/* Password Reset Routes */}
+        <Route path="/farmers/forgot-password" element={<ForgotPassword userType="farmer" />} />
+        <Route path="/farmers/reset-password" element={<ResetPassword userType="farmer" />} />
+        <Route path="/buyers/forgot-password" element={<ForgotPassword userType="buyer" />} />
+        <Route path="/buyers/reset-password" element={<ResetPassword userType="buyer" />} />
+        <Route path="/farmers/dashboard" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
   );

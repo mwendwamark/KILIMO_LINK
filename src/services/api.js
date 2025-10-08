@@ -237,6 +237,103 @@ export const resendConfirmation = async (email, userType) => {
   }
 };
 
+// ==================== PASSWORD RESET ====================
+
+/**
+ * Request password reset email
+ * @param {string} email - User's email
+ * @param {string} userType - 'farmer' or 'buyer'
+ * @returns {Promise<Object>}
+ */
+export const requestPasswordReset = async (email, userType) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/${userType}s/password`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({
+        user: { email }
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return {
+        success: false,
+        error: extractError(data),
+        status: response.status,
+      };
+    }
+
+    return {
+      success: true,
+      message: data.message,
+      status: response.status,
+    };
+  } catch (error) {
+    console.error('Password reset request error:', error);
+    return {
+      success: false,
+      error: 'Network error. Please check your connection and try again.',
+      status: 0,
+    };
+  }
+};
+
+/**
+ * Reset password with token
+ * @param {string} token - Reset password token from email
+ * @param {string} password - New password
+ * @param {string} passwordConfirmation - Password confirmation
+ * @param {string} userType - 'farmer' or 'buyer'
+ * @returns {Promise<Object>}
+ */
+export const resetPassword = async (token, password, passwordConfirmation, userType) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/${userType}s/password`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({
+        user: {
+          reset_password_token: token,
+          password,
+          password_confirmation: passwordConfirmation
+        }
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return {
+        success: false,
+        error: extractError(data),
+        errors: data.errors,
+        status: response.status,
+      };
+    }
+
+    return {
+      success: true,
+      message: data.message,
+      status: response.status,
+    };
+  } catch (error) {
+    console.error('Password reset error:', error);
+    return {
+      success: false,
+      error: 'Network error. Please check your connection and try again.',
+      status: 0,
+    };
+  }
+};
+
 // ==================== LEGACY API (for other parts of your app) ====================
 
 const API_ENDPOINTS = {
