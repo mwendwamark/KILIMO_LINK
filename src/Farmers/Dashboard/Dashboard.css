@@ -1,0 +1,64 @@
+.dashboard-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--white_alt_color);
+}
+
+.dashboard-main-content {
+  margin-left: 250px;
+  padding: 2rem;
+  transition: margin-left 0.3s ease;
+  min-height: 100vh;
+  background-color: var(--white_alt_color);
+}
+
+.dashboard-main-content.sidebar-collapsed {
+  margin-left: 80px;
+}
+
+@media screen and (max-width: 768px) {
+  .dashboard-main-content {
+    margin-left: 0;
+    padding: 1rem;
+    padding-top: 90px;
+  }
+
+  .dashboard-main-content.sidebar-collapsed {
+    margin-left: 0;
+  }
+}
+
+/* Page wrapper for consistent spacing */
+.dashboard-page {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.dashboard-page-header {
+  margin-bottom: 2rem;
+}
+
+.dashboard-page-title {
+  font-family: var(--league_spartan);
+  font-size: 2.5rem;
+  font-weight: var(--fw_bold);
+  color: var(--text_color);
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-page-subtitle {
+  font-family: var(--outfit);
+  font-size: 1.1rem;
+  color: var(--light_grey_color);
+  line-height: 1.6;
+}
+
+@media screen and (max-width: 768px) {
+  .dashboard-page-title {
+    font-size: 2rem;
+  }
+
+  .dashboard-page-subtitle {
+    font-size: 1rem;
+  }
+}

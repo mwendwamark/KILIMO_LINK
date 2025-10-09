@@ -74,7 +74,7 @@
   left: 0;
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: 1.5rem;
   border-right: 1px solid var(--grey_alt_color);
   transition: width 0.3s ease, transform 0.3s ease;
   z-index: 1001;
@@ -82,7 +82,7 @@
 }
 
 .farmers-sidebar.collapsed {
-  width: 100px;
+  width: 80px;
 }
 
 .sidebar-logo-section {
@@ -123,7 +123,6 @@
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  margin-top: 2rem;
 }
 
 .sidebar-links::-webkit-scrollbar {
@@ -136,12 +135,12 @@
 }
 
 .sidebar-section-label {
-  font-size: 1.1rem;
+  font-size: 0.75rem;
   font-family: var(--league_spartan);
   color: var(--light_grey_color);
   font-weight: var(--fw_medium);
   text-transform: uppercase;
-  letter-spacing: -1px;
+  letter-spacing: 0.5px;
   white-space: nowrap;
   transition: opacity 0.3s ease;
   padding-left: 0.5rem;
@@ -166,7 +165,7 @@
   color: var(--text_color);
   font-weight: var(--fw_regular);
   text-decoration: none;
-  padding: 0.8rem 1rem;
+  padding: 0.9rem 1rem;
   border-radius: 0.7rem;
   transition: all 0.3s ease;
   cursor: pointer;
