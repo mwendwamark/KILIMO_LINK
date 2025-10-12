@@ -1,15 +1,15 @@
 .dashboard-container {
   width: 100%;
   min-height: 100vh;
-  background-color: var(--white_alt_color);
+  background-color: var(--bg_color);
 }
 
 .dashboard-main-content {
   margin-left: 250px;
-  padding: 2rem;
+  padding: 1rem;
   transition: margin-left 0.3s ease;
   min-height: 100vh;
-  background-color: var(--white_alt_color);
+  background-color: var(--bg_color);
 }
 
 .dashboard-main-content.sidebar-collapsed {

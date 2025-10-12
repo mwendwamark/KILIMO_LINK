@@ -11,6 +11,46 @@ const API_BASE_URL =
  * @param {object} data - Form data to send
  * @returns {Promise} - Response from the server
  */
+// export const authenticate = async (userType, action, data) => {
+//   const endpoint = `${API_BASE_URL}/${userType}s/${action}`;
+
+//   try {
+//     const response = await fetch(endpoint, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Accept: "application/json",
+//       },
+//       body: JSON.stringify({ user: data }),
+//     });
+
+//     const responseData = await response.json();
+
+//     if (!response.ok) {
+//       // Return error in a structured way
+//       return {
+//         success: false,
+//         error: extractError(responseData),
+//         status: response.status,
+//       };
+//     }
+
+//     // Success
+//     return {
+//       success: true,
+//       data: responseData,
+//       status: response.status,
+//     };
+//   } catch (error) {
+//     console.error(`${action} error:`, error);
+//     return {
+//       success: false,
+//       error: "Network error. Please check your connection and try again.",
+//       status: 0,
+//     };
+//   }
+// };
+
 export const authenticate = async (userType, action, data) => {
   const endpoint = `${API_BASE_URL}/${userType}s/${action}`;
 
@@ -27,7 +67,6 @@ export const authenticate = async (userType, action, data) => {
     const responseData = await response.json();
 
     if (!response.ok) {
-      // Return error in a structured way
       return {
         success: false,
         error: extractError(responseData),
@@ -35,10 +74,17 @@ export const authenticate = async (userType, action, data) => {
       };
     }
 
-    // Success
+    // Extract token from Authorization header
+    const authHeader = response.headers.get("Authorization");
+    const token = authHeader ? authHeader.replace("Bearer ", "") : null;
+
+    // Success - include token in response
     return {
       success: true,
-      data: responseData,
+      data: {
+        ...responseData,
+        token: token, // Add token to the response data
+      },
       status: response.status,
     };
   } catch (error) {
@@ -248,13 +294,13 @@ export const resendConfirmation = async (email, userType) => {
 export const requestPasswordReset = async (email, userType) => {
   try {
     const response = await fetch(`${API_BASE_URL}/${userType}s/password`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        "Content-Type": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify({
-        user: { email }
+        user: { email },
       }),
     });
 
@@ -274,10 +320,10 @@ export const requestPasswordReset = async (email, userType) => {
       status: response.status,
     };
   } catch (error) {
-    console.error('Password reset request error:', error);
+    console.error("Password reset request error:", error);
     return {
       success: false,
-      error: 'Network error. Please check your connection and try again.',
+      error: "Network error. Please check your connection and try again.",
       status: 0,
     };
   }
@@ -291,20 +337,25 @@ export const requestPasswordReset = async (email, userType) => {
  * @param {string} userType - 'farmer' or 'buyer'
  * @returns {Promise<Object>}
  */
-export const resetPassword = async (token, password, passwordConfirmation, userType) => {
+export const resetPassword = async (
+  token,
+  password,
+  passwordConfirmation,
+  userType
+) => {
   try {
     const response = await fetch(`${API_BASE_URL}/${userType}s/password`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        "Content-Type": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify({
         user: {
           reset_password_token: token,
           password,
-          password_confirmation: passwordConfirmation
-        }
+          password_confirmation: passwordConfirmation,
+        },
       }),
     });
 
@@ -325,15 +376,121 @@ export const resetPassword = async (token, password, passwordConfirmation, userT
       status: response.status,
     };
   } catch (error) {
-    console.error('Password reset error:', error);
+    console.error("Password reset error:", error);
     return {
       success: false,
-      error: 'Network error. Please check your connection and try again.',
+      error: "Network error. Please check your connection and try again.",
       status: 0,
     };
   }
 };
 
+// ==================== FARM CRUD ====================
+const getAuthHeader = () => {
+  const token = getAuthToken();
+  return token ? { Authorization: `Bearer ${token}` } : {};
+};
+
+export const getFarms = async () => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/farmers/farms`, {
+      headers: { ...getAuthHeader() },
+    });
+    const data = await res.json();
+    return res.ok
+      ? { success: true, data }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+export const getFarm = async (id) => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/farmers/farms/${id}`, {
+      headers: { ...getAuthHeader() },
+    });
+    const data = await res.json();
+    return res.ok
+      ? { success: true, data }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+export const createFarm = async (payload) => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/farmers/farms`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", ...getAuthHeader() },
+      body: JSON.stringify({ farm: payload }),
+    });
+    const data = await res.json();
+    return res.ok
+      ? { success: true, data }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+// export const updateFarm = async (id, payload) => {
+//   try {
+//     const res = await fetch(`${API_BASE_URL}/farmers/farms/${id}`, {
+//       method: "PUT",
+//       headers: { "Content-Type": "application/json", ...getAuthHeader() },
+//       body: JSON.stringify({ farm: payload }),
+//     });
+//     const data = await res.json();
+//     return res.ok
+//       ? { success: true, data }
+//       : { success: false, error: extractError(data) };
+//   } catch (e) {
+//     return { success: false, error: "Network error" };
+//   }
+// };
+
+export const updateFarm = async (id, payload) => {
+  try {
+    // Filter out non-editable fields
+    const allowedFields = {
+      farm_name: payload.farm_name,
+      county: payload.county,
+      sub_county: payload.sub_county,
+      ward: payload.ward,
+      farm_description: payload.farm_description,
+      farm_type: payload.farm_type,
+      farm_latitude: payload.farm_latitude,
+      farm_longitude: payload.farm_longitude,
+    };
+
+    const res = await fetch(`${API_BASE_URL}/farmers/farms/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json", ...getAuthHeader() },
+      body: JSON.stringify({ farm: allowedFields }),
+    });
+    const data = await res.json();
+    return res.ok
+      ? { success: true, data }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+export const deleteFarm = async (id) => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/farmers/farms/${id}`, {
+      method: "DELETE",
+      headers: { ...getAuthHeader() },
+    });
+    return res.ok
+      ? { success: true }
+      : { success: false, error: "Delete failed" };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
 // ==================== LEGACY API (for other parts of your app) ====================
 
 const API_ENDPOINTS = {

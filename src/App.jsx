@@ -11,28 +11,53 @@ import CheckEmail from "./pages/CheckEmail";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import ResetPassword from "./pages/ForgotPassword/ResetPassword";
 import Dashboard from "./Farmers/Dashboard/Dashboard";
+import MyFarms from "./Farmers/Dashboard/MyFarms/MyFarms";
+import FarmDetail from "./Farmers/Dashboard/MyFarms/FarmDetail";
 const App = () => {
   return (
     <BrowserRouter>
+      {" "}
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/select_role" element={<RoleSelection />} />
-        <Route path="/farmers/signup" element={<FarmerSignup />} />
-        <Route path="/farmers/login" element={<FarmerLogin />} />
-        <Route path="/buyers/signup" element={<BuyerSignup />} />
-        <Route path="/buyers/login" element={<BuyerLogin />} />
-        <Route path="/check-email" element={<CheckEmail />} />
-        <Route path="/email-confirmed" element={<EmailConfirmed />} />
-        
-        {/* Password Reset Routes */}
-        <Route path="/farmers/forgot-password" element={<ForgotPassword userType="farmer" />} />
-        <Route path="/farmers/reset-password" element={<ResetPassword userType="farmer" />} />
-        <Route path="/buyers/forgot-password" element={<ForgotPassword userType="buyer" />} />
-        <Route path="/buyers/reset-password" element={<ResetPassword userType="buyer" />} />
-        <Route path="/farmers/dashboard" element={<Dashboard />} />
-      </Routes>
+        {" "}
+        <Route path="/" element={<Home />} />{" "}
+        <Route path="/select_role" element={<RoleSelection />} />{" "}
+        <Route path="/farmers/signup" element={<FarmerSignup />} />{" "}
+        <Route path="/farmers/login" element={<FarmerLogin />} />{" "}
+        <Route path="/buyers/signup" element={<BuyerSignup />} />{" "}
+        <Route path="/buyers/login" element={<BuyerLogin />} />{" "}
+        <Route path="/check-email" element={<CheckEmail />} />{" "}
+        <Route path="/email-confirmed" element={<EmailConfirmed />} />{" "}
+        {/* Password Reset Routes */}{" "}
+        <Route
+          path="/farmers/forgot-password"
+          element={<ForgotPassword userType="farmer" />}
+        />{" "}
+        <Route
+          path="/farmers/reset-password"
+          element={<ResetPassword userType="farmer" />}
+        />{" "}
+        <Route
+          path="/buyers/forgot-password"
+          element={<ForgotPassword userType="buyer" />}
+        />{" "}
+        <Route
+          path="/buyers/reset-password"
+          element={<ResetPassword userType="buyer" />}
+        />{" "}
+        {/* Farmers Dashboard Routes */}{" "}
+        <Route path="/farmers/dashboard" element={<Dashboard />}>
+          <Route index element={<div>Dashboard Home</div>} />
+          <Route path="farms" element={<MyFarms />} />
+          <Route path="farms/:id" element={<FarmDetail />} />{" "}
+          {/* Add this line */}
+          <Route path="resources" element={<div>Resources</div>} />
+          <Route path="marketplace" element={<div>Marketplace</div>} />
+          <Route path="my-listings" element={<div>My Listings</div>} />
+          <Route path="community" element={<div>Community</div>} />
+          <Route path="messages" element={<div>Messages</div>} />
+        </Route>
+      </Routes>{" "}
     </BrowserRouter>
   );
 };
-
 export default App;
