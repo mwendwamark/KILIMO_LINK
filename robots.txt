@@ -1,0 +1,28 @@
+# Kilimo Link - robots.txt
+# Allow all crawlers by default
+
+User-agent: *
+Allow: /
+
+# OpenAI Crawlers - Allow search and user interactions
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+# Disallow authenticated areas for all bots
+Disallow: /farmers/forgot-password
+Disallow: /buyers/forgot-password
+Disallow: /farmers/reset-password
+Disallow: /buyers/reset-password
+
+# Allow public pages
+Allow: /
+Allow: /select_role
+
+# Sitemap location
+Sitemap: https://kilimo-link.vercel.app/sitemap.xml
