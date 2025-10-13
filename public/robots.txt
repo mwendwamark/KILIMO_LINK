@@ -1,0 +1,51 @@
+# Kilimo Link - robots.txt
+# Allow all crawlers by default
+
+User-agent: *
+Allow: /
+Disallow: /farmers/dashboard
+Disallow: /buyers/dashboard
+Disallow: /farmers/login
+Disallow: /buyers/login
+Disallow: /farmers/signup
+Disallow: /buyers/signup
+Disallow: /farmers/forgot-password
+Disallow: /buyers/forgot-password
+Disallow: /farmers/reset-password
+Disallow: /buyers/reset-password
+
+# Explicitly allow Facebook crawler
+User-agent: facebookexternalhit
+Allow: /
+
+# Explicitly allow Twitter crawler
+User-agent: Twitterbot
+Allow: /
+
+# Explicitly allow LinkedIn crawler
+User-agent: LinkedInBot
+Allow: /
+
+# Explicitly allow WhatsApp crawler
+User-agent: WhatsApp
+Allow: /
+
+# OpenAI Crawlers - Allow search and user interactions
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+# Google bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+# Sitemap location
+Sitemap: https://kilimo-link.vercel.app/sitemap.xml
