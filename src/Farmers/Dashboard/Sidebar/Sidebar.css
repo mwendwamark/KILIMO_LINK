@@ -232,7 +232,9 @@
 
 .sidebar-bottom {
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
   padding: 1rem;
   margin-top: auto;
@@ -253,9 +255,26 @@
 
 .sidebar-user-info {
   display: flex;
+  align-items: center;
   flex-direction: column;
   gap: 0.2rem;
   transition: opacity 0.3s ease;
+}
+
+.sidebar-user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--green_color);
+  color: white;
+  border: 3px solid var(--light_green_color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--fw_medium);
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-right: 12px;
 }
 
 .farmers-sidebar.collapsed .sidebar-user-info {
@@ -288,9 +307,9 @@
     display: flex;
   }
 
-  .sidebar-overlay {
+  /* .sidebar-overlay {
     display: block;
-  }
+  } */
 
   .farmers-sidebar {
     transform: translateX(-100%);
@@ -320,9 +339,9 @@
     display: none;
   }
 
-  .sidebar-overlay {
+  /* .sidebar-overlay {
     display: none !important;
-  }
+  } */
 
   .mobile-close-btn {
     display: none;

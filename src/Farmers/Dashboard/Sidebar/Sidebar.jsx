@@ -13,6 +13,7 @@ import {
   FarmIcon,
 } from "@phosphor-icons/react";
 import { NavLink, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import logo from "../../../../public/logo.svg";
 import "./Sidebar.css";
 const Sidebar = ({
@@ -21,6 +22,19 @@ const Sidebar = ({
   isMobileMenuOpen,
   setIsMobileMenuOpen,
 }) => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // Get user data from localStorage
+    const userData = localStorage.getItem("user");
+    if (userData) {
+      try {
+        setUser(JSON.parse(userData));
+      } catch (error) {
+        console.error("Error parsing user data:", error);
+      }
+    }
+  }, []);
   const location = useLocation();
   const navigationLinks = [
     {
@@ -71,8 +85,15 @@ const Sidebar = ({
         </div>{" "}
         <img src={logo} alt="Kilimo Link" className="mobile-header-logo" />{" "}
         <div className="mobile-avatar">
-          {" "}
-          <UserIcon size={24} weight="fill" />{" "}
+          <div>
+            {user?.first_name && user?.last_name ? (
+              `${user.first_name.charAt(0).toUpperCase()}${user.last_name
+                .charAt(0)
+                .toUpperCase()}`
+            ) : (
+              <UserIcon size={32} weight="duotone" />
+            )}
+          </div>
         </div>{" "}
       </header>{" "}
       {/* Overlay for Mobile */}{" "}
@@ -144,13 +165,24 @@ const Sidebar = ({
           </nav>{" "}
         </div>{" "}
         <div className="sidebar-bottom">
-          {" "}
-          <UserIcon size={32} weight="duotone" />{" "}
+          <div className="sidebar-user-avatar">
+            {user?.first_name && user?.last_name ? (
+              `${user.first_name.charAt(0).toUpperCase()}${user.last_name
+                .charAt(0)
+                .toUpperCase()}`
+            ) : (
+              <UserIcon size={32} weight="duotone" />
+            )}
+          </div>
           <div className="sidebar-user-info">
-            {" "}
-            <p className="sidebar-user-name">John Doe</p>{" "}
-            <p className="sidebar-user-role">Farmer</p>{" "}
-          </div>{" "}
+            <p className="sidebar-user-name">
+              {user
+                ? `${user.first_name || ""} ${user.last_name || ""}`.trim() ||
+                  "User"
+                : "Loading..."}
+            </p>
+            <p className="sidebar-user-role">Farmer</p>
+          </div>
         </div>{" "}
       </aside>{" "}
     </>

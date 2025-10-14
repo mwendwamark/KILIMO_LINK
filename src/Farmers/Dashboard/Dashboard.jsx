@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar/Sidebar";
 import "./Dashboard.css";
+import TopDash from "./TopDash/TopDash";
 
 const Dashboard = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -20,6 +21,8 @@ const Dashboard = () => {
           isCollapsed ? "sidebar-collapsed" : ""
         }`}
       >
+        {/* Add TopDash component here */}
+        <TopDash />
         <Outlet /> {/* ← MyFarms will render here via the route below */}
       </main>
     </div>

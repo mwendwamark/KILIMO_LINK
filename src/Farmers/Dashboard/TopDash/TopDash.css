@@ -1,0 +1,76 @@
+/* TopDash.css - Optimized and clash-free */
+.top-dash {
+  background-color: var(--white_alt_color);
+  padding: 0.8rem 0.5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(64, 128, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-greeting {
+  position: relative;
+  z-index: 1;
+}
+
+.greeting-text {
+  font-family: var(--league_spartan);
+  font-size: 1.3rem;
+  font-weight: var(--fw_medium);
+  color: var(--text_color);
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.member-since {
+  font-family: var(--outfit);
+  font-size: 1.1rem;
+  color: var(--light_grey_color);
+  margin: 0;
+  font-weight: var(--fw_regular);
+}
+
+/* Loading and Error States */
+.top-dash-loading,
+.top-dash-error {
+  text-align: center;
+  padding: 2rem;
+  font-family: var(--outfit);
+  font-size: 1rem;
+  color: var(--light_grey_color);
+}
+
+.top-dash-error {
+  color: var(--error_color);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .top-dash {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .greeting-text {
+    font-size: 1.75rem;
+  }
+
+  .member-since {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .top-dash {
+    padding: 1.25rem;
+  }
+
+  .greeting-text {
+    font-size: 1.5rem;
+  }
+
+  .member-since {
+    font-size: 0.95rem;
+  }
+}

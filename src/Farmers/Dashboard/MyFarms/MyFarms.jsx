@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import {
-  getFarms,
-  createFarm,
-  updateFarm,
-  deleteFarm,
-} from "../../../services/api";
+import { getFarms, createFarm, updateFarm } from "../../../services/api";
 import "./MyFarms.css";
+import { MapPinIcon, PlusIcon } from "@phosphor-icons/react";
+import { ArrowCircleUpRightIcon } from "@phosphor-icons/react/dist/ssr";
 
 const MyFarms = () => {
   const navigate = useNavigate();
@@ -38,19 +35,6 @@ const MyFarms = () => {
       setForm({});
       fetchFarms();
     } else alert(res.error);
-  };
-
-  const handleDelete = async (id) => {
-    if (!window.confirm("Delete this farm?")) return;
-    const res = await deleteFarm(id);
-    if (res.success) fetchFarms();
-    else alert("Delete failed");
-  };
-
-  const openEdit = (farm) => {
-    setEditing(farm);
-    setForm(farm);
-    setShowForm(true);
   };
 
   const askForLocation = () =>
@@ -91,9 +75,9 @@ const MyFarms = () => {
   return (
     <div className="my-farms-wrapper">
       <div className="my-farms-header">
-        <h2>My Farms ({farms.length})</h2>
-        <button className="btn-primary" onClick={handleAddClick}>
-          Add Farm
+        <h2>My Farms </h2>
+        <button className="my-farms-add_btn" onClick={handleAddClick}>
+          <PlusIcon size={20}/> Add Farm
         </button>
       </div>
 
@@ -191,12 +175,20 @@ const MyFarms = () => {
             onClick={() => navigate(`/farmers/dashboard/farms/${f.id}`)}
             style={{ cursor: "pointer" }}
           >
-            <h3>{f.farm_name}</h3>
-            <p className="my-farms-county">
-              {f.county}
-              {f.sub_county && `, ${f.sub_county}`}
-              {f.ward && `, ${f.ward}`} &bull; {f.farm_type}
-            </p>
+            <div className="my-farm-title-div">
+              <div className="my-farm-title">
+                <h3>{f.farm_name}</h3>
+                <p>{f.farm_type}</p>
+              </div>
+
+              <ArrowCircleUpRightIcon size={40} color="var(--green_color)"  />
+            </div>
+            <div className="my-farms-location-info">
+              <MapPinIcon size={20} color="var(--green_color)" />
+              <p> {f.ward},</p>
+              <p> {f.sub_county},</p>
+              <p> {f.county}</p>
+            </div>
             <p className="my-farms-desc">
               {f.farm_description
                 ? f.farm_description.substring(0, 100) +
@@ -205,7 +197,7 @@ const MyFarms = () => {
             </p>
             {f.created_at && (
               <p className="my-farms-date">
-                Created:{" "}
+                Created on:{" "}
                 {new Date(f.created_at).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "short",

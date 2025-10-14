@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getFarm, updateFarm, deleteFarm } from "../../../services/api";
 import {
-  ArrowLeft,
-  PencilSimple,
-  Trash,
-  MapPin,
-  Calendar,
+  ArrowLeftIcon,
+  PencilIcon,
+  TrashIcon,
+  MapPinIcon,
+  CalendarIcon,
 } from "@phosphor-icons/react";
 import "./FarmDetail.css";
 
@@ -83,8 +83,8 @@ const FarmDetail = () => {
 
   if (loading) {
     return (
-      <div className="farm-detail-loading">
-        <div className="spinner"></div>
+      <div className="farmdetail-loading-state">
+        <div className="farmdetail-loading-spinner"></div>
         <p>Loading farm details...</p>
       </div>
     );
@@ -92,7 +92,7 @@ const FarmDetail = () => {
 
   if (!farm) {
     return (
-      <div className="farm-detail-error">
+      <div className="farmdetail-error-state">
         <p>Farm not found</p>
         <button onClick={() => navigate("/farmers/dashboard/farms")}>
           Back to Farms
@@ -102,24 +102,27 @@ const FarmDetail = () => {
   }
 
   return (
-    <div className="farm-detail-container">
-      <div className="farm-detail-header">
+    <div className="farmdetail-page-container">
+      <div className="farmdetail-page-header">
         <button
-          className="back-button"
+          className="farmdetail-back-button"
           onClick={() => navigate("/farmers/dashboard/farms")}
         >
-          <ArrowLeft size={20} weight="bold" />
+          <ArrowLeftIcon size={20} weight="bold" />
           Back to Farms
         </button>
 
         {!editing && (
-          <div className="farm-detail-actions">
-            <button className="edit-button" onClick={() => setEditing(true)}>
-              <PencilSimple size={18} weight="bold" />
+          <div className="farmdetail-action-buttons">
+            <button
+              className="farmdetail-edit-button"
+              onClick={() => setEditing(true)}
+            >
+              <PencilIcon size={18} />
               Edit Farm
             </button>
-            <button className="delete-button" onClick={handleDelete}>
-              <Trash size={18} weight="bold" />
+            <button className="farmdetail-delete-button" onClick={handleDelete}>
+              <TrashIcon size={18} />
               Delete Farm
             </button>
           </div>
@@ -127,10 +130,10 @@ const FarmDetail = () => {
       </div>
 
       {editing ? (
-        <form className="farm-detail-form" onSubmit={handleSubmit}>
+        <form className="farmdetail-edit-form" onSubmit={handleSubmit}>
           <h2>Edit Farm Details</h2>
 
-          <div className="form-group">
+          <div className="farmdetail-form-group">
             <label htmlFor="farm_name">Farm Name *</label>
             <input
               id="farm_name"
@@ -141,8 +144,8 @@ const FarmDetail = () => {
             />
           </div>
 
-          <div className="form-row">
-            <div className="form-group">
+          <div className="farmdetail-form-row">
+            <div className="farmdetail-form-group">
               <label htmlFor="county">County *</label>
               <input
                 id="county"
@@ -153,7 +156,7 @@ const FarmDetail = () => {
               />
             </div>
 
-            <div className="form-group">
+            <div className="farmdetail-form-group">
               <label htmlFor="sub_county">Sub County</label>
               <input
                 id="sub_county"
@@ -166,8 +169,8 @@ const FarmDetail = () => {
             </div>
           </div>
 
-          <div className="form-row">
-            <div className="form-group">
+          <div className="farmdetail-form-row">
+            <div className="farmdetail-form-group">
               <label htmlFor="ward">Ward</label>
               <input
                 id="ward"
@@ -177,7 +180,7 @@ const FarmDetail = () => {
               />
             </div>
 
-            <div className="form-group">
+            <div className="farmdetail-form-group">
               <label htmlFor="farm_type">Farm Type *</label>
               <select
                 id="farm_type"
@@ -197,7 +200,7 @@ const FarmDetail = () => {
             </div>
           </div>
 
-          <div className="form-group">
+          <div className="farmdetail-form-group">
             <label htmlFor="farm_description">Description</label>
             <textarea
               id="farm_description"
@@ -209,8 +212,8 @@ const FarmDetail = () => {
             />
           </div>
 
-          <div className="form-row">
-            <div className="form-group">
+          <div className="farmdetail-form-row">
+            <div className="farmdetail-form-group">
               <label htmlFor="farm_latitude">Latitude</label>
               <input
                 id="farm_latitude"
@@ -223,7 +226,7 @@ const FarmDetail = () => {
               />
             </div>
 
-            <div className="form-group">
+            <div className="farmdetail-form-group">
               <label htmlFor="farm_longitude">Longitude</label>
               <input
                 id="farm_longitude"
@@ -237,13 +240,13 @@ const FarmDetail = () => {
             </div>
           </div>
 
-          <div className="form-actions">
-            <button type="submit" className="save-button">
+          <div className="farmdetail-form-actions">
+            <button type="submit" className="farmdetail-save-button">
               Save Changes
             </button>
             <button
               type="button"
-              className="cancel-button"
+              className="farmdetail-cancel-button"
               onClick={() => setEditing(false)}
             >
               Cancel
@@ -251,21 +254,21 @@ const FarmDetail = () => {
           </div>
         </form>
       ) : (
-        <div className="farm-detail-content">
-          <div className="farm-detail-main">
-            <h1 className="farm-name">{farm.farm_name}</h1>
+        <div className="farmdetail-content-wrapper">
+          <div className="farmdetail-main-content">
+            <h1 className="farmdetail-farm-name">{farm.farm_name}</h1>
 
-            <div className="farm-meta">
-              <span className="farm-type-badge">{farm.farm_type}</span>
-              <span className="farm-date">
-                <Calendar size={16} weight="bold" />
+            <div className="farmdetail-meta-info">
+              <span className="farmdetail-type-badge">{farm.farm_type}</span>
+              <span className="farmdetail-created-date">
+                <CalendarIcon size={16} weight="bold" />
                 Created {formatDate(farm.created_at)}
               </span>
             </div>
 
-            <div className="farm-section">
+            <div className="farmdetail-info-section">
               <h3>Location</h3>
-              <div className="location-details">
+              <div className="farmdetail-location-details">
                 <p>
                   <strong>County:</strong> {farm.county}
                 </p>
@@ -283,17 +286,19 @@ const FarmDetail = () => {
             </div>
 
             {farm.farm_description && (
-              <div className="farm-section">
+              <div className="farmdetail-info-section">
                 <h3>Description</h3>
-                <p className="farm-description">{farm.farm_description}</p>
+                <p className="farmdetail-description-text">
+                  {farm.farm_description}
+                </p>
               </div>
             )}
 
             {(farm.farm_latitude || farm.farm_longitude) && (
-              <div className="farm-section">
+              <div className="farmdetail-info-section">
                 <h3>Coordinates</h3>
-                <div className="coordinates">
-                  <MapPin size={20} weight="bold" />
+                <div className="farmdetail-coordinates-wrapper">
+                  <MapPinIcon size={20} weight="bold" />
                   <span>
                     {farm.farm_latitude}, {farm.farm_longitude}
                   </span>
@@ -301,7 +306,7 @@ const FarmDetail = () => {
                     href={`https://www.google.com/maps?q=${farm.farm_latitude},${farm.farm_longitude}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="map-link"
+                    className="farmdetail-map-link"
                   >
                     View on Map
                   </a>
@@ -310,16 +315,16 @@ const FarmDetail = () => {
             )}
           </div>
 
-          <div className="farm-detail-sidebar">
-            <div className="sidebar-card">
+          <div className="farmdetail-sidebar-content">
+            <div className="farmdetail-sidebar-card">
               <h3>Farm Statistics</h3>
-              <div className="stat-item">
-                <span className="stat-label">Products</span>
-                <span className="stat-value">0</span>
+              <div className="farmdetail-stat-item">
+                <span className="farmdetail-stat-label">Products</span>
+                <span className="farmdetail-stat-value">0</span>
               </div>
-              <div className="stat-item">
-                <span className="stat-label">Last Updated</span>
-                <span className="stat-value">
+              <div className="farmdetail-stat-item">
+                <span className="farmdetail-stat-label">Last Updated</span>
+                <span className="farmdetail-stat-value">
                   {formatDate(farm.updated_at)}
                 </span>
               </div>
