@@ -11,45 +11,6 @@ const API_BASE_URL =
  * @param {object} data - Form data to send
  * @returns {Promise} - Response from the server
  */
-// export const authenticate = async (userType, action, data) => {
-//   const endpoint = `${API_BASE_URL}/${userType}s/${action}`;
-
-//   try {
-//     const response = await fetch(endpoint, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//         Accept: "application/json",
-//       },
-//       body: JSON.stringify({ user: data }),
-//     });
-
-//     const responseData = await response.json();
-
-//     if (!response.ok) {
-//       // Return error in a structured way
-//       return {
-//         success: false,
-//         error: extractError(responseData),
-//         status: response.status,
-//       };
-//     }
-
-//     // Success
-//     return {
-//       success: true,
-//       data: responseData,
-//       status: response.status,
-//     };
-//   } catch (error) {
-//     console.error(`${action} error:`, error);
-//     return {
-//       success: false,
-//       error: "Network error. Please check your connection and try again.",
-//       status: 0,
-//     };
-//   }
-// };
 
 export const authenticate = async (userType, action, data) => {
   const endpoint = `${API_BASE_URL}/${userType}s/${action}`;
@@ -435,22 +396,6 @@ export const createFarm = async (payload) => {
   }
 };
 
-// export const updateFarm = async (id, payload) => {
-//   try {
-//     const res = await fetch(`${API_BASE_URL}/farmers/farms/${id}`, {
-//       method: "PUT",
-//       headers: { "Content-Type": "application/json", ...getAuthHeader() },
-//       body: JSON.stringify({ farm: payload }),
-//     });
-//     const data = await res.json();
-//     return res.ok
-//       ? { success: true, data }
-//       : { success: false, error: extractError(data) };
-//   } catch (e) {
-//     return { success: false, error: "Network error" };
-//   }
-// };
-
 export const updateFarm = async (id, payload) => {
   try {
     // Filter out non-editable fields
@@ -487,6 +432,168 @@ export const deleteFarm = async (id) => {
     return res.ok
       ? { success: true }
       : { success: false, error: "Delete failed" };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+// Add these functions to your services/api.js file
+
+// ==================== PROFILE MANAGEMENT ====================
+
+/**
+ * Get farmer profile
+ * @returns {Promise<Object>}
+ */
+export const getFarmerProfile = async () => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/farmers/profile`, {
+      headers: { ...getAuthHeader() },
+    });
+    const data = await res.json();
+    return res.ok
+      ? { success: true, data: data.profile }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+/**
+ * Create farmer profile
+ * @param {Object} payload - Profile data
+ * @returns {Promise<Object>}
+ */
+export const createFarmerProfile = async (payload) => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/farmers/profile`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", ...getAuthHeader() },
+      body: JSON.stringify({ farmer_profile: payload }),
+    });
+    const data = await res.json();
+    return res.ok
+      ? { success: true, data: data.profile, message: data.message }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+/**
+ * Update farmer profile
+ * @param {Object} payload - Profile data to update
+ * @returns {Promise<Object>}
+ */
+export const updateFarmerProfile = async (payload) => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/farmers/profile`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json", ...getAuthHeader() },
+      body: JSON.stringify({ farmer_profile: payload }),
+    });
+    const data = await res.json();
+    return res.ok
+      ? { success: true, data: data.profile, message: data.message }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+/**
+ * Delete farmer profile
+ * @returns {Promise<Object>}
+ */
+export const deleteFarmerProfile = async () => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/farmers/profile`, {
+      method: "DELETE",
+      headers: { ...getAuthHeader() },
+    });
+    const data = await res.json();
+    return res.ok
+      ? { success: true, message: data.message }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+/**
+ * Get buyer profile
+ * @returns {Promise<Object>}
+ */
+export const getBuyerProfile = async () => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/buyers/profile`, {
+      headers: { ...getAuthHeader() },
+    });
+    const data = await res.json();
+    return res.ok
+      ? { success: true, data: data.profile }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+/**
+ * Create buyer profile
+ * @param {Object} payload - Profile data
+ * @returns {Promise<Object>}
+ */
+export const createBuyerProfile = async (payload) => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/buyers/profile`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", ...getAuthHeader() },
+      body: JSON.stringify({ buyer_profile: payload }),
+    });
+    const data = await res.json();
+    return res.ok
+      ? { success: true, data: data.profile, message: data.message }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+/**
+ * Update buyer profile
+ * @param {Object} payload - Profile data to update
+ * @returns {Promise<Object>}
+ */
+export const updateBuyerProfile = async (payload) => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/buyers/profile`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json", ...getAuthHeader() },
+      body: JSON.stringify({ buyer_profile: payload }),
+    });
+    const data = await res.json();
+    return res.ok
+      ? { success: true, data: data.profile, message: data.message }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+/**
+ * Delete buyer profile
+ * @returns {Promise<Object>}
+ */
+export const deleteBuyerProfile = async () => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/buyers/profile`, {
+      method: "DELETE",
+      headers: { ...getAuthHeader() },
+    });
+    const data = await res.json();
+    return res.ok
+      ? { success: true, message: data.message }
+      : { success: false, error: extractError(data) };
   } catch (e) {
     return { success: false, error: "Network error" };
   }

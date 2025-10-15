@@ -1,8 +1,6 @@
 import {
   ChatCircleDotsIcon,
-  FolderOpenIcon,
   LayoutIcon,
-  ListChecksIcon,
   StorefrontIcon,
   TextOutdentIcon,
   TextIndentIcon,
@@ -10,15 +8,15 @@ import {
   UsersThreeIcon,
   ListIcon,
   X,
-  FarmIcon,
   UserCircleIcon,
+  ShoppingBagIcon,
 } from "@phosphor-icons/react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import logo from "../../../../public/logo.svg";
-import "./Sidebar.css";
+import "./BuyerSidebar.css";
 
-const Sidebar = ({
+const BuyerSidebar = ({
   isCollapsed,
   setIsCollapsed,
   isMobileMenuOpen,
@@ -42,56 +40,54 @@ const Sidebar = ({
 
   const navigationLinks = [
     {
-      path: "/farmers/dashboard",
+      path: "/buyers/dashboard",
       icon: LayoutIcon,
       label: "Dashboard",
       exact: true,
     },
-    { path: "/farmers/dashboard/farms", icon: FarmIcon, label: "My Farms" },
     {
-      path: "/farmers/dashboard/resources",
-      icon: FolderOpenIcon,
-      label: "Resources",
+      path: "/buyers/dashboard/profile",
+      icon: UserCircleIcon,
+      label: "My Profile",
     },
     {
-      path: "/farmers/dashboard/marketplace",
+      path: "/buyers/dashboard/marketplace",
       icon: StorefrontIcon,
-      label: "Market",
+      label: "Marketplace",
     },
     {
-      path: "/farmers/dashboard/my-listings",
-      icon: ListChecksIcon,
-      label: "My Listings",
+      path: "/buyers/dashboard/orders",
+      icon: ShoppingBagIcon,
+      label: "My Orders",
     },
     {
-      path: "/farmers/dashboard/community",
+      path: "/buyers/dashboard/community",
       icon: UsersThreeIcon,
       label: "Community",
     },
     {
-      path: "/farmers/dashboard/messages",
+      path: "/buyers/dashboard/messages",
       icon: ChatCircleDotsIcon,
       label: "Messages",
     },
-    {
-      path: "/farmers/dashboard/profile",
-      icon: UserCircleIcon,
-      label: "My Profile",
-    },
   ];
-  
+
   return (
     <>
       {/* Mobile Header */}
-      <header className="mobile-header">
+      <header className="buyersidebar-mobile-header">
         <div
-          className="mobile-header-icon"
+          className="buyersidebar-mobile-header-icon"
           onClick={() => setIsMobileMenuOpen(true)}
         >
           <ListIcon size={28} weight="bold" />
         </div>
-        <img src={logo} alt="Kilimo Link" className="mobile-header-logo" />
-        <div className="mobile-avatar">
+        <img
+          src={logo}
+          alt="Kilimo Link"
+          className="buyersidebar-mobile-header-logo"
+        />
+        <div className="buyersidebar-mobile-avatar">
           <div>
             {user?.first_name && user?.last_name ? (
               `${user.first_name.charAt(0).toUpperCase()}${user.last_name
@@ -106,27 +102,27 @@ const Sidebar = ({
 
       {/* Overlay for Mobile */}
       <div
-        className={`sidebar-overlay ${isMobileMenuOpen ? "active" : ""}`}
+        className={`buyersidebar-overlay ${isMobileMenuOpen ? "active" : ""}`}
         onClick={() => setIsMobileMenuOpen(false)}
       />
 
       {/* Sidebar */}
       <aside
-        className={`farmers-sidebar ${isCollapsed ? "collapsed" : ""} ${
+        className={`buyersidebar-main ${isCollapsed ? "collapsed" : ""} ${
           isMobileMenuOpen ? "mobile-open" : ""
         }`}
       >
-        <div className="sidebar-logo-section">
+        <div className="buyersidebar-logo-section">
           <img
             src={logo}
             alt="Kilimo Link"
             loading="eager"
-            className="sidebar-logo"
+            className="buyersidebar-logo"
             height={50}
             width={"auto"}
           />
           <div
-            className="toggle-btn"
+            className="buyersidebar-toggle-btn"
             onClick={() => setIsCollapsed(!isCollapsed)}
           >
             {isCollapsed ? (
@@ -137,7 +133,7 @@ const Sidebar = ({
           </div>
           {isMobileMenuOpen && (
             <div
-              className="toggle-btn mobile-close-btn"
+              className="buyersidebar-toggle-btn buyersidebar-mobile-close-btn"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <X size={24} />
@@ -145,9 +141,9 @@ const Sidebar = ({
           )}
         </div>
 
-        <div className="sidebar-links">
-          <span className="sidebar-section-label">Navigation</span>
-          <nav className="sidebar-navigation-links">
+        <div className="buyersidebar-links">
+          <span className="buyersidebar-section-label">Navigation</span>
+          <nav className="buyersidebar-navigation-links">
             {navigationLinks.map((link) => {
               const Icon = link.icon;
               return (
@@ -156,7 +152,7 @@ const Sidebar = ({
                   to={link.path}
                   end={link.exact}
                   className={({ isActive }) =>
-                    `sidebar-nav-link ${isActive ? "active" : ""}`
+                    `buyersidebar-nav-link ${isActive ? "active" : ""}`
                   }
                   data-label={link.label}
                   onClick={() => setIsMobileMenuOpen(false)}
@@ -168,12 +164,8 @@ const Sidebar = ({
           </nav>
         </div>
 
-        <NavLink
-          to="/farmers/dashboard/profile"
-          className="sidebar-bottom"
-          onClick={() => setIsMobileMenuOpen(false)}
-        >
-          <div className="sidebar-user-avatar">
+        <div className="buyersidebar-bottom">
+          <div className="buyersidebar-user-avatar">
             {user?.first_name && user?.last_name ? (
               `${user.first_name.charAt(0).toUpperCase()}${user.last_name
                 .charAt(0)
@@ -182,19 +174,19 @@ const Sidebar = ({
               <UserIcon size={32} weight="duotone" />
             )}
           </div>
-          <div className="sidebar-user-info">
-            <p className="sidebar-user-name">
+          <div className="buyersidebar-user-info">
+            <p className="buyersidebar-user-name">
               {user
                 ? `${user.first_name || ""} ${user.last_name || ""}`.trim() ||
                   "User"
                 : "Loading..."}
             </p>
-            <p className="sidebar-user-role">Farmer</p>
+            <p className="buyersidebar-user-role">Buyer</p>
           </div>
-        </NavLink>
+        </div>
       </aside>
     </>
   );
 };
 
-export default Sidebar;
+export default BuyerSidebar;

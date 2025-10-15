@@ -1,0 +1,287 @@
+/* BuyerSidebar.css */
+.buyersidebar-main {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 280px;
+  height: 100vh;
+  background-color: var(--bg_color);
+  border-right: 1px solid var(--grey_alt_color);
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease;
+  z-index: 1000;
+}
+
+.buyersidebar-main.collapsed {
+  width: 80px;
+}
+
+.buyersidebar-logo-section {
+  padding: 2rem 1.5rem;
+  border-bottom: 1px solid var(--grey_alt_color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.buyersidebar-logo {
+  max-width: 150px;
+  height: auto;
+  transition: opacity 0.3s ease;
+}
+
+.buyersidebar-main.collapsed .buyersidebar-logo {
+  opacity: 0;
+  width: 0;
+}
+
+.buyersidebar-toggle-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--grey_alt_color);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  color: var(--text_color);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.buyersidebar-toggle-btn:hover {
+  background: var(--green_color);
+  color: var(--bg_color);
+}
+
+.buyersidebar-links {
+  flex: 1;
+  padding: 1.5rem 0;
+  overflow-y: auto;
+}
+
+.buyersidebar-section-label {
+  padding: 0 1.5rem;
+  font-family: var(--outfit);
+  font-size: 0.85rem;
+  color: var(--light_grey_color);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.buyersidebar-main.collapsed .buyersidebar-section-label {
+  opacity: 0;
+}
+
+.buyersidebar-navigation-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0 1rem;
+}
+
+.buyersidebar-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  border-radius: 0.75rem;
+  font-family: var(--outfit);
+  font-size: 1rem;
+  color: var(--dark_grey_color);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.buyersidebar-nav-link:hover {
+  background: var(--grey_alt_color);
+  color: var(--text_color);
+}
+
+.buyersidebar-nav-link.active {
+  background: var(--light_green_color);
+  color: var(--green_color);
+  font-weight: var(--fw_medium);
+}
+
+.buyersidebar-nav-link p {
+  transition: opacity 0.3s ease;
+}
+
+.buyersidebar-main.collapsed .buyersidebar-nav-link p {
+  opacity: 0;
+  width: 0;
+}
+
+.buyersidebar-main.collapsed .buyersidebar-nav-link {
+  justify-content: center;
+  padding: 0.9rem;
+}
+
+.buyersidebar-bottom {
+  padding: 1.5rem;
+  border-top: 1px solid var(--grey_alt_color);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.buyersidebar-user-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--green_color);
+  color: var(--bg_color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--league_spartan);
+  font-weight: var(--fw_bold);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.buyersidebar-user-info {
+  flex: 1;
+  min-width: 0;
+  transition: opacity 0.3s ease;
+}
+
+.buyersidebar-main.collapsed .buyersidebar-user-info {
+  opacity: 0;
+  width: 0;
+}
+
+.buyersidebar-user-name {
+  font-family: var(--league_spartan);
+  font-weight: var(--fw_medium);
+  color: var(--text_color);
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.buyersidebar-user-role {
+  font-family: var(--outfit);
+  font-size: 0.85rem;
+  color: var(--light_grey_color);
+}
+
+/* Mobile Styles */
+.buyersidebar-mobile-header {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: var(--bg_color);
+  border-bottom: 1px solid var(--grey_alt_color);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.buyersidebar-mobile-header-icon {
+  cursor: pointer;
+  color: var(--text_color);
+}
+
+.buyersidebar-mobile-header-logo {
+  height: 40px;
+  width: auto;
+}
+
+.buyersidebar-mobile-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--green_color);
+  color: var(--bg_color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--league_spartan);
+  font-weight: var(--fw_bold);
+  font-size: 1rem;
+}
+
+.buyersidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+}
+
+.buyersidebar-overlay.active {
+  display: block;
+}
+
+.buyersidebar-mobile-close-btn {
+  display: none;
+}
+
+@media screen and (max-width: 968px) {
+  .buyersidebar-main {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .buyersidebar-main.mobile-open {
+    transform: translateX(0);
+  }
+
+  .buyersidebar-mobile-header {
+    display: flex;
+  }
+
+  .buyersidebar-toggle-btn:not(.buyersidebar-mobile-close-btn) {
+    display: none;
+  }
+
+  .buyersidebar-mobile-close-btn {
+    display: flex;
+  }
+
+  .buyersidebar-main.collapsed {
+    width: 280px;
+  }
+
+  .buyersidebar-main.collapsed .buyersidebar-logo,
+  .buyersidebar-main.collapsed .buyersidebar-section-label,
+  .buyersidebar-main.collapsed .buyersidebar-nav-link p,
+  .buyersidebar-main.collapsed .buyersidebar-user-info {
+    opacity: 1;
+    width: auto;
+  }
+
+  .buyersidebar-main.collapsed .buyersidebar-nav-link {
+    justify-content: flex-start;
+    padding: 0.9rem 1rem;
+  }
+}
+
+/* Scrollbar Styling */
+.buyersidebar-links::-webkit-scrollbar {
+  width: 6px;
+}
+
+.buyersidebar-links::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.buyersidebar-links::-webkit-scrollbar-thumb {
+  background: var(--grey_alt_color);
+  border-radius: 3px;
+}
+
+.buyersidebar-links::-webkit-scrollbar-thumb:hover {
+  background: var(--light_grey_color);
+}
