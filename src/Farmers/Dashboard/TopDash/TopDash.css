@@ -42,7 +42,17 @@
 }
 
 .top-dash-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.top-dash-error p:first-child{
   color: var(--error_color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;  
 }
 
 /* Responsive Design */

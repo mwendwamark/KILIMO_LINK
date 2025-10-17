@@ -1,6 +1,7 @@
 import "./TopDash.css";
 import { useEffect, useState } from "react";
 import { Calendar } from "@phosphor-icons/react";
+import { NavLink } from "react-router-dom";
 
 const TopDash = () => {
   const [user, setUser] = useState(null);
@@ -24,7 +25,7 @@ const TopDash = () => {
   // Format the member since date - using the same format as FarmDetail
   const formatDate = (dateString) => {
     if (!dateString) return "";
-    
+
     try {
       const date = new Date(dateString);
       return date.toLocaleDateString("en-US", {
@@ -53,8 +54,15 @@ const TopDash = () => {
     return (
       <div className="top-dash">
         <div className="top-dash-error">
-          <p>User data not available</p>
-          <button onClick={() => window.location.reload()}>
+          <p>
+            User data not available try to <br />
+            <NavLink className="dashboard-green_btn" to="/farmers/login">Login</NavLink>
+          </p>
+          <p>or</p>
+          <button
+            className="dashboard-outline_btn"
+            onClick={() => window.location.reload()}
+          >
             Refresh Page
           </button>
         </div>
@@ -63,17 +71,16 @@ const TopDash = () => {
   }
 
   const fullName = `${user.first_name || ""} ${user.last_name || ""}`.trim();
-  
+
   // Check if created_at exists in user data, if not, try alternative fields
-  const memberSinceDate = user.created_at || user.createdAt || user.registration_date;
+  const memberSinceDate =
+    user.created_at || user.createdAt || user.registration_date;
   const memberSince = formatDate(memberSinceDate);
 
   return (
     <div className="top-dash">
       <div className="dashboard-greeting">
-        <h1 className="greeting-text">
-          Hello, {fullName || "User"}
-        </h1>
+        <h1 className="greeting-text">Hello, {fullName || "User"}</h1>
         {memberSince ? (
           <p className="member-since">
             {/* <Calendar size={16} weight="bold" /> */}
