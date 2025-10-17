@@ -108,7 +108,7 @@ const FarmDetail = () => {
           className="farmdetail-back-button"
           onClick={() => navigate("/farmers/dashboard/farms")}
         >
-          <ArrowLeftIcon size={20} weight="bold" />
+          <ArrowLeftIcon size={16}  />
           Back to Farms
         </button>
 
@@ -118,11 +118,11 @@ const FarmDetail = () => {
               className="farmdetail-edit-button"
               onClick={() => setEditing(true)}
             >
-              <PencilIcon size={18} />
+              <PencilIcon size={16} />
               Edit Farm
             </button>
             <button className="farmdetail-delete-button" onClick={handleDelete}>
-              <TrashIcon size={18} />
+              <TrashIcon size={16} />
               Delete Farm
             </button>
           </div>
@@ -256,7 +256,7 @@ const FarmDetail = () => {
       ) : (
         <div className="farmdetail-content-wrapper">
           <div className="farmdetail-main-content">
-            <h1 className="farmdetail-farm-name">{farm.farm_name}</h1>
+            <h1 className="farmdetail-farm-name dashboard_body-title">{farm.farm_name}</h1>
 
             <div className="farmdetail-meta-info">
               <span className="farmdetail-type-badge">{farm.farm_type}</span>

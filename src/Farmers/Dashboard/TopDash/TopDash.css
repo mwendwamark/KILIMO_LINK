@@ -24,10 +24,10 @@
 }
 
 .member-since {
-  font-family: var(--outfit);
-  font-size: 1.1rem;
+  font-family: var(--league_spartan);
+  font-size: 0.9rem;
   color: var(--light_grey_color);
-  margin: 0;
+  margin-top: 0.5rem;
   font-weight: var(--fw_regular);
 }
 

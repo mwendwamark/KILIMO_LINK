@@ -436,10 +436,9 @@ export const deleteFarm = async (id) => {
     return { success: false, error: "Network error" };
   }
 };
+// Replace the existing profile API functions in your services/api.js with these:
 
-// Add these functions to your services/api.js file
-
-// ==================== PROFILE MANAGEMENT ====================
+// ==================== PROFILE MANAGEMENT WITH FILE UPLOAD ====================
 
 /**
  * Get farmer profile
@@ -458,40 +457,41 @@ export const getFarmerProfile = async () => {
     return { success: false, error: "Network error" };
   }
 };
-
 /**
- * Create farmer profile
- * @param {Object} payload - Profile data
- * @returns {Promise<Object>}
- */
-export const createFarmerProfile = async (payload) => {
-  try {
-    const res = await fetch(`${API_BASE_URL}/farmers/profile`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", ...getAuthHeader() },
-      body: JSON.stringify({ farmer_profile: payload }),
-    });
-    const data = await res.json();
-    return res.ok
-      ? { success: true, data: data.profile, message: data.message }
-      : { success: false, error: extractError(data) };
-  } catch (e) {
-    return { success: false, error: "Network error" };
-  }
-};
-
-/**
- * Update farmer profile
- * @param {Object} payload - Profile data to update
+ * Create or Update farmer profile with file upload support
+ * @param {Object|FormData} payload - Profile data (can include File object for profile_picture)
  * @returns {Promise<Object>}
  */
 export const updateFarmerProfile = async (payload) => {
   try {
+    let formData;
+
+    // Check if payload is already FormData (from file upload)
+    if (payload instanceof FormData) {
+      formData = payload;
+    } else {
+      // For regular object payload, convert to FormData
+      formData = new FormData();
+      Object.keys(payload).forEach((key) => {
+        if (
+          payload[key] !== null &&
+          payload[key] !== undefined &&
+          payload[key] !== ""
+        ) {
+          formData.append(`farmer_profile[${key}]`, payload[key]);
+        }
+      });
+    }
+
     const res = await fetch(`${API_BASE_URL}/farmers/profile`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json", ...getAuthHeader() },
-      body: JSON.stringify({ farmer_profile: payload }),
+      headers: {
+        ...getAuthHeader(),
+        // Don't set Content-Type - let browser set it with boundary for multipart/form-data
+      },
+      body: formData,
     });
+
     const data = await res.json();
     return res.ok
       ? { success: true, data: data.profile, message: data.message }
@@ -539,38 +539,40 @@ export const getBuyerProfile = async () => {
 };
 
 /**
- * Create buyer profile
- * @param {Object} payload - Profile data
- * @returns {Promise<Object>}
- */
-export const createBuyerProfile = async (payload) => {
-  try {
-    const res = await fetch(`${API_BASE_URL}/buyers/profile`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", ...getAuthHeader() },
-      body: JSON.stringify({ buyer_profile: payload }),
-    });
-    const data = await res.json();
-    return res.ok
-      ? { success: true, data: data.profile, message: data.message }
-      : { success: false, error: extractError(data) };
-  } catch (e) {
-    return { success: false, error: "Network error" };
-  }
-};
-
-/**
- * Update buyer profile
- * @param {Object} payload - Profile data to update
+ * Create or Update buyer profile with file upload support
+ * @param {Object|FormData} payload - Profile data (can include File object for profile_picture)
  * @returns {Promise<Object>}
  */
 export const updateBuyerProfile = async (payload) => {
   try {
+    let formData;
+
+    // Check if payload is already FormData (from file upload)
+    if (payload instanceof FormData) {
+      formData = payload;
+    } else {
+      // For regular object payload, convert to FormData
+      formData = new FormData();
+      Object.keys(payload).forEach((key) => {
+        if (
+          payload[key] !== null &&
+          payload[key] !== undefined &&
+          payload[key] !== ""
+        ) {
+          formData.append(`buyer_profile[${key}]`, payload[key]);
+        }
+      });
+    }
+
     const res = await fetch(`${API_BASE_URL}/buyers/profile`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json", ...getAuthHeader() },
-      body: JSON.stringify({ buyer_profile: payload }),
+      headers: {
+        ...getAuthHeader(),
+        // Don't set Content-Type - let browser set it with boundary for multipart/form-data
+      },
+      body: formData,
     });
+
     const data = await res.json();
     return res.ok
       ? { success: true, data: data.profile, message: data.message }
@@ -579,7 +581,6 @@ export const updateBuyerProfile = async (payload) => {
     return { success: false, error: "Network error" };
   }
 };
-
 /**
  * Delete buyer profile
  * @returns {Promise<Object>}

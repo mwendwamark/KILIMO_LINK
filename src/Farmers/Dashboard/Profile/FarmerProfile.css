@@ -1,10 +1,3 @@
-/* FarmerProfile.css */
-.farmerprofile-page-container {
-  padding: 2rem 0;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
 /* Header Styles */
 .farmerprofile-page-header {
   display: flex;
@@ -17,51 +10,16 @@
 
 .farmerprofile-page-title {
   font-family: var(--league_spartan);
-  font-size: var(--section_fs);
-  color: var(--text_color);
+  font-size: 2rem;
+  font-weight: var(--fw_medium);
+  letter-spacing: -1px;
+  color: var(--green_color);
 }
 
 .farmerprofile-action-buttons {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
-}
-
-.farmerprofile-edit-button,
-.farmerprofile-delete-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.7rem 0.8rem;
-  border: 2px solid transparent;
-  border-radius: 75rem;
-  font-family: var(--league_spartan);
-  font-size: var(--button_fs);
-  font-weight: var(--fw_regular);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.farmerprofile-edit-button {
-  background: var(--green_color);
-  color: var(--bg_color);
-}
-
-.farmerprofile-edit-button:hover {
-  background: var(--deep_green);
-  transform: translateY(-2px);
-}
-
-.farmerprofile-delete-button {
-  background: var(--error_bg);
-  color: var(--error_color);
-  border: 1.5px solid var(--error_border);
-}
-
-.farmerprofile-delete-button:hover {
-  background: var(--error_color);
-  color: var(--bg_color);
-  transform: translateY(-2px);
 }
 
 /* Form Styles */
@@ -78,6 +36,7 @@
   font-size: var(--sub_section_fs);
   color: var(--text_color);
   margin-bottom: 2rem;
+  font-weight: 500;
 }
 
 .farmerprofile-form-group {
@@ -120,7 +79,7 @@
 }
 
 .farmerprofile-form-group textarea {
-  min-height: 120px;
+  min-height: 200px;
   resize: vertical;
 }
 
@@ -136,40 +95,6 @@
   display: flex;
   gap: 1rem;
   margin-top: 2rem;
-}
-
-.farmerprofile-save-button {
-  padding: 0.9rem 2rem;
-  background: var(--green_color);
-  color: var(--bg_color);
-  border-radius: 0.75rem;
-  font-family: var(--league_spartan);
-  font-size: 1rem;
-  font-weight: var(--fw_medium);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: none;
-}
-
-.farmerprofile-save-button:hover {
-  background: var(--deep_green);
-}
-
-.farmerprofile-cancel-button {
-  padding: 0.9rem 2rem;
-  border: 1.5px solid var(--grey_alt_color);
-  border-radius: 0.75rem;
-  background: var(--bg_color);
-  color: var(--text_color);
-  font-family: var(--league_spartan);
-  font-size: 1rem;
-  font-weight: var(--fw_medium);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.farmerprofile-cancel-button:hover {
-  background: var(--grey_alt_color);
 }
 
 /* Content Styles */
@@ -224,7 +149,8 @@
 
 .farmerprofile-user-name {
   font-family: var(--league_spartan);
-  font-size: 2rem;
+  font-size: 1.6rem;
+  font-weight: var(--fw_medium);
   color: var(--text_color);
   margin-bottom: 0.5rem;
 }
@@ -264,7 +190,8 @@
 
 .farmerprofile-info-section h3 {
   font-family: var(--league_spartan);
-  font-size: 1.5rem;
+  font-size: 1.6rem;
+  font-weight: var(--fw_medium);
   color: var(--text_color);
   margin-bottom: 1rem;
 }
@@ -273,7 +200,7 @@
   font-family: var(--outfit);
   font-size: 1rem;
   line-height: 1.6;
-  color: var(--dark_grey_color);
+  color: var(--light_grey_color);
 }
 
 .farmerprofile-contact-grid {
@@ -292,11 +219,12 @@
   font-family: var(--league_spartan);
   color: var(--text_color);
   font-size: 0.95rem;
+  font-weight: var(--fw_medium);
 }
 
 .farmerprofile-contact-item span {
   font-family: var(--outfit);
-  color: var(--dark_grey_color);
+  color: var(--light_grey_color);
 }
 
 /* Sidebar Styles */
@@ -363,6 +291,73 @@
   margin-bottom: 1rem;
 }
 
+/* File Upload Styles */
+.farmerprofile-file-upload-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.farmerprofile-file-upload-area {
+  position: relative;
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  transition: border-color 0.3s ease;
+  background: #f9fafb;
+}
+
+.farmerprofile-file-upload-area:hover {
+  border-color: #3b82f6;
+}
+
+.farmerprofile-file-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.farmerprofile-upload-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.farmerprofile-upload-preview-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e5e7eb;
+}
+
+.farmerprofile-upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #6b7280;
+}
+
+.farmerprofile-upload-placeholder svg {
+  color: #9ca3af;
+}
+
+/* Update avatar styles to be consistent */
+.farmerprofile-avatar-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e5e7eb;
+}
 @keyframes farmerprofile-spin {
   0% {
     transform: rotate(0deg);
@@ -441,5 +436,11 @@
 
   .farmerprofile-user-name {
     font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .farmerprofile-action-buttons {
+    gap: 0.2rem;
   }
 }

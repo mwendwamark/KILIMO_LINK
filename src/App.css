@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&family=Outfit:wght@100..900&display=swap");
 :root {
   --bg_color: #ffffff;
-  --white_alt_color: #f3f5f7;
-  --green_color: #408000;
+  --white_alt_color: #f7f7f7;
+  --green_color: #165136;
   --light_green_color: #eff8ce;
   --text_color: #322f30;
   --grey_alt_color: #f0f4f9;
@@ -85,7 +85,7 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.8rem 2rem;
+  padding: 0.6rem 1.5rem;
   font-family: var(--league_spartan);
   font-size: var(--button_fs);
   font-weight: var(--fw_regular);
@@ -195,7 +195,110 @@ button {
   background-color: var(--green_color);
   color: var(--bg_color);
 }
+/* =============== DASHBOARD =============== */
+.dashboard_body-title {
+  color: var(--green_color);
+  font-size: 1.8rem;
+  font-weight: var(--fw_medium);
+  font-family: var(--league_spartan);
+  letter-spacing: -0.5px;
+}
 
+.dashboard-outline_btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  background: var(--bg_color);
+  color: var(--green_color);
+  border-radius: 75rem;
+  font-family: var(--league_spartan);
+  font-size: 1rem;
+  font-weight: var(--fw_regular);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid var(--green_color);
+}
+
+.dashboard-outline_btn:hover {
+  background: var(--green_color);
+  color: var(--bg_color);
+}
+
+.dashboard-green_btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  background: var(--green_color);
+  color: var(--bg_color);
+  border-radius: 75rem;
+  font-family: var(--league_spartan);
+  font-size: 1rem;
+  font-weight: var(--fw_regular);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.dashboard-green_btn:hover {
+  border: 2px solid var(--green_color);
+  color: var(--green_color);
+  background: var(--bg_color);
+}
+
+.dashboard-delete_btn,
+.dashboard-edit_btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border: 2px solid transparent;
+  border-radius: 75rem;
+  font-family: var(--league_spartan);
+  font-size: var(--button_fs);
+  font-weight: var(--fw_regular);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+.dashboard-edit_btn {
+  background: var(--green_color);
+  color: var(--bg_color);
+}
+
+.dashboard-edit_btn:hover {
+  background: var(--deep_green);
+  transform: translateY(-2px);
+}
+
+.dashboard-delete_btn {
+  background: var(--error_bg);
+  color: var(--error_color);
+}
+
+.dashboard-delete_btn:hover {
+  background: var(--error_color);
+  color: var(--bg_color);
+  transform: translateY(-2px);
+}
+
+.dashboard-cancel_btn {
+  padding: 0.6rem 1rem;
+  border: 2px solid var(--grey_alt_color);
+  border-radius: 75rem;
+  background: var(--bg_color);
+  color: var(--light_grey_color);
+  font-family: var(--league_spartan);
+  font-size: 1rem;
+  font-weight: var(--fw_medium);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dashboard-cancel_btn:hover {
+  background: var(--grey_alt_color);
+}
 @media screen and (max-width: 900px) {
   .pre-title-line.white {
     background-color: var(--bg_color);

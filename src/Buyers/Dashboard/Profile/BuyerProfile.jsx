@@ -13,6 +13,7 @@ import {
   CalendarIcon,
   EnvelopeIcon,
   PhoneIcon,
+  CameraIcon,
 } from "@phosphor-icons/react";
 import "./BuyerProfile.css";
 
@@ -22,7 +23,14 @@ const BuyerProfile = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState({
+    location: "",
+    county: "",
+    country: "Kenya",
+  });
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     // Get user data from localStorage
@@ -42,16 +50,15 @@ const BuyerProfile = () => {
     if (res.success) {
       setProfile(res.data);
       setForm({
-        avatar: res.data.avatar || "",
         location: res.data.location || "",
         county: res.data.county || "",
         country: res.data.country || "Kenya",
       });
+      setPreviewUrl(res.data.profile_picture_url);
     } else {
       // Profile doesn't exist yet - show create form
       setProfile(null);
       setForm({
-        avatar: "",
         location: "",
         county: "",
         country: "Kenya",
@@ -60,15 +67,86 @@ const BuyerProfile = () => {
     setLoading(false);
   };
 
+  const handleFileSelect = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      // Validate file type
+      const validTypes = [
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+        "image/webp",
+        "image/gif",
+      ];
+      if (!validTypes.includes(file.type)) {
+        alert("Please select a valid image file (JPEG, PNG, WebP, or GIF)");
+        return;
+      }
+
+      // Validate file size (5MB max)
+      if (file.size > 5 * 1024 * 1024) {
+        alert("File size must be less than 5MB");
+        return;
+      }
+
+      setSelectedFile(file);
+      setPreviewUrl(URL.createObjectURL(file));
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await updateBuyerProfile(form);
-    if (res.success) {
-      setProfile(res.data);
-      setEditing(false);
-      alert(res.message || "Profile updated successfully!");
-    } else {
-      alert(res.error);
+    setUploading(true);
+
+    try {
+      const formData = new FormData();
+
+      // Create the nested buyer_profile object structure
+      const buyerProfileData = {
+        location: form.location,
+        county: form.county,
+        country: form.country,
+      };
+
+      // Append the nested buyer_profile parameters
+      Object.keys(buyerProfileData).forEach((key) => {
+        if (
+          buyerProfileData[key] !== null &&
+          buyerProfileData[key] !== undefined &&
+          buyerProfileData[key] !== ""
+        ) {
+          formData.append(`buyer_profile[${key}]`, buyerProfileData[key]);
+        }
+      });
+
+      // Append file if selected
+      if (selectedFile) {
+        formData.append(`buyer_profile[profile_picture]`, selectedFile);
+      }
+
+      console.log("Sending FormData with:", {
+        location: form.location,
+        county: form.county,
+        country: form.country,
+        hasFile: !!selectedFile,
+      });
+
+      const res = await updateBuyerProfile(formData);
+      if (res.success) {
+        setProfile(res.data);
+        setEditing(false);
+        setSelectedFile(null);
+        setPreviewUrl(res.data.profile_picture_url);
+        alert(res.message || "Profile updated successfully!");
+        fetchProfile(); // Refresh to get the updated image URL
+      } else {
+        alert(res.error);
+      }
+    } catch (error) {
+      console.error("Upload error:", error);
+      alert("Failed to update profile. Please try again.");
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -116,14 +194,14 @@ const BuyerProfile = () => {
               className="buyerprofile-edit-button"
               onClick={() => setEditing(true)}
             >
-              <PencilIcon size={18} />
+              <PencilIcon size={14} />
               Edit Profile
             </button>
             <button
               className="buyerprofile-delete-button"
               onClick={handleDelete}
             >
-              <TrashIcon size={18} />
+              <TrashIcon size={14} />
               Delete Profile
             </button>
           </div>
@@ -134,17 +212,39 @@ const BuyerProfile = () => {
         <form className="buyerprofile-edit-form" onSubmit={handleSubmit}>
           <h2>{profile ? "Edit Profile" : "Create Your Profile"}</h2>
 
+          {/* File Upload Section */}
           <div className="buyerprofile-form-group">
-            <label htmlFor="avatar">Avatar URL</label>
-            <input
-              id="avatar"
-              type="text"
-              placeholder="https://example.com/avatar.jpg"
-              value={form.avatar || ""}
-              onChange={(e) => setForm({ ...form, avatar: e.target.value })}
-            />
+            <label
+              htmlFor="profile-picture"
+              className="buyerprofile-file-upload-label"
+            >
+              Profile Picture
+            </label>
+            <div className="buyerprofile-file-upload-area">
+              <input
+                id="profile-picture"
+                type="file"
+                accept="image/*"
+                onChange={handleFileSelect}
+                className="buyerprofile-file-input"
+              />
+              <div className="buyerprofile-upload-preview">
+                {previewUrl ? (
+                  <img
+                    src={previewUrl}
+                    alt="Preview"
+                    className="buyerprofile-upload-preview-image"
+                  />
+                ) : (
+                  <div className="buyerprofile-upload-placeholder">
+                    <CameraIcon size={32} />
+                    <span>Click to upload profile picture</span>
+                  </div>
+                )}
+              </div>
+            </div>
             <span className="buyerprofile-field-hint">
-              Enter a URL to your profile picture
+              Supported formats: JPEG, PNG, WebP, GIF. Max size: 5MB
             </span>
           </div>
 
@@ -187,14 +287,27 @@ const BuyerProfile = () => {
           </div>
 
           <div className="buyerprofile-form-actions">
-            <button type="submit" className="buyerprofile-save-button">
-              {profile ? "Save Changes" : "Create Profile"}
+            <button
+              type="submit"
+              className="buyerprofile-save-button"
+              disabled={uploading}
+            >
+              {uploading
+                ? "Uploading..."
+                : profile
+                ? "Save Changes"
+                : "Create Profile"}
             </button>
             {profile && (
               <button
                 type="button"
                 className="buyerprofile-cancel-button"
-                onClick={() => setEditing(false)}
+                onClick={() => {
+                  setEditing(false);
+                  setSelectedFile(null);
+                  setPreviewUrl(profile.profile_picture_url);
+                }}
+                disabled={uploading}
               >
                 Cancel
               </button>
@@ -206,20 +319,22 @@ const BuyerProfile = () => {
           <div className="buyerprofile-main-content">
             <div className="buyerprofile-header-section">
               <div className="buyerprofile-avatar-wrapper">
-                {profile.avatar ? (
+                {profile.profile_picture_url ? (
                   <img
-                    src={profile.avatar}
+                    src={profile.profile_picture_url}
                     alt="Profile"
                     className="buyerprofile-avatar-image"
                     onError={(e) => {
-                      e.target.style.display = 'none';
-                      e.target.nextElementSibling.style.display = 'flex';
+                      e.target.style.display = "none";
+                      e.target.nextElementSibling.style.display = "flex";
                     }}
                   />
                 ) : null}
-                <div 
+                <div
                   className="buyerprofile-avatar-placeholder"
-                  style={{ display: profile.avatar ? 'none' : 'flex' }}
+                  style={{
+                    display: profile.profile_picture_url ? "none" : "flex",
+                  }}
                 >
                   <UserIcon size={64} weight="duotone" />
                 </div>

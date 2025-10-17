@@ -1,5 +1,5 @@
-/* TopDash.css - Optimized and clash-free */
-.top-dash {
+/* BuyerTopDash.css - Matching Farmer TopDash styles */
+.buyertopdash-container {
   background-color: var(--white_alt_color);
   padding: 0.8rem 0.5rem;
   border-radius: 0.5rem;
@@ -9,12 +9,12 @@
   overflow: hidden;
 }
 
-.dashboard-greeting {
+.buyertopdash-greeting {
   position: relative;
   z-index: 1;
 }
 
-.greeting-text {
+.buyertopdash-greeting-text {
   font-family: var(--league_spartan);
   font-size: 1.3rem;
   font-weight: var(--fw_medium);
@@ -23,54 +23,101 @@
   line-height: 1.2;
 }
 
-.member-since {
-  font-family: var(--outfit);
-  font-size: 1.1rem;
+.buyertopdash-member-since {
+  font-family: var(--league_spartan);
+  font-size: 0.9rem;
   color: var(--light_grey_color);
-  margin: 0;
+  margin-top: 0.5rem;
   font-weight: var(--fw_regular);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 /* Loading and Error States */
-.top-dash-loading,
-.top-dash-error {
-  text-align: center;
+.buyertopdash-loading,
+.buyertopdash-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 2rem;
-  font-family: var(--outfit);
-  font-size: 1rem;
-  color: var(--light_grey_color);
+  text-align: center;
 }
 
-.top-dash-error {
+.buyertopdash-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--grey_alt_color);
+  border-top: 3px solid var(--green_color);
+  border-radius: 50%;
+  animation: buyertopdash-spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes buyertopdash-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.buyertopdash-loading p,
+.buyertopdash-error p {
+  font-family: var(--outfit);
+  color: var(--light_grey_color);
+  font-size: 1rem;
+}
+
+.buyertopdash-error p {
   color: var(--error_color);
+  margin-bottom: 1rem;
+}
+
+.buyertopdash-error button {
+  padding: 0.8rem 1.5rem;
+  background: var(--green_color);
+  color: var(--bg_color);
+  border-radius: 0.5rem;
+  font-family: var(--league_spartan);
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  transition: background 0.3s ease;
+}
+
+.buyertopdash-error button:hover {
+  background: var(--deep_green);
 }
 
 /* Responsive Design */
 @media screen and (max-width: 768px) {
-  .top-dash {
+  .buyertopdash-container {
     padding: 1.5rem;
     margin-bottom: 1.5rem;
   }
 
-  .greeting-text {
+  .buyertopdash-greeting-text {
     font-size: 1.75rem;
   }
 
-  .member-since {
+  .buyertopdash-member-since {
     font-size: 1rem;
   }
 }
 
 @media screen and (max-width: 480px) {
-  .top-dash {
+  .buyertopdash-container {
     padding: 1.25rem;
   }
 
-  .greeting-text {
+  .buyertopdash-greeting-text {
     font-size: 1.5rem;
   }
 
-  .member-since {
+  .buyertopdash-member-since {
     font-size: 0.95rem;
   }
 }

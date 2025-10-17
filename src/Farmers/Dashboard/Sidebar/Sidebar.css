@@ -40,6 +40,8 @@
   color: var(--bg_color);
   cursor: pointer;
   transition: transform 0.3s ease;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
 .mobile-avatar:hover {
@@ -230,27 +232,22 @@
   opacity: 1;
 }
 
-/* Add these styles to your existing Sidebar.css */
+/* Sidebar Bottom Section with Popup */
+.sidebar-bottom-wrapper {
+  position: relative;
+}
 
-/* Update the .sidebar-bottom styles to make it clickable */
 .sidebar-bottom {
-  padding: 1.5rem;
+  padding: 1rem;
   border-top: 1px solid var(--grey_alt_color);
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  text-decoration: none;
-  border-radius: 0;
-}
-
-.sidebar-bottom:hover {
-  background: var(--grey_alt_color);
-}
-
-.sidebar-bottom.active {
-  background: var(--light_green_color);
+  border-radius: 0.7rem;
+  margin-top: 0.5rem;
 }
 
 .sidebar-bottom.active .sidebar-user-avatar {
@@ -262,7 +259,6 @@
   color: var(--green_color);
 }
 
-/* Ensure these existing styles remain */
 .sidebar-user-avatar {
   width: 48px;
   height: 48px;
@@ -277,6 +273,7 @@
   font-size: 1.1rem;
   flex-shrink: 0;
   transition: all 0.3s ease;
+  overflow: hidden;
 }
 
 .sidebar-user-info {
@@ -294,17 +291,170 @@
   overflow: hidden;
   text-overflow: ellipsis;
   transition: color 0.3s ease;
+  margin: 0;
+  text-align: center;
 }
 
 .sidebar-user-role {
   font-family: var(--outfit);
   font-size: 0.85rem;
   color: var(--light_grey_color);
+  margin: 0;
+  text-align: center;
 }
 
 .farmers-sidebar.collapsed .sidebar-bottom {
   justify-content: center;
   padding: 1rem 0;
+}
+
+.farmers-sidebar.collapsed .sidebar-user-info {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+/* Logout Popup Styles */
+.logout-popup {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  margin-bottom: 0.5rem;
+  background-color: var(--bg_color);
+  border: 1px solid var(--grey_alt_color);
+  border-radius: 0.7rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  z-index: 1002;
+  animation: popupSlideUp 0.3s ease;
+}
+
+@keyframes popupSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.logout-popup-content {
+  padding: 1rem;
+}
+
+.logout-popup-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--grey_alt_color);
+  margin-bottom: 0.5rem;
+}
+
+.logout-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--green_color);
+  color: var(--bg_color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--league_spartan);
+  font-weight: var(--fw_bold);
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.logout-user-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.logout-user-name {
+  font-family: var(--league_spartan);
+  font-weight: var(--fw_semibold);
+  color: var(--text_color);
+  font-size: 1.1rem;
+  margin: 0 0 0.25rem 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.logout-user-email {
+  font-family: var(--outfit);
+  font-size: 0.85rem;
+  color: var(--light_grey_color);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.logout-popup-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.logout-popup-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-family: var(--league_spartan);
+  font-size: 0.95rem;
+  color: var(--text_color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.logout-popup-link:hover {
+  background-color: var(--light_green_color);
+  color: var(--green_color);
+}
+
+.logout-button {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-family: var(--league_spartan);
+  font-size: 0.95rem;
+  font-weight: var(--fw_medium);
+  color: #dc2626;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.logout-button:hover {
+  background-color: #fee2e2;
+}
+
+.logout-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Collapsed sidebar popup positioning */
+.farmers-sidebar.collapsed .logout-popup {
+  left: 100%;
+  right: auto;
+  bottom: 0;
+  margin-left: 1rem;
+  margin-bottom: 0;
+  min-width: 250px;
 }
 
 /* Mobile Styles */
@@ -313,9 +463,9 @@
     display: flex;
   }
 
-  /* .sidebar-overlay {
+  .sidebar-overlay {
     display: block;
-  } */
+  }
 
   .farmers-sidebar {
     transform: translateX(-100%);
@@ -337,6 +487,23 @@
   .sidebar-nav-link::after {
     display: none;
   }
+
+  .logout-popup {
+    position: fixed;
+    bottom: 80px;
+    left: 1rem;
+    right: 1rem;
+    width: calc(100% - 2rem);
+    max-width: 350px;
+    margin: 0 auto;
+  }
+
+  .farmers-sidebar.collapsed .logout-popup {
+    left: 1rem;
+    right: 1rem;
+    bottom: 80px;
+    margin: 0 auto;
+  }
 }
 
 /* Tablet and Desktop */
@@ -345,11 +512,28 @@
     display: none;
   }
 
-  /* .sidebar-overlay {
+  .sidebar-overlay {
     display: none !important;
-  } */
+  }
 
   .mobile-close-btn {
     display: none;
+  }
+}
+
+/* Extra small mobile devices */
+@media screen and (max-width: 375px) {
+  .logout-popup-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .logout-avatar {
+    margin: 0 auto;
+  }
+
+  .logout-user-name,
+  .logout-user-email {
+    text-align: center;
   }
 }

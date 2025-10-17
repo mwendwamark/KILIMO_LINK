@@ -146,6 +146,7 @@
 
 .buyerprofile-save-button:hover {
   background: var(--deep_green);
+  /* color: var(--bg_color); */
 }
 
 .buyerprofile-cancel-button {
@@ -409,6 +410,73 @@
   font-size: 1.1rem;
 }
 
+/* File Upload Styles */
+.buyerprofile-file-upload-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.buyerprofile-file-upload-area {
+  position: relative;
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  transition: border-color 0.3s ease;
+  background: #f9fafb;
+}
+
+.buyerprofile-file-upload-area:hover {
+  border-color: #3b82f6;
+}
+
+.buyerprofile-file-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.buyerprofile-upload-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.buyerprofile-upload-preview-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e5e7eb;
+}
+
+.buyerprofile-upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #6b7280;
+}
+
+.buyerprofile-upload-placeholder svg {
+  color: #9ca3af;
+}
+
+/* Update avatar styles to be consistent */
+.buyerprofile-avatar-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e5e7eb;
+}
 /* Responsive Design */
 @media screen and (max-width: 968px) {
   .buyerprofile-content-wrapper {

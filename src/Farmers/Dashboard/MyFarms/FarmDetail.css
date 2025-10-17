@@ -1,8 +1,5 @@
-/* FarmDetail.css - Optimized with unique class names */
 .farmdetail-page-container {
-  padding: 2rem 0;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 0 2rem;
 }
 
 /* Header Styles */
@@ -21,7 +18,7 @@
   justify-content: center;
   padding: 0.8rem;
   gap: 0.4rem;
-  padding: 0.7rem 0.8rem;
+  padding: 0.6rem 0.8rem;
   background-color: var(--bg_color);
   color: var(--green_color);
   border-radius: 33rem;
@@ -47,7 +44,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.7rem 0.8rem;
+  padding: 0.6rem 1rem;
   border: 2px solid transparent;
   border-radius: 75rem;
   font-family: var(--league_spartan);
@@ -55,28 +52,32 @@
   font-weight: var(--fw_regular);
   cursor: pointer;
   transition: all 0.3s ease;
+  border: 2px solid transparent;
 }
 
 .farmdetail-edit-button {
   background: var(--green_color);
   color: var(--bg_color);
+  /* border: 2px solid var(--green_color); */
 }
 
 .farmdetail-edit-button:hover {
   background: var(--deep_green);
   transform: translateY(-2px);
+  /* border: 2px solid var(--deep_green); */
 }
 
 .farmdetail-delete-button {
   background: var(--error_bg);
   color: var(--error_color);
-  border: 1.5px solid var(--error_border);
+  /* border: 2px solid var(--error_border); */
 }
 
 .farmdetail-delete-button:hover {
   background: var(--error_color);
   color: var(--bg_color);
   transform: translateY(-2px);
+  /* border: 2px solid var(--error_green); */
 }
 
 /* Form Styles */
@@ -158,19 +159,24 @@
 }
 
 .farmdetail-save-button {
-  padding: 0.9rem 2rem;
-  border-radius: 0.75rem;
-  font-weight: var(--fw_medium);
-  background: var(--green_color);
-  color: var(--bg_color);
+  padding: 0.6rem 1rem;
+  background: var(--bg_color);
+  color: var(--green_color);
+  border-radius: 75rem;
+  font-family: var(--league_spartan);
+  font-size: 1rem;
+  font-weight: var(--fw_regular);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid var(--green_color);
 }
 
 .farmdetail-cancel-button {
-  padding: 0.9rem 2rem;
-  border: 1.5px solid var(--grey_alt_color);
-  border-radius: 0.75rem;
+  padding: 0.6rem 1rem;
+  border: 2px solid var(--grey_alt_color);
+  border-radius: 75rem;
   background: var(--bg_color);
-  color: var(--text_color);
+  color: var(--light_grey_color);
   font-family: var(--league_spartan);
   font-size: 1rem;
   font-weight: var(--fw_medium);
@@ -379,6 +385,9 @@
 }
 
 @media screen and (max-width: 768px) {
+  .farmdetail-page-container {
+    padding: 0;
+  }
   .farmdetail-page-header {
     flex-direction: column;
     align-items: stretch;
@@ -417,5 +426,12 @@
 
   .farmdetail-farm-name {
     font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .farmdetail-delete-button,
+  .farmdetail-edit-button {
+    padding: 0.5rem 0rem;
   }
 }

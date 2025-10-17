@@ -75,9 +75,9 @@ const MyFarms = () => {
   return (
     <div className="my-farms-wrapper">
       <div className="my-farms-header">
-        <h2>My Farms </h2>
-        <button className="my-farms-add_btn" onClick={handleAddClick}>
-          <PlusIcon size={20}/> Add Farm
+        <h2 className="dashboard_body-title">My Farms </h2>
+        <button className="dashboard-outline_btn" onClick={handleAddClick}>
+          <PlusIcon size={16} /> Add Farm
         </button>
       </div>
 
@@ -149,12 +149,12 @@ const MyFarms = () => {
           </div>
 
           <div className="my-farms-form-actions">
-            <button type="submit" className="btn-primary">
-              {editing ? "Update" : "Save"}
+            <button type="submit" className="dashboard-outline_btn">
+              {editing ? "Update" : "Create Farm"}
             </button>
             <button
               type="button"
-              className="btn-secondary"
+              className="dashboard-cancel_btn"
               onClick={() => {
                 setShowForm(false);
                 setEditing(null);
@@ -181,7 +181,7 @@ const MyFarms = () => {
                 <p>{f.farm_type}</p>
               </div>
 
-              <ArrowCircleUpRightIcon size={40} color="var(--green_color)"  />
+              <ArrowCircleUpRightIcon size={40} color="var(--green_color)" />
             </div>
             <div className="my-farms-location-info">
               <MapPinIcon size={20} color="var(--green_color)" />
