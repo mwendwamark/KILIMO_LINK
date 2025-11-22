@@ -108,7 +108,7 @@ const FarmDetail = () => {
           className="farmdetail-back-button"
           onClick={() => navigate("/farmers/dashboard/farms")}
         >
-          <ArrowLeftIcon size={16}  />
+          <ArrowLeftIcon size={16} />
           Back to Farms
         </button>
 
@@ -256,7 +256,9 @@ const FarmDetail = () => {
       ) : (
         <div className="farmdetail-content-wrapper">
           <div className="farmdetail-main-content">
-            <h1 className="farmdetail-farm-name dashboard_body-title">{farm.farm_name}</h1>
+            <h1 className="farmdetail-farm-name dashboard_body-title">
+              {farm.farm_name}
+            </h1>
 
             <div className="farmdetail-meta-info">
               <span className="farmdetail-type-badge">{farm.farm_type}</span>
@@ -316,6 +318,19 @@ const FarmDetail = () => {
           </div>
 
           <div className="farmdetail-sidebar-content">
+            <div className="farmdetail-sidebar-card">
+              <h3>Farm Actions</h3>
+              <button
+                className="dashboard-green_btn"
+                style={{ width: "100%", marginBottom: "1rem" }}
+                onClick={() =>
+                  navigate(`/farmers/dashboard/farms/${id}/products`)
+                }
+              >
+                View Products
+              </button>
+            </div>
+
             <div className="farmdetail-sidebar-card">
               <h3>Farm Statistics</h3>
               <div className="farmdetail-stat-item">

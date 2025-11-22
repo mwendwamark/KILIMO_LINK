@@ -599,6 +599,182 @@ export const deleteBuyerProfile = async () => {
     return { success: false, error: "Network error" };
   }
 };
+
+// Add these to your services/api.js file
+
+// ==================== PRODUCTS CRUD ====================
+
+/**
+ * Get all products for a farm
+ * @param {number} farmId - The farm ID
+ * @returns {Promise<Object>}
+ */
+export const getProducts = async (farmId) => {
+  try {
+    const res = await fetch(
+      `${API_BASE_URL}/farmers/farms/${farmId}/products`,
+      {
+        headers: { ...getAuthHeader() },
+      }
+    );
+    const data = await res.json();
+    return res.ok
+      ? { success: true, data: data.products }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+/**
+ * Get a single product
+ * @param {number} farmId - The farm ID
+ * @param {number} productId - The product ID
+ * @returns {Promise<Object>}
+ */
+export const getProduct = async (farmId, productId) => {
+  try {
+    const res = await fetch(
+      `${API_BASE_URL}/farmers/farms/${farmId}/products/${productId}`,
+      {
+        headers: { ...getAuthHeader() },
+      }
+    );
+    const data = await res.json();
+    return res.ok
+      ? { success: true, data: data.product }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+/**
+ * Create a new product with images
+ * @param {number} farmId - The farm ID
+ * @param {Object|FormData} payload - Product data (can include File objects for product_images)
+ * @returns {Promise<Object>}
+ */
+export const createProduct = async (farmId, payload) => {
+  try {
+    let formData;
+
+    // Check if payload is already FormData
+    if (payload instanceof FormData) {
+      formData = payload;
+    } else {
+      // Convert object to FormData
+      formData = new FormData();
+      Object.keys(payload).forEach((key) => {
+        if (key === "product_images" && Array.isArray(payload[key])) {
+          // Handle multiple images
+          payload[key].forEach((file) => {
+            formData.append(`product[product_images][]`, file);
+          });
+        } else if (
+          payload[key] !== null &&
+          payload[key] !== undefined &&
+          payload[key] !== ""
+        ) {
+          formData.append(`product[${key}]`, payload[key]);
+        }
+      });
+    }
+
+    const res = await fetch(
+      `${API_BASE_URL}/farmers/farms/${farmId}/products`,
+      {
+        method: "POST",
+        headers: {
+          ...getAuthHeader(),
+          // Don't set Content-Type - let browser set it with boundary
+        },
+        body: formData,
+      }
+    );
+
+    const data = await res.json();
+    return res.ok
+      ? { success: true, data: data.product, message: data.message }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+/**
+ * Update a product
+ * @param {number} farmId - The farm ID
+ * @param {number} productId - The product ID
+ * @param {Object|FormData} payload - Product data to update
+ * @returns {Promise<Object>}
+ */
+export const updateProduct = async (farmId, productId, payload) => {
+  try {
+    let formData;
+
+    if (payload instanceof FormData) {
+      formData = payload;
+    } else {
+      formData = new FormData();
+      Object.keys(payload).forEach((key) => {
+        if (key === "product_images" && Array.isArray(payload[key])) {
+          payload[key].forEach((file) => {
+            formData.append(`product[product_images][]`, file);
+          });
+        } else if (
+          payload[key] !== null &&
+          payload[key] !== undefined &&
+          payload[key] !== ""
+        ) {
+          formData.append(`product[${key}]`, payload[key]);
+        }
+      });
+    }
+
+    const res = await fetch(
+      `${API_BASE_URL}/farmers/farms/${farmId}/products/${productId}`,
+      {
+        method: "PUT",
+        headers: {
+          ...getAuthHeader(),
+        },
+        body: formData,
+      }
+    );
+
+    const data = await res.json();
+    return res.ok
+      ? { success: true, data: data.product, message: data.message }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+/**
+ * Delete a product
+ * @param {number} farmId - The farm ID
+ * @param {number} productId - The product ID
+ * @returns {Promise<Object>}
+ */
+export const deleteProduct = async (farmId, productId) => {
+  try {
+    const res = await fetch(
+      `${API_BASE_URL}/farmers/farms/${farmId}/products/${productId}`,
+      {
+        method: "DELETE",
+        headers: { ...getAuthHeader() },
+      }
+    );
+    const data = await res.json();
+    return res.ok
+      ? { success: true, message: data.message }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
 // ==================== LEGACY API (for other parts of your app) ====================
 
 const API_ENDPOINTS = {
