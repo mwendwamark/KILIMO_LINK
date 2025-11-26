@@ -102,6 +102,11 @@ const Sidebar = ({
       label: "Dashboard",
       exact: true,
     },
+    {
+      path: "/farmers/dashboard/my-listings",
+      icon: ListChecksIcon,
+      label: "My products",
+    },
     { path: "/farmers/dashboard/farms", icon: FarmIcon, label: "My Farms" },
     {
       path: "/farmers/dashboard/resources",
@@ -111,12 +116,7 @@ const Sidebar = ({
     {
       path: "/farmers/dashboard/marketplace",
       icon: StorefrontIcon,
-      label: "Market",
-    },
-    {
-      path: "/farmers/dashboard/my-listings",
-      icon: ListChecksIcon,
-      label: "My Listings",
+      label: "Marketplace",
     },
     {
       path: "/farmers/dashboard/community",

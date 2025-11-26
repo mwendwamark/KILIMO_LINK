@@ -602,6 +602,41 @@ export const deleteBuyerProfile = async () => {
 
 // Add these to your services/api.js file
 
+// ==================== PUBLIC PRODUCTS ====================
+
+/**
+ * Get all public products
+ * @returns {Promise<Object>}
+ */
+export const getAllProducts = async () => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/products`);
+    const data = await res.json();
+    return res.ok
+      ? { success: true, data }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+/**
+ * Get a single public product
+ * @param {number} id - The product ID
+ * @returns {Promise<Object>}
+ */
+export const getPublicProduct = async (id) => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/products/${id}`);
+    const data = await res.json();
+    return res.ok
+      ? { success: true, data }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
 // ==================== PRODUCTS CRUD ====================
 
 /**

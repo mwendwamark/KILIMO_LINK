@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import "./App.css";
 import Home from "./FirstTimer/Pages/Home/Home";
 import RoleSelection from "./FirstTimer/Pages/RoleSelection/RoleSelection";
+import Products from "./FirstTimer/Pages/Products/Products";
+import ProductDetails from "./FirstTimer/Pages/ProductDetails/ProductDetails";
 import FarmerSignup from "./Farmers/Auth/signup/FarmerSignup";
 import FarmerLogin from "./Farmers/Auth/login/FarmerLogin";
 import BuyerSignup from "./Buyers/Auth/signup/BuyerSignup";
@@ -17,6 +19,7 @@ import FarmDetail from "./Farmers/Dashboard/MyFarms/FarmDetail";
 import FarmerProfile from "./Farmers/Dashboard/Profile/FarmerProfile";
 import BuyerDashboard from "./Buyers/Dashboard/BuyerDashboard";
 import BuyerProfile from "./Buyers/Dashboard/Profile/BuyerProfile";
+
 
 // Import Product Components
 import ProductsList from "./Products/ProductList/ProductList";
@@ -51,6 +54,11 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/select_role" element={<RoleSelection />} />
+
+        {/* Public Product Routes */}
+        <Route path="/products" element={<Products />} />
+        <Route path="/products/:id" element={<ProductDetails />} />
+
         <Route path="/farmers/signup" element={<FarmerSignup />} />
         <Route path="/farmers/login" element={<FarmerLogin />} />
         <Route path="/buyers/signup" element={<BuyerSignup />} />
@@ -81,13 +89,25 @@ const App = () => {
           <Route index element={<div>Dashboard Home</div>} />
           <Route path="farms" element={<MyFarms />} />
           <Route path="farms/:id" element={<FarmDetail />} />
-          
+
           {/* Products Routes - NO LEADING SLASH! */}
-          <Route path="farms/:farmId/products" element={<ProductsListWrapper />} />
-          <Route path="farms/:farmId/products/create" element={<ProductFormCreateWrapper />} />
-          <Route path="farms/:farmId/products/:productId" element={<ProductDetailWrapper />} />
-          <Route path="farms/:farmId/products/:productId/edit" element={<ProductFormEditWrapper />} />
-          
+          <Route
+            path="farms/:farmId/products"
+            element={<ProductsListWrapper />}
+          />
+          <Route
+            path="farms/:farmId/products/create"
+            element={<ProductFormCreateWrapper />}
+          />
+          <Route
+            path="farms/:farmId/products/:productId"
+            element={<ProductDetailWrapper />}
+          />
+          <Route
+            path="farms/:farmId/products/:productId/edit"
+            element={<ProductFormEditWrapper />}
+          />
+
           <Route path="profile" element={<FarmerProfile />} />
           <Route path="resources" element={<div>Resources</div>} />
           <Route path="marketplace" element={<div>Marketplace</div>} />

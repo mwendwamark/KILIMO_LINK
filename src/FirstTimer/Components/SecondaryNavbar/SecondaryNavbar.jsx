@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import "./Navbar.css";
+import "./SecondaryNavbar.css";
 import { AlignRight, ArrowDownRight, X } from "lucide-react";
 import { NavLink } from "react-router-dom";
 // import Logo from "../../../assets/logo1.svg";
 import Logo from "../../../../public/logo.svg";
 
-const Navbar = () => {
+const SecondaryNavbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -34,17 +34,17 @@ const Navbar = () => {
   return (
     <>
       <header>
-        <nav className={`main_navbar ${scrolled ? "scroll_navbar" : ""}`}>
-          <div className="main_navbar-container container">
+        <nav className={`secondary_navbar ${scrolled ? "scroll_navbar" : ""}`}>
+          <div className="secondary_navbar-container container">
             <NavLink
               aria-label="Go to Home page"
               to="/"
-              className="main_navbar-logo"
+              className="secondary_navbar-logo"
             >
               <img src={Logo} alt="Logo" />
             </NavLink>
 
-            <ul className={`main_navbar-menu ${menuOpen ? "active" : ""}`}>
+            <ul className={`secondary_navbar-menu ${menuOpen ? "active" : ""}`}>
               <li>
                 <NavLink
                   aria-label="Go to Home page"
@@ -107,13 +107,17 @@ const Navbar = () => {
                   onClick={closeMenu}
                 >
                   <span className="button_text">Sign In</span>
-                  <ArrowDownRight className="arrow_icon" size={18} color="#322f30" />
+                  <ArrowDownRight
+                    className="arrow_icon"
+                    size={18}
+                    color="#322f30"
+                  />
                 </NavLink>
               </div>
             </ul>
 
-            <div className="main_navbar-right">
-              <ul className="main_navbar-right-list">
+            <div className="secondary_navbar-right">
+              <ul className="secondary_navbar-right-list">
                 <li>
                   <NavLink
                     aria-label="Go to Sign In page"
@@ -127,9 +131,9 @@ const Navbar = () => {
                 </li>
               </ul>
 
-              <div className="main_navbar-menu-icon" onClick={toggleMenu}>
+              <div className="secondary_navbar-menu-icon" onClick={toggleMenu}>
                 {menuOpen ? (
-                  <X size={24} className="close_menu" color="#fff" />
+                  <X size={24} className="close_menu" color="#000" />
                 ) : (
                   <AlignRight size={24} />
                 )}
@@ -142,4 +146,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default SecondaryNavbar;
