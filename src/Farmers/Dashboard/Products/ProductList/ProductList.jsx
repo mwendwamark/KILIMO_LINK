@@ -1,7 +1,7 @@
-// components/Products/ProductsList.jsx
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getProducts, deleteProduct } from "../../services/api";
+import { getProducts, deleteProduct } from "../../../../services/api";
+import { formatCurrency } from "../../../../utils/formatters";
 import "./ProductList.css";
 
 const ProductsList = ({ farmId }) => {
@@ -53,7 +53,9 @@ const ProductsList = ({ farmId }) => {
         <h2 className="dashboard_body-title">Products</h2>
         <button
           className="dashboard-green_btn"
-          onClick={() => navigate(`/farmers/dashboard/farms/${farmId}/products/create`)}
+          onClick={() =>
+            navigate(`/farmers/dashboard/farms/${farmId}/products/create`)
+          }
         >
           + Add Product
         </button>
@@ -83,7 +85,7 @@ const ProductsList = ({ farmId }) => {
                     {product.quantity} {product.unit}
                   </span>
                   <span className="product-price">
-                    KES {product.price_per_unit}/{product.unit}
+                    {formatCurrency(product.price_per_unit)}/{product.unit}
                   </span>
                 </div>
               </div>
@@ -91,7 +93,9 @@ const ProductsList = ({ farmId }) => {
                 <button
                   className="dashboard-outline_btn"
                   onClick={() =>
-                    navigate(`/farmers/dashboard/farms/${farmId}/products/${product.id}`)
+                    navigate(
+                      `/farmers/dashboard/farms/${farmId}/products/${product.id}`
+                    )
                   }
                 >
                   View
@@ -99,7 +103,9 @@ const ProductsList = ({ farmId }) => {
                 <button
                   className="dashboard-edit_btn"
                   onClick={() =>
-                    navigate(`/farmers/dashboard/farms/${farmId}/products/${product.id}/edit`)
+                    navigate(
+                      `/farmers/dashboard/farms/${farmId}/products/${product.id}/edit`
+                    )
                   }
                 >
                   Edit

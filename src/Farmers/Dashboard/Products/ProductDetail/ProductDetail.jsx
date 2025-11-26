@@ -1,7 +1,8 @@
 // components/Products/ProductDetail.jsx
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getProduct, deleteProduct } from "../../services/api";
+import { getProduct, deleteProduct } from "../../../../services/api";
+import { formatCurrency } from "../../../../utils/formatters";
 import "./ProductDetail.css";
 
 const ProductDetail = ({ farmId }) => {
@@ -76,7 +77,9 @@ const ProductDetail = ({ farmId }) => {
       <div className="product-detail-header">
         <button
           className="dashboard-outline_btn"
-          onClick={() => navigate(`/farmers/dashboard/farms/${farmId}/products`)}
+          onClick={() =>
+            navigate(`/farmers/dashboard/farms/${farmId}/products`)
+          }
         >
           ← Back to Products
         </button>
@@ -84,7 +87,9 @@ const ProductDetail = ({ farmId }) => {
           <button
             className="dashboard-edit_btn"
             onClick={() =>
-              navigate(`/farmers/dashboard/farms/${farmId}/products/${productId}/edit`)
+              navigate(
+                `/farmers/dashboard/farms/${farmId}/products/${productId}/edit`
+              )
             }
           >
             Edit
@@ -151,7 +156,7 @@ const ProductDetail = ({ farmId }) => {
           <div className="product-detail-price">
             <span className="price-label">Price:</span>
             <span className="price-value">
-              KES {product.price_per_unit} / {product.unit}
+              {formatCurrency(product.price_per_unit)} / {product.unit}
             </span>
           </div>
 

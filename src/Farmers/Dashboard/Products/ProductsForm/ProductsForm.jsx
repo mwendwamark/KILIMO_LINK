@@ -1,7 +1,7 @@
 // components/Products/ProductsForm.jsx
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { createProduct, updateProduct, getProduct } from "../../services/api";
+import { createProduct, updateProduct, getProduct } from "../../../../services/api";
 import "./ProductsForm.css";
 
 const CATEGORIES = [

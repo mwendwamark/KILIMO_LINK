@@ -662,6 +662,24 @@ export const getProducts = async (farmId) => {
 };
 
 /**
+ * Get all products across all farms owned by the farmer
+ * @returns {Promise<Object>}
+ */
+export const getAllFarmerProducts = async () => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/farmers/products`, {
+      headers: { ...getAuthHeader() },
+    });
+    const data = await res.json();
+    return res.ok
+      ? { success: true, data: data.products }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+/**
  * Get a single product
  * @param {number} farmId - The farm ID
  * @param {number} productId - The product ID

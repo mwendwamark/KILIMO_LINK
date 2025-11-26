@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getPublicProduct } from "../../../services/api";
+import { formatCurrency } from "../../../utils/formatters";
 import "./ProductDetails.css";
 
 const ProductDetails = () => {
@@ -95,8 +96,8 @@ const ProductDetails = () => {
         <div className="details-info">
           <h1>{product.product_name}</h1>
           <div className="details-price">
-            KSh {product.price_per_unit}{" "}
-            <span className="unit">/ {product.unit}</span>
+            {formatCurrency(product.price_per_unit)}{" "}
+            <span className="unit">per {product.unit}</span>
           </div>
 
           <div className="details-description">

@@ -20,11 +20,11 @@ import FarmerProfile from "./Farmers/Dashboard/Profile/FarmerProfile";
 import BuyerDashboard from "./Buyers/Dashboard/BuyerDashboard";
 import BuyerProfile from "./Buyers/Dashboard/Profile/BuyerProfile";
 
-
-// Import Product Components
-import ProductsList from "./Products/ProductList/ProductList";
-import ProductsForm from "./Products/ProductsForm/ProductsForm";
-import ProductDetail from "./Products/ProductDetail/ProductDetail";
+// Import Product Components (moved to Farmers/Dashboard/Products)
+import ProductsList from "./Farmers/Dashboard/Products/ProductList/ProductList";
+import ProductsForm from "./Farmers/Dashboard/Products/ProductsForm/ProductsForm";
+import ProductDetail from "./Farmers/Dashboard/Products/ProductDetail/ProductDetail";
+import MyListings from "./Farmers/Dashboard/MyListings/MyListings";
 
 // Wrapper components - needed because your components expect farmId as a prop
 // These extract farmId from URL and pass it down
@@ -111,7 +111,7 @@ const App = () => {
           <Route path="profile" element={<FarmerProfile />} />
           <Route path="resources" element={<div>Resources</div>} />
           <Route path="marketplace" element={<div>Marketplace</div>} />
-          <Route path="my-listings" element={<div>My Listings</div>} />
+          <Route path="my-listings" element={<MyListings />} />
           <Route path="community" element={<div>Community</div>} />
           <Route path="messages" element={<div>Messages</div>} />
         </Route>
