@@ -5,7 +5,13 @@
   position: fixed;
   z-index: 100;
   border-bottom: none;
+  transition: all 0.3s ease;
 }
+
+.main_navbar--hidden {
+  transform: translateY(-100%);
+}
+
 .scroll_navbar {
   /* background-color: rgba(209, 206, 206, 0.8); */
   border-bottom: 1px solid var(--white_alt_color);
@@ -127,7 +133,7 @@
     color: var(--text_color);
     z-index: 15;
   }
-  
+
   .main_navbar-container {
     padding: 0.5rem 0;
   }

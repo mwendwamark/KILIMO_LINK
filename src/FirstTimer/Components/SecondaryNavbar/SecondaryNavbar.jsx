@@ -8,20 +8,37 @@ import Logo from "../../../../public/logo.svg";
 const SecondaryNavbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 100) {
+      const currentScrollY = window.scrollY;
+
+      // Determine if navbar should have backdrop blur and color change
+      if (currentScrollY > 100) {
         setScrolled(true);
       } else {
         setScrolled(false);
       }
+
+      // Show/hide navbar based on scroll direction
+      if (currentScrollY > lastScrollY && currentScrollY > 150) {
+        // Scrolling down & past threshold - hide navbar
+        setVisible(false);
+      } else {
+        // Scrolling up - show navbar
+        setVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [lastScrollY]);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -34,7 +51,11 @@ const SecondaryNavbar = () => {
   return (
     <>
       <header>
-        <nav className={`secondary_navbar ${scrolled ? "scroll_navbar" : ""}`}>
+        <nav
+          className={`secondary_navbar ${scrolled ? "scroll_navbar" : ""} ${
+            !visible ? "secondary_navbar--hidden" : ""
+          }`}
+        >
           <div className="secondary_navbar-container container">
             <NavLink
               aria-label="Go to Home page"

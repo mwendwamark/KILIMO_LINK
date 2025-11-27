@@ -13,7 +13,7 @@ import { ArrowLeft, Eye, EyeOff } from "lucide-react";
 const FarmerLogin = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
+  const [rememberMe, setRememberMe] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
