@@ -3,7 +3,7 @@
   --bg_color: #ffffff;
   --white_alt_color: #f7f7f7;
   --green_color: #165136;
-  --light_green_color: #eff8ce;
+  --light_green_color: #e8f5e9;
   --text_color: #322f30;
   --grey_alt_color: #f0f4f9;
   --light_grey_color: #808080;
@@ -207,6 +207,7 @@ button {
 .dashboard-outline_btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   padding: 0.6rem 1rem;
   background: var(--bg_color);
@@ -228,6 +229,7 @@ button {
 .dashboard-green_btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   padding: 0.6rem 1rem;
   background: var(--green_color);
@@ -251,6 +253,7 @@ button {
 .dashboard-edit_btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   padding: 0.6rem 1rem;
   border: 2px solid transparent;
@@ -260,8 +263,8 @@ button {
   font-weight: var(--fw_regular);
   cursor: pointer;
   transition: all 0.3s ease;
-  border: 2px solid transparent;
 }
+
 .dashboard-edit_btn {
   background: var(--green_color);
   color: var(--bg_color);
@@ -284,6 +287,10 @@ button {
 }
 
 .dashboard-cancel_btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   padding: 0.6rem 1rem;
   border: 2px solid var(--grey_alt_color);
   border-radius: 75rem;

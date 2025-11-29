@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { getAllFarmerProducts, deleteProduct } from "../../../services/api";
 import { formatCurrency } from "../../../utils/formatters";
 import "./MyListings.css";
@@ -150,7 +150,7 @@ const ProductCard = ({
   showFarmName = false,
 }) => {
   return (
-    <div className="my-listings-product-card">
+    <NavLink className="my-listings-product-card " to={`/farmers/dashboard/farms/${product.farm_id}/products/${product.id}`}>
       {product.product_images && product.product_images.length > 0 && (
         <img
           src={product.product_images[0]}
@@ -174,7 +174,7 @@ const ProductCard = ({
           </span>
         </div>
       </div>
-      <div className="product-actions">
+      {/* <div className="product-actions">
         <button
           className="dashboard-outline_btn"
           onClick={() => onView(product.farm_id, product.id)}
@@ -193,8 +193,8 @@ const ProductCard = ({
         >
           Delete
         </button>
-      </div>
-    </div>
+      </div> */}
+    </NavLink>
   );
 };
 

@@ -1,5 +1,5 @@
 .join-community-section {
-  background-color: var(--white_alt_color);
+  background-color: var(--light_green_color);
   display: flex;
   justify-content: center;
 }
@@ -8,7 +8,7 @@
   position: relative;
   width: 100%;
   height: 60vh;
-  background-color: var(--white_alt_color);
+  background-color: var(--light_green_color);
   display: flex;
   flex-direction: column;
   justify-content: center;
