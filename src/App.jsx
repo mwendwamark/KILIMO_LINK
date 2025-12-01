@@ -25,6 +25,7 @@ import ProductsList from "./Farmers/Dashboard/Products/ProductList/ProductList";
 import ProductsForm from "./Farmers/Dashboard/Products/ProductsForm/ProductsForm";
 import ProductDetail from "./Farmers/Dashboard/Products/ProductDetail/ProductDetail";
 import MyListings from "./Farmers/Dashboard/MyListings/MyListings";
+import Marketplace from "./Farmers/Dashboard/Marketplace/Marketplace";
 import NotFound from "./pages/404/NotFound";
 
 // Wrapper components - needed because your components expect farmId as a prop
@@ -111,7 +112,7 @@ const App = () => {
 
           <Route path="profile" element={<FarmerProfile />} />
           <Route path="resources" element={<div>Resources</div>} />
-          <Route path="marketplace" element={<div>Marketplace</div>} />
+          <Route path="marketplace" element={<Marketplace />} />
           <Route path="my-listings" element={<MyListings />} />
           <Route path="community" element={<div>Community</div>} />
           <Route path="messages" element={<div>Messages</div>} />
