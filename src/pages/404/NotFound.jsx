@@ -8,7 +8,7 @@ const NotFound = () => {
         <h1>Page not found</h1>
         <h2 className="not_found_title">404</h2>
         <span>Oops! the page you're looking for cannot be found</span>
-        <NavLink to="/" className="btn btn_black_outline">GO BACK HOME</NavLink>
+        <NavLink to="/" className="btn dashboard-outline_btn">GO BACK HOME</NavLink>
       </div>
     </div>
   );

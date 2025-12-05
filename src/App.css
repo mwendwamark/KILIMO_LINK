@@ -69,7 +69,7 @@ button {
 }
 
 .container {
-  max-width: 90%;
+  max-width: 94%;
   margin: 0 auto;
 }
 
@@ -309,5 +309,9 @@ button {
 @media screen and (max-width: 900px) {
   .pre-title-line.white {
     background-color: var(--bg_color);
+  }
+
+  .below_navbar{
+    padding-top: 8rem;
   }
 }

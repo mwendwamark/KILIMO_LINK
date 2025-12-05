@@ -605,15 +605,49 @@ export const deleteBuyerProfile = async () => {
 // ==================== PUBLIC PRODUCTS ====================
 
 /**
- * Get all public products
+ * Get all public products with search and filter support
+ * @param {Object} params - Search and filter parameters
  * @returns {Promise<Object>}
  */
-export const getAllProducts = async () => {
+export const getAllProducts = async (params = {}) => {
   try {
-    const res = await fetch(`${API_BASE_URL}/products`);
+    // Build query string from params
+    const queryParams = new URLSearchParams();
+
+    if (params.search) queryParams.append("search", params.search);
+    if (params.category) queryParams.append("category", params.category);
+    if (params.min_price) queryParams.append("min_price", params.min_price);
+    if (params.max_price) queryParams.append("max_price", params.max_price);
+    if (params.county) queryParams.append("county", params.county);
+    if (params.sort) queryParams.append("sort", params.sort);
+    if (params.page) queryParams.append("page", params.page);
+    if (params.per_page) queryParams.append("per_page", params.per_page);
+
+    const queryString = queryParams.toString();
+    const url = `${API_BASE_URL}/products${
+      queryString ? `?${queryString}` : ""
+    }`;
+
+    const res = await fetch(url);
     const data = await res.json();
     return res.ok
       ? { success: true, data }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+/**
+ * Get available filter options
+ * @returns {Promise<Object>}
+ */
+export const getFilterOptions = async () => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/products/filter_options`);
+    const data = await res.json();
+    return res.ok
+      ? { success: true, data: data.filters }
       : { success: false, error: extractError(data) };
   } catch (e) {
     return { success: false, error: "Network error" };

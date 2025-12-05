@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Navbar.css";
-import { AlignRight, ArrowDownRight, X } from "lucide-react";
+import { AlignRight, ArrowUpRight, X } from "lucide-react";
 import { NavLink } from "react-router-dom";
 // import Logo from "../../../assets/logo1.svg";
 import Logo from "../../../../public/logo.svg";
@@ -128,7 +128,7 @@ const Navbar = () => {
                   onClick={closeMenu}
                 >
                   <span className="button_text">Sign In</span>
-                  <ArrowDownRight
+                  <ArrowUpRight
                     className="arrow_icon"
                     size={18}
                     color="#322f30"
@@ -147,7 +147,7 @@ const Navbar = () => {
                     onClick={closeMenu}
                   >
                     <span className="button_text">Sign In</span>
-                    <ArrowDownRight className="normal_button_icon" />
+                    <ArrowUpRight className="normal_button_icon" />
                   </NavLink>
                 </li>
               </ul>
