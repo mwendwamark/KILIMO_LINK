@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&family=Outfit:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Questrial&display=swap");
+
 :root {
   --bg_color: #ffffff;
   --white_alt_color: #f7f7f7;
@@ -22,10 +24,10 @@
   --warning_color: #ea580c;
   --warning_bg: #ffedd5;
 
-  --league_spartan: "League Spartan", sans-serif;
+  --league_spartan: "Questrial", sans-serif;
   --outfit: "Outfit", sans-serif;
 
-  --hero_fs: 5rem;
+  --hero_fs: 4.5rem;
   --section_fs: 3rem;
   --sub_section_fs: 2.25rem;
   --pre_title_fs: 1.125rem;
@@ -45,11 +47,17 @@
   scroll-behavior: smooth;
 }
 
+html {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 body {
   font-family: var(--outfit);
   background-color: var(--bg_color);
   color: var(--text_color);
   overflow-x: hidden;
+  width: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -71,10 +79,12 @@ button {
 .container {
   max-width: 94%;
   margin: 0 auto;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 .below_navbar {
-  padding: 11rem 0;
+  padding: 9rem 0;
 }
 
 .section {
@@ -151,6 +161,10 @@ button {
   box-shadow: 0 4px 10px rgba(64, 191, 64, 0.2);
 }
 
+.custom_arrow_button.white_text {
+  color: var(--bg_color);
+}
+
 .button_text {
   flex: 1;
   text-align: left;
@@ -158,8 +172,8 @@ button {
 
 .button_arrow_circle {
   position: relative;
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   background-color: var(--text_color);
   border-radius: 50%;
   display: flex;
@@ -169,6 +183,14 @@ button {
   transition: all 0.3s ease;
 }
 
+.button_arrow_circle.white {
+  background-color: var(--bg_color);
+}
+
+.custom_arrow_button:hover .button_arrow_circle.white {
+  background-color: var(--bg_color);
+}
+
 .custom_arrow_button:hover .button_arrow_circle {
   background-color: var(--dark_grey_color);
   transform: rotate(45deg);
@@ -176,8 +198,15 @@ button {
 
 .arrow_icon {
   color: var(--bg_color);
-  width: 18px;
-  height: 18px;
+  width: 14px;
+  height: 14px;
+  transition: all 0.3s ease;
+}
+
+.arrow_icon.black {
+  color: var(--text_color);
+  width: 14px;
+  height: 14px;
   transition: all 0.3s ease;
 }
 
@@ -194,6 +223,15 @@ button {
 .custom_arrow_button.green {
   background-color: var(--green_color);
   color: var(--bg_color);
+  background: linear-gradient(135deg, var(--deep_green), var(--green_color));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(64, 191, 64, 0.3);
+}
+
+.custom_arrow_button.green:hover {
+  background: linear-gradient(135deg, var(--deep_green), var(--green_color));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(64, 191, 64, 0.3);
 }
 /* =============== DASHBOARD =============== */
 .dashboard_body-title {
@@ -311,7 +349,7 @@ button {
     background-color: var(--bg_color);
   }
 
-  .below_navbar{
+  .below_navbar {
     padding-top: 8rem;
   }
 }

@@ -1,104 +1,191 @@
-import React, { useEffect } from "react";
-import "./Hero.css";
-import heroImgFallback from "../../../assets/heroImg2.webp";
-import heroImgWide1400 from "../../../assets/hero-wide-1400w.webp";
-import heroImgWide2000 from "../../../assets/hero-wide-2000w.webp";
-import heroImgNarrow700 from "../../../assets/hero-narrow-700w.webp";
-import heroImgNarrow1400 from "../../../assets/hero-narrow-700w.webp";
+// import img from "../../../FirstTimer/assets/AboutHero.webp";
+// import img1 from "../../../FirstTimer/assets/AboutHero1.webp";
+// import img2 from "../../../FirstTimer/assets/AboutHero2.jpg";
+// import { NavLink } from "react-router-dom";
+// // import "../About/AboutHero/AboutHero.css";
+// import "./Hero.css";
 
-import "../../../App.css";
-import "../../Shared.css";
+// const Hero = () => {
+//   return (
+//     <section className="home_hero below_navbar">
+//       <div className="home_hero_container container">
+//         <div className="home_hero_top">
+//           <div className="home_hero_titles">
+//             <div className="pre-title">
+//               <span className="pre-title-line green"></span>
+//               <span className="pre-title-text green">kilimo link</span>
+//             </div>
+//             <h1>
+//               Bypass middlemen, <br /> and sell your farm produce directly to
+//               buyers
+//             </h1>
+//           </div>
+//           <div className="home_hero_description">
+//             <p className="">
+//               Discover a marketplace empowering Kenyan farmers to skip middlemen
+//               and sell directly for fair profits. Plus, connect with peers to
+//               share crop tips and business hacks, fostering innovation and
+//               prosperity in agriculture
+//             </p>{" "}
+//             <div>
+//               <NavLink className="normal_button">Get Started</NavLink>
+//             </div>
+//           </div>
+//         </div>
+
+//         <div className="home_hero_bottom">
+//           {/* <div className="heroImg_left">
+//             <img src={img} alt="Kilimo Link farmers" />
+//           </div>
+//           <div className="heroImg_right">
+//             <img src={img1} alt="Agricultural commerce" />
+//           </div>
+//           <div className="heroImg_left">
+//             <img src={img2} alt="Livestock marketplace" />
+//           </div>
+//           <div className="heroImg_right">
+//             <img src={img1} alt="Connecting farmers and buyers" />
+//           </div> */}
+//           <div className="home_hero_bottom_left"></div>
+//           <div className="home_hero_bottom_center"></div>
+//           <div className="home_hero_bottom_right"></div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// };
+
+// export default Hero;
+
+import { useEffect } from "react";
+import img from "../../../FirstTimer/assets/AboutHero.webp";
+import img1 from "../../../FirstTimer/assets/AboutHero1.webp";
+import img2 from "../../../FirstTimer/assets/AboutHero2.jpg";
 import { NavLink } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { annotate } from "rough-notation";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import "./Hero.css";
 
 const Hero = () => {
   useEffect(() => {
+    // Initialize AOS
     AOS.init({
       duration: 1000,
       easing: "ease-out-cubic",
       once: true,
       offset: 50,
+      disable: window.innerWidth < 768, // Disable on mobile to prevent layout issues
     });
 
+    // Add rough-notation to "middlemen"
     const middlemenElement = document.querySelector("#middlemen");
     if (middlemenElement) {
-      const a1 = annotate(middlemenElement, {
-        type: "box",
-        color: "#2dd4bf",
+      const annotation = annotate(middlemenElement, {
+        type: "strike-through",
+        color: "var(--green_color)",
         strokeWidth: 3,
         padding: 2,
       });
-      a1.show();
+      annotation.show();
     }
   }, []);
 
   return (
-    <section className="landing_hero-section below_navbar">
-     
-      <picture>
-        <source
-          media="(max-width: 899px)"
-          type="image/webp"
-          srcSet={`${heroImgNarrow700} 700w, ${heroImgNarrow1400} 1400w`}
-          sizes="100vw"
-        />
-
-        <source
-          type="image/webp"
-          srcSet={`${heroImgWide1400} 1600w, ${heroImgWide2000} 2000w`}
-          sizes="100vw"
-        />
-
-        <img
-          src={heroImgFallback} // Use the best quality JPEG fallback
-          alt="Kenyan farm landscape with fresh produce"
-          className="landing_hero-background"
-          fetchPriority="high" // High priority for LCP (Largest Contentful Paint)
-          loading="eager" // Load immediately
-          decoding="sync" // Decode synchronously for faster rendering
-          // Provide intrinsic dimensions for better layout shift (CLS) performance
-          width="2000"
-          height="1000" // Adjust based on the actual ratio of your wide image
-        />
-      </picture>
-
-      <div className="landing_hero-container container">
-        <div className="landing_hero-contents">
-          {/* ... Rest of your content remains the same ... */}
-          <div className="landing_hero_title" data-aos="fade-up">
-            <div className="pre-title">
-              <span className="pre-title-line green hero"></span>
-              <span className="pre-title-text green hero">Kilimo link</span>
-            </div>{" "}
-            <h1 fetchPriority="high">
-              Bypass <strong id="middlemen">middlemen</strong>, and sell your
+    <section className="home_hero below_navbar">
+      <div className="home_hero_container container">
+        <div className="home_hero_top">
+          <div className="home_hero_titles">
+            <div className="pre-title" data-aos="fade-up">
+              <span className="pre-title-line green"></span>
+              <span className="pre-title-text green">kilimo link</span>
+            </div>
+            <h1 data-aos="fade-up" data-aos-delay="100">
+              Bypass <span id="middlemen">middlemen</span>, <br /> and sell your
               farm produce directly to buyers
             </h1>
           </div>
-          <p data-aos="fade-up" data-aos-delay="200">
-            Discover a marketplace empowering Kenyan farmers to skip middlemen
-            and sell directly for fair profits. Plus, connect with peers to
-            share crop tips and business hacks, fostering innovation and
-            prosperity in agriculture
-          </p>
-          <div
-            className="landing_hero-button"
-            data-aos="fade-up"
-            data-aos-delay="400"
-          >
-            <NavLink
-              to="/select_role"
-              aria-label="Get Started as a Buyer or Seller"
-              className="custom_arrow_button white"
+          <div className="home_hero_description">
+            <p data-aos="fade-up" data-aos-delay="200">
+              Discover a marketplace empowering Kenyan farmers to skip middlemen
+              and sell directly for fair profits. Plus, connect with peers to
+              share crop tips and business hacks, fostering innovation and
+              prosperity in agriculture
+            </p>
+            <div
+              className="home_page_hero_buttons"
+              data-aos="fade-up"
+              data-aos-delay="300"
             >
-              <span className="button_text">Get Started</span>
-              <div className="button_arrow_circle">
-                <ArrowRight className="arrow_icon" />
+              <NavLink
+                className="custom_arrow_button green white_text"
+                to="/select_role"
+              >
+                <span className="button_text">Join now</span>
+                <div className="button_arrow_circle white">
+                  <ArrowRight className="arrow_icon black" size={18} />
+                </div>
+              </NavLink>
+              <NavLink to="/products" className="home_hero_secondary_link">
+                View Products
+              </NavLink>
+            </div>
+          </div>
+        </div>
+
+        <div className="home_hero_gallery">
+          <div className="home_hero_bottom">
+            <div
+              className="hero_gallery_item hero_item_left"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
+              <img src={img} alt="Abstract Data Display" />
+              <div className="gallery_item_overlay">
+                <div className="gallery_item_content">
+                  <h3 className="gallery_item_title">Direct Farm Sales</h3>
+                  <p className="gallery_item_author">Kilimo Link</p>
+                </div>
+                <button className="gallery_item_arrow">
+                  <ArrowUpRight size={20} />
+                </button>
               </div>
-            </NavLink>
+            </div>
+
+            <div
+              className="hero_gallery_item hero_item_center"
+              data-aos="fade-up"
+              data-aos-delay="500"
+            >
+              <img src={img1} alt="Minimalist Geometric Composition" />
+              <div className="gallery_item_overlay">
+                <div className="gallery_item_content">
+                  <h3 className="gallery_item_title">Connect with Buyers</h3>
+                  <p className="gallery_item_author">Marketplace</p>
+                </div>
+                <button className="gallery_item_arrow">
+                  <ArrowUpRight size={20} />
+                </button>
+              </div>
+            </div>
+
+            <div
+              className="hero_gallery_item hero_item_right"
+              data-aos="fade-up"
+              data-aos-delay="600"
+            >
+              <img src={img2} alt="Abstract 3D Illustration" />
+              <div className="gallery_item_overlay">
+                <div className="gallery_item_content">
+                  <h3 className="gallery_item_title">Fair Trade Platform</h3>
+                  <p className="gallery_item_author">Direct Commerce</p>
+                </div>
+                <button className="gallery_item_arrow">
+                  <ArrowUpRight size={20} />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

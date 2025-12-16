@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "./App.css";
 import Home from "./FirstTimer/Pages/Home/Home";
+import About from "./FirstTimer/Pages/About/About";
 import RoleSelection from "./FirstTimer/Pages/RoleSelection/RoleSelection";
 import Products from "./FirstTimer/Pages/Products/Products";
 import ProductDetails from "./FirstTimer/Pages/ProductDetails/ProductDetails";
@@ -55,6 +56,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/about_us" element={<About />} />
         <Route path="/select_role" element={<RoleSelection />} />
 
         {/* Public Product Routes */}

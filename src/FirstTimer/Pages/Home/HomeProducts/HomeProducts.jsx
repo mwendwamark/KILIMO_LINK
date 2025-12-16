@@ -29,7 +29,8 @@ const HomeProducts = () => {
       duration: 800,
       easing: "ease-out-cubic",
       once: true,
-      offset: 100,
+      offset: 50,
+      disable: window.innerWidth < 768, // Disable on mobile to prevent layout issues
     });
   }, []);
 
@@ -49,7 +50,11 @@ const HomeProducts = () => {
               </h1>
             </div>
           </div>
-          <div className="home-products-right-header" data-aos="fade-left" data-aos-delay="200">
+          <div
+            className="home-products-right-header"
+            data-aos="fade-left"
+            data-aos-delay="200"
+          >
             <p className="home-products-description section-description">
               Experience the power of direct farmer-to-buyer connections that
               strengthen Kenya's agricultural community and promote sustainable
@@ -77,7 +82,7 @@ const HomeProducts = () => {
             <div key={product.id} className="product-card">
               <div className="product-image-container">
                 <img
-                loading="lazy"
+                  loading="lazy"
                   src={product.image}
                   alt={product.productName}
                   className="product-image"

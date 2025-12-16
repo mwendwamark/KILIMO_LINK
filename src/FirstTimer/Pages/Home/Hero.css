@@ -1,203 +1,333 @@
-/*
-  Hero.css - Updated to support the <picture> element wrapper
-
-  Key Changes:
-  1. The .landing_hero-background class is now applied to the <img> inside <picture>.
-  2. <picture> is styled to be absolute and cover the section.
-*/
-
-.landing_hero-section {
-  position: relative;
+.home_hero {
   width: 100%;
-  min-height: 100vh;
+  max-width: 100%;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
-  justify-content: center;
+  overflow-x: hidden;
 }
 
-/* New: Style the <picture> element to take up the full space */
-.landing_hero-section picture {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1; /* Place below content */
-}
-
-/* Keep styling on the img for object-fit/position */
-.landing_hero-background {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  /* Removed absolute positioning since the parent <picture> is now absolute */
-}
-
-.landing_hero-section::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
-  z-index: 0;
-}
-
-.landing_hero-container {
-  position: relative;
-  z-index: 1;
-  color: var(--bg_color);
-  width: 100%;
-}
-
-.landing_hero-contents {
-  max-width: 50%;
+.home_hero_container {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  margin-top: 4rem;
-  animation: fadeIn 1s ease-out both; /* AOS will override this, but good as a fallback */
+  gap: 3rem;
 }
 
-.landing_hero_title {
+/* =============== TOP SECTION =============== */
+.home_hero_top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.home_hero_titles {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.landing_hero_title h1,
-.landing_hero_title h1 strong {
+.home_hero_titles h1 {
   font-family: var(--league_spartan);
-  font-size: var(--hero_fs);
-  font-weight: var(--fw_medium);
-  line-height: 0.9;
-  letter-spacing: -1px;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 500;
+  color: var(--text_color);
+  line-height: 1;
+  letter-spacing: -1.5px;
   margin: 0;
-  word-break: break-word;
 }
 
-.landing_hero-container p {
+.home_hero_description {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 2rem;
+}
+
+.home_hero_description p {
   font-family: var(--outfit);
-  font-size: calc(var(--text_fs) * 1);
-  line-height: 1.6;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--light_grey_color);
+  max-width: 90%;
+}
+
+.home_page_hero_buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.home_hero_secondary_link {
+  font-family: var(--league_spartan);
+  font-size: 0.9375rem;
+  color: var(--text_color);
+  text-decoration: none;
+  padding: 0.5rem 0;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.home_hero_secondary_link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--green_color);
+  transition: width 0.3s ease;
+}
+
+.home_hero_secondary_link:hover {
+  color: var(--green_color);
+}
+
+.home_hero_secondary_link:hover::after {
+  width: 100%;
+}
+
+/* =============== GALLERY SECTION =============== */
+.home_hero_gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.home_hero_categories {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.category_tag {
+  padding: 0.5rem 1.25rem;
+  border-radius: 50px;
+  border: 1px solid #e5e7eb;
+  background-color: var(--bg_color);
+  color: var(--text_color);
+  font-family: var(--outfit);
+  font-size: 0.875rem;
+  font-weight: var(--fw_regular);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.category_tag:hover {
+  border-color: var(--green_color);
+  color: var(--green_color);
+}
+
+.category_tag.active {
+  background-color: var(--text_color);
   color: var(--bg_color);
-  max-width: 85%;
-  margin-bottom: 1.5rem;
+  border-color: var(--text_color);
 }
 
-.landing_hero-button {
-  margin-top: 1rem;
+/* =============== GALLERY GRID =============== */
+.home_hero_bottom {
+  display: grid;
+  grid-template-columns: 0.55fr 1.1fr 0.55fr;
+  gap: 1rem;
+  width: 100%;
 }
 
-.landing_hero-button .custom_arrow_button {
-  padding: 0.7rem 1.5rem;
-  font-size: var(--button_fs);
+.hero_gallery_item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  cursor: pointer;
+  height: 450px;
+  background-color: #f5f5f5;
 }
 
-.landing_hero-button .custom_arrow_button .button_arrow_circle {
-  width: 28px;
-  height: 28px;
+.hero_item_left,
+.hero_item_right {
+  height: 450px;
 }
 
-/* =========================================================
-   Media Queries - Adjusted for Responsive Image Implementation
-   ========================================================= */
+.hero_item_center {
+  height: 450px;
+}
 
-@media screen and (max-width: 1370px) {
-  .landing_hero-contents {
-    max-width: 65%;
+.hero_gallery_item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero_gallery_item:hover img {
+  transform: scale(1.08);
+}
+
+/* =============== OVERLAY =============== */
+.gallery_item_overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.1) 50%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+.gallery_item_content {
+  margin-top: auto;
+  transform: translateY(0);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery_item_title {
+  font-family: var(--league_spartan);
+  font-size: 1.25rem;
+  font-weight: var(--fw_medium);
+  color: var(--bg_color);
+  margin-bottom: 0.25rem;
+  letter-spacing: -0.5px;
+}
+
+.gallery_item_author {
+  font-family: var(--outfit);
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: var(--fw_regular);
+}
+
+/* =============== ARROW BUTTON =============== */
+.gallery_item_arrow {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bg_color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.gallery_item_arrow:hover {
+  background-color: var(--bg_color);
+  color: var(--text_color);
+  transform: rotate(45deg);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* =============== RESPONSIVE =============== */
+@media screen and (max-width: 1200px) {
+  .home_hero_bottom {
+    grid-template-columns: 0.6fr 1fr 0.6fr;
   }
-  .landing_hero_title h1,
-  .landing_hero_title h1 strong {
-    font-size: calc(var(--hero_fs) * 0.9);
+
+  .hero_gallery_item,
+  .hero_item_left,
+  .hero_item_right,
+  .hero_item_center {
+    height: 400px;
   }
 }
 
-@media screen and (max-width: 1068px) {
-  .landing_hero-contents {
-    max-width: 80%;
-    margin-top: 3rem;
-  }
-  .landing_hero_title h1,
-  .landing_hero_title h1 strong {
-    font-size: calc(var(--hero_fs) * 0.85);
-  }
-  .landing_hero_title span {
-    font-size: calc(var(--pre_title_fs) * 1);
-    color: var(--white_alt_color);
+/* =============== TABLET LAYOUT (901px - 1024px) =============== */
+@media screen and (min-width: 701px) and (max-width: 1024px) {
+  .home_hero_bottom {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
   }
 
-  .landing_hero-container p {
-    font-size: calc(var(--text_fs) * 1);
-    max-width: 90%;
+  .hero_item_left {
+    grid-column: 1;
+    grid-row: 1;
   }
-}
 
-@media screen and (max-width: 900px) {
-  .landing_hero-section {
-    min-height: 80vh;
+  .hero_item_right {
+    grid-column: 2;
+    grid-row: 1;
   }
-  /* The narrow, art-directed image has a different focal point */
-  .landing_hero-background {
-    object-position: center; 
+
+  .hero_item_center {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    height: 420px;
   }
-  .landing_hero-contents {
-    max-width: 85%;
-    margin-top: 2rem;
-  }
-  .landing_hero_title h1,
-  .landing_hero_title h1 strong {
-    font-size: calc(var(--hero_fs) * 0.7);
-  }
-  .landing_hero-container p {
-    font-size: calc(var(--text_fs) * 0.95);
+
+  .hero_gallery_item,
+  .hero_item_left,
+  .hero_item_right {
+    height: 360px;
   }
 }
 
 @media screen and (max-width: 700px) {
-  .landing_hero-section {
-    min-height: 70vh;
-    padding-top: 6rem;
+  .home_hero_top {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
   }
-  .landing_hero-background {
-    object-position: center; /* Center the narrow/cropped image */
-  }
-  .landing_hero-contents {
+
+  .home_hero_description p {
     max-width: 100%;
-    margin-top: 6rem;
   }
-  .landing_hero_title h1,
-  .landing_hero_title h1 strong {
-    font-size: calc(var(--hero_fs) * 0.6);
-    line-height: 0.9;
+
+  .home_hero_bottom {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
-  .landing_hero_title span {
-    font-size: calc(var(--pre_title_fs) * 1);
-    padding-left: 0; /* Removed padding */
-    color: var(--white_alt_color);
+
+  .hero_gallery_item,
+  .hero_item_left,
+  .hero_item_right,
+  .hero_item_center {
+    height: 350px;
   }
-  /* Remove the CSS line modification if you want to keep it simple, 
-     otherwise, simplify it to just the color for a cleaner look
-  .landing_hero_title span::before {
-    background: var(--white_alt_color);
-  } */
-  .landing_hero-container p {
-    font-size: calc(var(--text_fs) * 0.9);
-    max-width: 100%;
-    margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 600px) {
+  .home_hero {
+    min-height: auto;
   }
-  .landing_hero-button .custom_arrow_button {
-    padding: 0.6rem 1.2rem;
-    min-width: 140px;
+
+  .home_hero_titles h1 {
+    font-size: 2.5rem;
   }
-  .landing_hero-button .custom_arrow_button .button_arrow_circle {
-    width: 24px;
-    height: 24px;
+
+  .hero_gallery_item,
+  .hero_item_left,
+  .hero_item_right,
+  .hero_item_center {
+    height: 300px;
   }
-  .landing_hero-button .custom_arrow_button .arrow_icon {
-    width: 16px;
-    height: 16px;
+
+  .gallery_item_title {
+    font-size: 1.125rem;
+  }
+
+  .home_hero_buttons {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .category_tag {
+    font-size: 0.8125rem;
+    padding: 0.4rem 1rem;
   }
 }

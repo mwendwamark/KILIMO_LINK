@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Handshake, Lightbulb, Users } from "lucide-react";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import AOS from "aos";
+import "aos/dist/aos.css";
 import "./HomeAbout.css";
 import "../../../Shared.css";
 
@@ -14,9 +14,10 @@ const HomeAbout = () => {
     // Initialize AOS
     AOS.init({
       duration: 800,
-      easing: 'ease-out-cubic',
+      easing: "ease-out-cubic",
       once: true,
-      offset: 100,
+      offset: 50,
+      disable: window.innerWidth < 768, // Disable on mobile to prevent layout issues
     });
 
     const checkMobile = () => {
@@ -99,7 +100,7 @@ const HomeAbout = () => {
       <div className="container section section-flex-col">
         {/* Header Section */}
         <div className="three-ways-header two-col-header">
-          <div 
+          <div
             className="header-left section-headers"
             data-aos="fade-right"
             data-aos-delay="100"
@@ -112,7 +113,7 @@ const HomeAbout = () => {
               Three Ways to Grow with Kilimo Link
             </h1>
           </div>
-          <div 
+          <div
             className="header-right"
             data-aos="fade-left"
             data-aos-delay="200"
@@ -145,13 +146,13 @@ const HomeAbout = () => {
                     ? `0 20px 60px ${card.shadowColor}, 0 0 40px ${card.glowColor}`
                     : `0 8px 32px ${card.shadowColor}`,
                   opacity: 1,
-                  transform: 'none',
+                  transform: "none",
                 }}
                 onClick={() => handleCardClick(card.id)}
                 onMouseEnter={() => handleMouseEnter(card.id)}
                 onMouseLeave={handleMouseLeave}
                 data-aos="fade-up"
-                data-aos-delay={300 + (card.id * 100)}
+                data-aos-delay={300 + card.id * 100}
                 data-aos-duration="600"
               >
                 <div
@@ -161,7 +162,7 @@ const HomeAbout = () => {
 
                 <div className="card-content">
                   <div className="card-text-content">
-                    <h3 className="card-title">{card.title}</h3>
+                    <h3 className="card_title">{card.title}</h3>
                     <p className="card-short-desc">{card.shortDesc}</p>
 
                     <div

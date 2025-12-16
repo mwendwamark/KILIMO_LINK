@@ -1,4 +1,4 @@
-import Navbar from "../../Components/Navbar/Navbar";
+import SecondaryNavbar from "../../Components/SecondaryNavbar/SecondaryNavbar";
 import Faqs from "./Faqs/Faqs";
 import Hero from "./Hero";
 import HomeAbout from "./HomeAbout/HomeAbout";
@@ -9,7 +9,7 @@ import WhyChooseUs from "./WhyChooseUs/WhyChooseUs";
 const Home = () => {
   return (
     <div>
-      <Navbar/>
+      <SecondaryNavbar/>
       <Hero />
       <HomeAbout />
       <WhyChooseUs />

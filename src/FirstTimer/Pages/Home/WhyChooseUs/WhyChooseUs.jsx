@@ -13,6 +13,7 @@ const WhyChooseUs = () => {
       easing: "ease-out-cubic",
       once: true,
       offset: 50,
+      disable: window.innerWidth < 768, // Disable on mobile to prevent layout issues
     });
   }, []);
 

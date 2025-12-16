@@ -13,6 +13,7 @@ const Faqs = () => {
       easing: "ease-out-cubic",
       once: true,
       offset: 50,
+      disable: window.innerWidth < 768, // Disable on mobile to prevent layout issues
     });
   }, []);
 
@@ -35,7 +36,9 @@ const Faqs = () => {
               Frequently Asked Questions
             </h1>
             <p className="section-description">
-              Find answers to common questions about connecting with buyers, sharing knowledge in the community, and getting the most out of our platform for Kenyan farmers and buyers.
+              Find answers to common questions about connecting with buyers,
+              sharing knowledge in the community, and getting the most out of
+              our platform for Kenyan farmers and buyers.
             </p>
           </div>
           <div className="faqs-list">
