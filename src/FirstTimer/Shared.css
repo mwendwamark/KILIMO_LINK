@@ -44,11 +44,11 @@
 
 /* Green */
 .pre-title-text.green {
-  color: var(--lime_accent);
+  color: var(--light_grey_color);
 }
 
 .pre-title-line.green {
-  background-color: var(--lime_accent);
+  background-color: var(--light_grey_color);
 }
 
 .highlight-text {
@@ -157,7 +157,7 @@
 }
 
 .title-max-50 {
-  max-width: 50%;
+  max-width: 80%;
 }
 
 .section-flex-col {

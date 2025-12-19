@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import img2 from "../../../../FirstTimer/assets/AboutHero2.jpg";
 import "./HowItWorks.css";
 
 const HowItWorks = () => {
@@ -61,41 +62,71 @@ const HowItWorks = () => {
   const steps = activeTab === "farmers" ? farmersSteps : buyersSteps;
 
   return (
-    <section className="how-it-works">
-      <div className="container">
-        <div className="how-it-works-header">
-          <h2 className="how-it-works-title">How Kilimo Link Works</h2>
-          <p className="how-it-works-subtitle">
-            Simple steps to connect and transact
+    <div className="section about_page_works">
+      <div className="about_page_works_container container">
+        <div className="about_page_works_headers two-col-header">
+          <div className="about_page_work_title section-headers">
+            <div className="pre-title">
+              <span className="pre-title-line green"></span>
+              <span className="pre-title-text green">How it works</span>
+            </div>
+            <h2 className="section-title title-max-50">
+              Simple steps to connect and transact with Kilimo Link
+            </h2>
+          </div>
+          <p className="about_page_works_description">
+            Discover a seamless marketplace empowering Kenyan farmers to skip
+            middlemen and sell directly for fair profits. Connect with buyers
+            and grow your agricultural business.
           </p>
         </div>
 
-        <div className="tab-switcher">
+        <div className="about_page_works_toggle">
           <button
-            className={`tab-btn ${activeTab === "farmers" ? "active" : ""}`}
+            className={`toggle_btn ${
+              activeTab === "farmers" ? "active" : ""
+            }`}
             onClick={() => setActiveTab("farmers")}
           >
             For Farmers
           </button>
           <button
-            className={`tab-btn ${activeTab === "buyers" ? "active" : ""}`}
+            className={`toggle_btn ${
+              activeTab === "buyers" ? "active" : ""
+            }`}
             onClick={() => setActiveTab("buyers")}
           >
             For Buyers
           </button>
         </div>
 
-        <div className="steps-grid">
-          {steps.map((step, index) => (
-            <div key={index} className="step-card">
-              <div className="step-number">{step.number}</div>
-              <h3 className="step-title">{step.title}</h3>
-              <p className="step-description">{step.description}</p>
-            </div>
-          ))}
+        <div className="about_page_works_steps_grid">
+          <div className="about_page_works_grid_left">
+            {steps.slice(0, 2).map((step, index) => (
+              <div key={index} className="work_step_card">
+                <span className="step_number">{step.number}</span>
+                <h3 className="step_title">{step.title}</h3>
+                <p className="step_description">{step.description}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="about_page_works_grid_center">
+            <img src={img2} alt="Kilimo Link Process" />
+          </div>
+
+          <div className="about_page_works_grid_right">
+            {steps.slice(2, 4).map((step, index) => (
+              <div key={index} className="work_step_card">
+                <span className="step_number">{step.number}</span>
+                <h3 className="step_title">{step.title}</h3>
+                <p className="step_description">{step.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

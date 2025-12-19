@@ -1,98 +1,508 @@
-.mission-vision {
-  padding: 5rem 0;
-  background: white;
+/* ===================================
+   MISSION & VISION SECTION STYLES
+   =================================== */
+
+.mission_vision_section {
+  width: 100%;
+  background-color: var(--green_color);
+  /* padding: 4rem 0; */
 }
 
-.mission-vision-grid {
+.mission_vision_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+/* Section Title Styling */
+.mission_vision_title {
+  color: var(--bg_color);
+  line-height: 1.2;
+}
+
+/* Subtitle with Icon */
+.mission_vision_sub_title {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.mission_vision_sub_title h3 {
+  color: var(--bg_color);
+  font-size: var(--sub_section_fs);
+  font-weight: var(--fw_bold);
+  letter-spacing: -0.5px;
+}
+
+/* Grid Container for Cards */
+.mission_vision_contents {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 3rem;
+  gap: 2rem;
 }
 
-.mission-card,
-.vision-card {
-  padding: 3rem;
-  border-radius: 20px;
-  background: white;
-  border: 2px solid #e5e7eb;
-  transition: all 0.3s ease;
+/* Card Styles with Gradient Background */
+.about_page_mission,
+.about_page_vision {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  justify-content: flex-start;
+  padding: 3.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1.5rem;
+  min-height: 400px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-.mission-card:hover,
-.vision-card:hover {
-  border-color: var(--green_color);
-  box-shadow: 0 12px 40px rgba(16, 185, 129, 0.1);
-  transform: translateY(-4px);
+/* Card Hover Effects */
+.about_page_mission:hover,
+.about_page_vision:hover {
+  /* transform: translateY(-8px); */
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
-.card-icon {
-  width: 80px;
-  height: 80px;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-}
-
-.mission-icon {
-  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-  color: var(--green_color);
-}
-
-.vision-icon {
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-  color: #d97706;
-}
-
-.mission-card:hover .card-icon,
-.vision-card:hover .card-icon {
-  transform: scale(1.1) rotate(5deg);
-}
-
-.card-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--dark_grey_color);
-  margin: 0;
-}
-
-.card-description {
-  font-size: 1.125rem;
-  color: #6b7280;
+/* Card Paragraph Styling */
+.about_page_mission p,
+.about_page_vision p {
+  color: var(--bg_color);
   line-height: 1.8;
-  margin: 0;
+  font-size: 1rem;
+  position: relative;
+  z-index: 2;
+  opacity: 0.95;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .mission-vision {
-    padding: 4rem 0;
+/* ===================================
+   DECORATIVE CIRCLES
+   =================================== */
+
+/* Circles Container */
+.cta-circles {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.6;
+}
+
+/* Base Circle Styles */
+.cta-circle {
+  position: absolute;
+  border-radius: 50%;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  transition: all 0.6s ease;
+}
+
+/* Circle 1 - Largest, outermost */
+.cta-circle-1 {
+  width: 500px;
+  height: 500px;
+  right: -200px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Circle 2 - Second layer */
+.cta-circle-2 {
+  width: 400px;
+  height: 400px;
+  right: -150px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Circle 3 - Third layer */
+.cta-circle-3 {
+  width: 300px;
+  height: 300px;
+  right: -100px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Circle 4 - Innermost, smallest */
+.cta-circle-4 {
+  width: 200px;
+  height: 200px;
+  right: -50px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.12);
+}
+
+/* Hover Animation for Circles */
+.about_page_mission:hover .cta-circle,
+.about_page_vision:hover .cta-circle {
+  opacity: 1;
+}
+
+.about_page_mission:hover .cta-circle-1,
+.about_page_vision:hover .cta-circle-1 {
+  transform: translateY(-50%) scale(1.05);
+}
+
+.about_page_mission:hover .cta-circle-2,
+.about_page_vision:hover .cta-circle-2 {
+  transform: translateY(-50%) scale(1.08);
+}
+
+.about_page_mission:hover .cta-circle-3,
+.about_page_vision:hover .cta-circle-3 {
+  transform: translateY(-50%) scale(1.1);
+}
+
+.about_page_mission:hover .cta-circle-4,
+.about_page_vision:hover .cta-circle-4 {
+  transform: translateY(-50%) scale(1.12);
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+   =================================== */
+
+/* Large Tablets and Small Desktops */
+@media screen and (max-width: 1200px) {
+  .mission_vision_contents {
+    gap: 1.5rem;
   }
 
-  .mission-vision-grid {
+  .about_page_mission,
+  .about_page_vision {
+    padding: 3rem;
+    min-height: 380px;
+  }
+
+  .cta-circles {
+    width: 45%;
+  }
+
+  .cta-circle-1 {
+    width: 450px;
+    height: 450px;
+    right: -180px;
+  }
+
+  .cta-circle-2 {
+    width: 360px;
+    height: 360px;
+    right: -135px;
+  }
+
+  .cta-circle-3 {
+    width: 270px;
+    height: 270px;
+    right: -90px;
+  }
+
+  .cta-circle-4 {
+    width: 180px;
+    height: 180px;
+    right: -45px;
+  }
+}
+
+/* Tablets */
+@media screen and (max-width: 1024px) {
+  .mission_vision_container {
+    gap: 3rem;
+  }
+
+  .about_page_mission,
+  .about_page_vision {
+    padding: 2.5rem;
+    min-height: 350px;
+  }
+
+  .cta-circles {
+    width: 40%;
+    opacity: 0.5;
+  }
+
+  .cta-circle-1 {
+    width: 400px;
+    height: 400px;
+    right: -160px;
+  }
+
+  .cta-circle-2 {
+    width: 320px;
+    height: 320px;
+    right: -120px;
+  }
+
+  .cta-circle-3 {
+    width: 240px;
+    height: 240px;
+    right: -80px;
+  }
+
+  .cta-circle-4 {
+    width: 160px;
+    height: 160px;
+    right: -40px;
+  }
+}
+
+/* Small Tablets */
+@media screen and (max-width: 768px) {
+  .mission_vision_contents {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
 
-  .mission-card,
-  .vision-card {
-    padding: 2rem;
+  .about_page_mission,
+  .about_page_vision {
+    padding: 2.5rem 2rem;
+    min-height: 320px;
   }
 
-  .card-title {
-    font-size: 1.75rem;
+  .cta-circles {
+    width: 50%;
   }
 
-  .card-description {
-    font-size: 1rem;
+  .cta-circle-1 {
+    width: 350px;
+    height: 350px;
+    right: -140px;
   }
 
-  .card-icon {
-    width: 70px;
-    height: 70px;
+  .cta-circle-2 {
+    width: 280px;
+    height: 280px;
+    right: -105px;
+  }
+
+  .cta-circle-3 {
+    width: 210px;
+    height: 210px;
+    right: -70px;
+  }
+
+  .cta-circle-4 {
+    width: 140px;
+    height: 140px;
+    right: -35px;
+  }
+}
+
+/* Mobile Devices */
+@media screen and (max-width: 640px) {
+  .mission_vision_container {
+    gap: 2.5rem;
+  }
+
+  .about_page_mission,
+  .about_page_vision {
+    padding: 2rem 1.5rem;
+    min-height: 300px;
+  }
+
+  .mission_vision_sub_title h3 {
+    font-size: 1.5rem;
+  }
+
+  .about_page_mission p,
+  .about_page_vision p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .cta-circles {
+    opacity: 0.4;
+  }
+
+  .cta-circle-1 {
+    width: 300px;
+    height: 300px;
+    right: -120px;
+  }
+
+  .cta-circle-2 {
+    width: 240px;
+    height: 240px;
+    right: -90px;
+  }
+
+  .cta-circle-3 {
+    width: 180px;
+    height: 180px;
+    right: -60px;
+  }
+
+  .cta-circle-4 {
+    width: 120px;
+    height: 120px;
+    right: -30px;
+  }
+}
+
+/* Small Mobile Devices */
+@media screen and (max-width: 480px) {
+  .mission_vision_section {
+    padding: 2rem 0;
+  }
+
+  .mission_vision_container {
+    gap: 2rem;
+  }
+
+  .about_page_mission,
+  .about_page_vision {
+    padding: 1.75rem 1.25rem;
+    min-height: 280px;
+    border-radius: 1rem;
+  }
+
+  .mission_vision_sub_title {
+    gap: 0.75rem;
+  }
+
+  .mission_vision_sub_title h3 {
+    font-size: 1.35rem;
+  }
+
+  .about_page_mission p,
+  .about_page_vision p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .cta-circles {
+    opacity: 0.35;
+  }
+
+  .cta-circle-1 {
+    width: 250px;
+    height: 250px;
+    right: -100px;
+  }
+
+  .cta-circle-2 {
+    width: 200px;
+    height: 200px;
+    right: -75px;
+  }
+
+  .cta-circle-3 {
+    width: 150px;
+    height: 150px;
+    right: -50px;
+  }
+
+  .cta-circle-4 {
+    width: 100px;
+    height: 100px;
+    right: -25px;
+  }
+}
+
+/* Extra Small Mobile Devices */
+@media screen and (max-width: 360px) {
+  .mission_vision_section {
+    padding: 1.5rem 0;
+  }
+
+  .about_page_mission,
+  .about_page_vision {
+    padding: 1.5rem 1rem;
+    min-height: 260px;
+  }
+
+  .mission_vision_sub_title h3 {
+    font-size: 1.25rem;
+  }
+
+  .about_page_mission p,
+  .about_page_vision p {
+    font-size: 0.875rem;
+  }
+
+  .cta-circles {
+    opacity: 0.3;
+  }
+
+  .cta-circle-1 {
+    width: 220px;
+    height: 220px;
+    right: -90px;
+  }
+
+  .cta-circle-2 {
+    width: 176px;
+    height: 176px;
+    right: -66px;
+  }
+
+  .cta-circle-3 {
+    width: 132px;
+    height: 132px;
+    right: -44px;
+  }
+
+  .cta-circle-4 {
+    width: 88px;
+    height: 88px;
+    right: -22px;
+  }
+}
+
+/* ===================================
+   ACCESSIBILITY ENHANCEMENTS
+   =================================== */
+
+/* Focus Styles for Keyboard Navigation */
+.about_page_mission:focus-within,
+.about_page_vision:focus-within {
+  outline: 3px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 4px;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .about_page_mission,
+  .about_page_vision,
+  .cta-circle {
+    transition: none;
+  }
+
+  .about_page_mission:hover,
+  .about_page_vision:hover {
+    transform: none;
+  }
+
+  .about_page_mission:hover .cta-circle,
+  .about_page_vision:hover .cta-circle {
+    transform: translateY(-50%);
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .about_page_mission,
+  .about_page_vision {
+    border: 2px solid rgba(255, 255, 255, 0.4);
+  }
+
+  .cta-circle {
+    border-width: 2px;
   }
 }

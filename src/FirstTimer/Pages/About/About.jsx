@@ -13,10 +13,10 @@ const About = () => {
     <div className="about-page">
       <SecondaryNavbar />
       <AboutHero />
-      <MissionVision />
-      <ImpactStats />
       <HowItWorks />
+      <MissionVision />
       <OurValues />
+      <ImpactStats />
       <AboutCTA />
     </div>
   );

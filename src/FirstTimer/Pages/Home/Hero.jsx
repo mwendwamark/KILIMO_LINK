@@ -1,62 +1,3 @@
-// import img from "../../../FirstTimer/assets/AboutHero.webp";
-// import img1 from "../../../FirstTimer/assets/AboutHero1.webp";
-// import img2 from "../../../FirstTimer/assets/AboutHero2.jpg";
-// import { NavLink } from "react-router-dom";
-// // import "../About/AboutHero/AboutHero.css";
-// import "./Hero.css";
-
-// const Hero = () => {
-//   return (
-//     <section className="home_hero below_navbar">
-//       <div className="home_hero_container container">
-//         <div className="home_hero_top">
-//           <div className="home_hero_titles">
-//             <div className="pre-title">
-//               <span className="pre-title-line green"></span>
-//               <span className="pre-title-text green">kilimo link</span>
-//             </div>
-//             <h1>
-//               Bypass middlemen, <br /> and sell your farm produce directly to
-//               buyers
-//             </h1>
-//           </div>
-//           <div className="home_hero_description">
-//             <p className="">
-//               Discover a marketplace empowering Kenyan farmers to skip middlemen
-//               and sell directly for fair profits. Plus, connect with peers to
-//               share crop tips and business hacks, fostering innovation and
-//               prosperity in agriculture
-//             </p>{" "}
-//             <div>
-//               <NavLink className="normal_button">Get Started</NavLink>
-//             </div>
-//           </div>
-//         </div>
-
-//         <div className="home_hero_bottom">
-//           {/* <div className="heroImg_left">
-//             <img src={img} alt="Kilimo Link farmers" />
-//           </div>
-//           <div className="heroImg_right">
-//             <img src={img1} alt="Agricultural commerce" />
-//           </div>
-//           <div className="heroImg_left">
-//             <img src={img2} alt="Livestock marketplace" />
-//           </div>
-//           <div className="heroImg_right">
-//             <img src={img1} alt="Connecting farmers and buyers" />
-//           </div> */}
-//           <div className="home_hero_bottom_left"></div>
-//           <div className="home_hero_bottom_center"></div>
-//           <div className="home_hero_bottom_right"></div>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default Hero;
-
 import { useEffect } from "react";
 import img from "../../../FirstTimer/assets/AboutHero.webp";
 import img1 from "../../../FirstTimer/assets/AboutHero1.webp";
@@ -122,7 +63,7 @@ const Hero = () => {
                 className="custom_arrow_button green white_text"
                 to="/select_role"
               >
-                <span className="button_text">Join now</span>
+                <span className="button_text">Try it today</span>
                 <div className="button_arrow_circle white">
                   <ArrowRight className="arrow_icon black" size={18} />
                 </div>

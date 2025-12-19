@@ -1,122 +1,207 @@
-.impact-stats {
-  padding: 5rem 0;
-  background: #f9fafb;
+.impact_stats_page_section{
+  background-color: var(--light_green_color);
 }
-
-.stats-header {
-  text-align: center;
-  margin-bottom: 4rem;
-}
-
-.stats-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--dark_grey_color);
-  margin: 0 0 1rem 0;
-}
-
-.stats-subtitle {
-  font-size: 1.125rem;
-  color: #6b7280;
-  margin: 0;
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-}
-
-.stat-card {
-  background: white;
-  padding: 3rem 2rem;
-  border-radius: 16px;
-  text-align: center;
-  border: 2px solid transparent;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.stat-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
+.impact_stats_section {
   width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, var(--green_color) 0%, #059669 100%);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
+  /* background-color: var(--bg_color); */
+  padding: 8rem 0;
 }
 
-.stat-card:hover::before {
-  transform: scaleX(1);
+.impact_stats_grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, auto);
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-.stat-card:hover {
-  border-color: #e5e7eb;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-  transform: translateY(-8px);
+.impact_cell {
+  padding: 4rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border-right: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  min-height: 280px;
 }
 
-.stat-value {
-  font-size: 3.5rem;
-  font-weight: 800;
-  color: var(--green_color);
-  line-height: 1;
+.impact_cell:nth-child(3n) {
+  border-right: none;
+}
+
+.impact_cell:nth-last-child(-n + 3) {
+  border-bottom: none;
+}
+
+
+.cell_1_2 {
+  justify-content: center;
+}
+
+.cell_1_3 {
+  align-items: center;
+  justify-content: center;
+}
+
+.cell_2_1 {
+  align-items: center;
+  justify-content: center;
+}
+.cell_2_3 {
+  justify-content: center;
+}
+
+.cell_3_1 {
+  justify-content: center;
+}
+
+.cell_3_3 {
+  align-items: center;
+  justify-content: center;
+}
+
+.impact_label {
+  font-family: var(--outfit);
+  font-size: 0.8125rem;
+  font-weight: var(--fw_regular);
+  color: var(--light_grey_color);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
   margin-bottom: 1rem;
 }
 
-.stat-label {
+/* Large impact numbers */
+.impact_number {
+  font-family: var(--league_spartan);
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: var(--fw_bold);
+  color: var(--text_color);
+  line-height: 1;
+  letter-spacing: -2px;
+  margin: 0;
+}
+
+/* Plus sign accent */
+.impact_plus {
+  color: var(--green_color);
+  font-weight: var(--fw_bold);
+  margin-left: 0.1em;
+}
+
+/* Description paragraphs */
+.impact_description {
+  font-family: var(--outfit);
   font-size: 1rem;
-  color: #6b7280;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  line-height: 1.7;
+  color: var(--dark_grey_color);
+  max-width: 400px;
+  margin: 0;
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
-  .stats-grid {
+/* =============== ILLUSTRATIONS =============== */
+
+.impact_illustration {
+  width: 100px;
+  height: 100px;
+}
+
+/* =============== RESPONSIVE: TABLET =============== */
+/* 
+  Tablet Layout (901px - 1024px):
+  - 2 columns instead of 3
+  - Cells reflow logically
+  - Maintain divider lines in new structure
+*/
+/* ... Keep your existing desktop styles above ... */
+
+/* =============== RESPONSIVE: TABLET & SMALLER =============== */
+@media screen and (max-width: 1024px) {
+  /* 1. Eliminate specific cells as requested */
+  .cell_1_3, 
+  .cell_2_1, 
+  .cell_3_3 {
+    display: none;
+  }
+
+  .impact_stats_grid {
     grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
+
+  .impact_cell {
+    padding: 3rem 2.5rem;
+    min-height: 240px;
+    /* Reset borders to build new logic */
+    border-right: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  /* 2. Logic for 2-column grid borders */
+  /* Remove right border on every second item in the remaining visible list */
+  /* Since we hid 3 items, we target the visible flow */
+  .impact_cell:nth-of-type(even) {
+    border-right: none;
+  }
+
+  /* Remove bottom border for the last row in 2-col layout */
+  /* Visible cells: 1_1, 1_2, 2_2, 2_3, 3_2, 3_1 (Total 6) */
+  .impact_cell:nth-last-of-type(-n + 2) {
+    border-bottom: none;
+  }
+
+  .impact_number {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
   }
 }
 
-@media (max-width: 768px) {
-  .impact-stats {
-    padding: 4rem 0;
+/* =============== RESPONSIVE: MOBILE =============== */
+@media screen and (max-width: 700px) {
+  .impact_stats_section {
+    padding: 5rem 0;
   }
 
-  .stats-header {
-    margin-bottom: 3rem;
-  }
-
-  .stats-title {
-    font-size: 2rem;
-  }
-
-  .stats-subtitle {
-    font-size: 1rem;
-  }
-
-  .stat-card {
-    padding: 2.5rem 1.5rem;
-  }
-
-  .stat-value {
-    font-size: 3rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .stats-grid {
+  .impact_stats_grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
   }
 
-  .stat-value {
-    font-size: 2.5rem;
+  .impact_cell {
+    padding: 2.5rem 1.5rem;
+    border-right: none !important;
+    border-bottom: 1px solid #e5e5e5;
+    min-height: auto;
+    /* align-items: center; */
+    /* text-align: center; */
+  }
+
+  /* Ensure last visible cell has no border */
+  .impact_cell:last-of-type {
+    border-bottom: none;
+  }
+
+  /* 3. Reordering for logical mobile flow */
+  /* Structure: Metric -> Description */
+  
+  /* Pair 1 */
+  .cell_1_1 { order: 1; } /* Metric */
+  .cell_1_2 { order: 2; } /* Description */
+
+  /* Pair 2 */
+  .cell_2_2 { order: 3; } /* Metric */
+  .cell_2_3 { order: 4; } /* Description */
+
+  /* Pair 3 - Specifically: cell_3_1 below cell_3_2 */
+  .cell_3_2 { order: 5; } /* Metric (Active Buyers) */
+  .cell_3_1 { order: 6; } /* Description (25+ Counties) */
+
+  .impact_description {
+    max-width: 100%;
+    /* text-align: center; */
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .impact_number {
+    font-size: clamp(2rem, 10vw, 3rem);
   }
 }

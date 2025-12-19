@@ -5,12 +5,13 @@
   display: flex;
   align-items: center;
   overflow-x: hidden;
+  scrollbar-base-color: #e5e7eb;
 }
 
 .home_hero_container {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 5rem;
 }
 
 /* =============== TOP SECTION =============== */
@@ -128,8 +129,8 @@
 /* =============== GALLERY GRID =============== */
 .home_hero_bottom {
   display: grid;
-  grid-template-columns: 0.55fr 1.1fr 0.55fr;
-  gap: 1rem;
+  grid-template-columns: 0.7fr 1.1fr 0.7fr;
+  gap: 0.5rem;
   width: 100%;
 }
 
@@ -138,17 +139,17 @@
   overflow: hidden;
   border-radius: 1rem;
   cursor: pointer;
-  height: 450px;
+  height: 400px;
   background-color: #f5f5f5;
 }
 
 .hero_item_left,
 .hero_item_right {
-  height: 450px;
+  height: 400px;
 }
 
 .hero_item_center {
-  height: 450px;
+  height: 400px;
 }
 
 .hero_gallery_item img {

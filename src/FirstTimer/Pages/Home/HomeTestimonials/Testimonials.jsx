@@ -34,8 +34,8 @@ const Testimonials = () => {
         <div className="testimonials-headers two-col-header">
           <div className="header-left section-headers">
             <div className="pre-title">
-              <span className="pre-title-line green"></span>
-              <span className="pre-title-text green">Testimonials</span>
+              <span className="pre-title-line white"></span>
+              <span className="pre-title-text white">Testimonials</span>
             </div>
             <h1 className="testimonials-title section-title why-choose-us-title title-max-50">
               Reviews that speak volumes
