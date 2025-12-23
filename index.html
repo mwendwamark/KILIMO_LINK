@@ -6,8 +6,85 @@
     <!-- Preconnect to critical origins for faster resource loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://www.googletagmanager.com" />
-    <link rel="preconnect" href="https://www.google-analytics.com" />
+
+    <!-- Preload critical fonts for faster LCP -->
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      href="https://fonts.gstatic.com/s/questrial/v18/QdVUSTchPBm7nuUeVf7EuStkm20oJA.woff2"
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      href="https://fonts.gstatic.com/s/outfit/v11/QGYvz_MVcBeNP4NJuktqQ4E.woff2"
+    />
+
+    <!-- Non-blocking font loading with display=swap -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&family=Outfit:wght@100..900&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Questrial&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&family=Outfit:wght@100..900&display=swap"
+      />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Questrial&display=swap"
+      />
+    </noscript>
+
+    <!-- Critical inline CSS for LCP optimization -->
+    <style>
+      /* Critical CSS for hero section - ensures text renders immediately */
+      :root {
+        --bg_color: #ffffff;
+        --text_color: #322f30;
+        --green_color: #165136;
+        --light_grey_color: #4b4a4a;
+        --outfit: "Outfit", system-ui, -apple-system, sans-serif;
+        --league_spartan: "Questrial", system-ui, sans-serif;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: var(--outfit);
+        background: var(--bg_color);
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: var(--league_spartan);
+      }
+      .container {
+        max-width: 94%;
+        margin: 0 auto;
+      }
+      .below_navbar {
+        padding: 9rem 0;
+      }
+      /* Ensure text is visible while fonts load */
+      h1 {
+        font-synthesis: none;
+        font-display: swap;
+      }
+    </style>
 
     <!-- Deferred Google Tag Manager - loads after page is interactive -->
     <script>

@@ -91,11 +91,14 @@ const Hero = () => {
               />
               <div className="gallery_item_overlay">
                 <div className="gallery_item_content">
-                  <h3 className="gallery_item_title">Direct Farm Sales</h3>
+                  <h2 className="gallery_item_title">Direct Farm Sales</h2>
                   <p className="gallery_item_author">Kilimo Link</p>
                 </div>
-                <button className="gallery_item_arrow">
-                  <ArrowUpRight size={20} />
+                <button
+                  className="gallery_item_arrow"
+                  aria-label="View Direct Farm Sales"
+                >
+                  <ArrowUpRight size={20} aria-hidden="true" />
                 </button>
               </div>
             </div>
@@ -114,11 +117,14 @@ const Hero = () => {
               />
               <div className="gallery_item_overlay">
                 <div className="gallery_item_content">
-                  <h3 className="gallery_item_title">Connect with Buyers</h3>
+                  <h2 className="gallery_item_title">Connect with Buyers</h2>
                   <p className="gallery_item_author">Marketplace</p>
                 </div>
-                <button className="gallery_item_arrow">
-                  <ArrowUpRight size={20} />
+                <button
+                  className="gallery_item_arrow"
+                  aria-label="View Marketplace"
+                >
+                  <ArrowUpRight size={20} aria-hidden="true" />
                 </button>
               </div>
             </div>
@@ -137,11 +143,14 @@ const Hero = () => {
               />
               <div className="gallery_item_overlay">
                 <div className="gallery_item_content">
-                  <h3 className="gallery_item_title">Fair Trade Platform</h3>
+                  <h2 className="gallery_item_title">Fair Trade Platform</h2>
                   <p className="gallery_item_author">Direct Commerce</p>
                 </div>
-                <button className="gallery_item_arrow">
-                  <ArrowUpRight size={20} />
+                <button
+                  className="gallery_item_arrow"
+                  aria-label="View Fair Trade Platform"
+                >
+                  <ArrowUpRight size={20} aria-hidden="true" />
                 </button>
               </div>
             </div>

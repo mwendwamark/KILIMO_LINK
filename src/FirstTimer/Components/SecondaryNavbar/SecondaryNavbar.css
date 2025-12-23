@@ -174,11 +174,24 @@
   }
 
   .mobile-right-section {
-    width: 100%;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: auto;
+    width: 50%;
+    background-color: var(--green_color);
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin-top: auto;
+    justify-content: center;
+    padding: 1rem 2rem;
+    bottom: 0;
+    transition: right 0.3s ease;
+    align-items: flex-end;
+    padding-bottom: 2rem;
+  }
+
+  .mobile-right-section.active {
+    right: 0;
   }
 }
 

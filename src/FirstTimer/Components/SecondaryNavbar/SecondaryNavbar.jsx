@@ -62,7 +62,7 @@ const SecondaryNavbar = () => {
               to="/"
               className="secondary_navbar-logo"
             >
-              <img src={Logo} alt="Logo" />
+              <img src={Logo} alt="Logo" width={120} height={40} />
             </NavLink>
 
             <ul className={`secondary_navbar-menu ${menuOpen ? "active" : ""}`}>
@@ -120,22 +120,25 @@ const SecondaryNavbar = () => {
                   Contact
                 </NavLink>
               </li>
-              <div className="mobile-right-section">
-                <NavLink
-                  aria-label="Go to Sign In page"
-                  to="/select_role"
-                  className="normal_button normal_button_white"
-                  onClick={closeMenu}
-                >
-                  <span className="button_text">Sign In</span>
-                  <ArrowUpRight
-                    className="arrow_icon"
-                    size={18}
-                    color="#322f30"
-                  />
-                </NavLink>
-              </div>
             </ul>
+
+            {/* Mobile sign-in button - moved outside ul for valid HTML structure */}
+            <div className={`mobile-right-section ${menuOpen ? "active" : ""}`}>
+              <NavLink
+                aria-label="Go to Sign In page"
+                to="/select_role"
+                className="normal_button normal_button_white"
+                onClick={closeMenu}
+              >
+                <span className="button_text">Sign In</span>
+                <ArrowUpRight
+                  className="arrow_icon"
+                  size={18}
+                  color="#322f30"
+                  aria-hidden="true"
+                />
+              </NavLink>
+            </div>
 
             <div className="secondary_navbar-right">
               <ul className="secondary_navbar-right-list">
