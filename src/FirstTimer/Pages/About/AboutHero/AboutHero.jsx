@@ -41,7 +41,7 @@ const AboutHero = () => {
               alt="Agricultural commerce"
               width={300}
               height={280}
-              fetchpriority="high"
+              fetchPriority="high"
             />
           </div>
           <div className="about_heroImg_left">

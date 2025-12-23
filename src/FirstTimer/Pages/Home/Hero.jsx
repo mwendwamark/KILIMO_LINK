@@ -113,7 +113,7 @@ const Hero = () => {
                 alt="Minimalist Geometric Composition"
                 width={400}
                 height={340}
-                fetchpriority="high"
+                fetchPriority="high"
               />
               <div className="gallery_item_overlay">
                 <div className="gallery_item_content">

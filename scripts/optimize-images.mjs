@@ -34,7 +34,7 @@ async function optimizeImages() {
   // Create backup directory
   if (!fs.existsSync(BACKUP_DIR)) {
     fs.mkdirSync(BACKUP_DIR, { recursive: true });
-    console.log("Created backup directory");
+    // console.log("Created backup directory");
   }
 
   for (const { file, quality, width } of imagesToOptimize) {
@@ -42,7 +42,7 @@ async function optimizeImages() {
     const backupPath = path.join(BACKUP_DIR, file);
 
     if (!fs.existsSync(inputPath)) {
-      console.log(`Skipping ${file} - not found`);
+    //   console.log(`Skipping ${file} - not found`);
       continue;
     }
 
@@ -71,15 +71,15 @@ async function optimizeImages() {
         (outputBuffer.length / originalStats.size) * 100
       ).toFixed(1);
 
-      console.log(
-        `✓ ${file}: ${originalSize}KB → ${newSize}KB (${savings}% saved)`
-      );
+    //   console.log(
+    //     `✓ ${file}: ${originalSize}KB → ${newSize}KB (${savings}% saved)`
+    //   );
     } catch (err) {
       console.error(`✗ ${file}: ${err.message}`);
     }
   }
 
-  console.log("\nOptimization complete! Originals backed up to:", BACKUP_DIR);
+//   console.log("\nOptimization complete! Originals backed up to:", BACKUP_DIR);
 }
 
 optimizeImages();
