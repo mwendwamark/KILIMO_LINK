@@ -44,7 +44,7 @@
 
 /* Green */
 .pre-title-text.green {
-  color: var(--light_grey_color);
+  color: green;
 }
 
 .pre-title-line.green {

@@ -250,7 +250,7 @@
 }
 
 /* =============== TABLET LAYOUT (901px - 1024px) =============== */
-@media screen and (min-width: 701px) and (max-width: 1024px) {
+@media screen and (min-width: 651px) and (max-width: 1024px) {
   .home_hero_bottom {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
@@ -277,14 +277,23 @@
   .hero_item_right {
     height: 360px;
   }
+  .home_hero_top {
+    grid-template-columns: 1fr 0.6fr;
+  }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 900px) {
   .home_hero_top {
     grid-template-columns: 1fr;
     gap: 2.5rem;
   }
 
+  .home_hero_top h1, .home_hero_description {
+    max-width: 90%;
+  }
+}
+
+@media screen and (max-width: 650px) {
   .home_hero_description p {
     max-width: 100%;
   }

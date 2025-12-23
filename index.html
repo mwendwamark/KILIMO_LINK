@@ -1,32 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Google Tag Manager -->
+    <meta charset="UTF-8" />
+
+    <!-- Preconnect to critical origins for faster resource loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
+
+    <!-- Deferred Google Tag Manager - loads after page is interactive -->
     <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-5CGLCQK6");
+      // GTM will be loaded after page becomes interactive to avoid blocking render
+      function loadGTM() {
+        (function (w, d, s, l, i) {
+          w[l] = w[l] || [];
+          w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+          var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != "dataLayer" ? "&l=" + l : "";
+          j.async = true;
+          j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+          f.parentNode.insertBefore(j, f);
+        })(window, document, "script", "dataLayer", "GTM-5CGLCQK6");
+      }
+      // Load GTM after 3 seconds or on user interaction
+      if (document.readyState === "complete") {
+        setTimeout(loadGTM, 3000);
+      } else {
+        window.addEventListener("load", function () {
+          setTimeout(loadGTM, 3000);
+        });
+      }
     </script>
-    <!-- End Google Tag Manager -->
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-6XNLZ8VXXR"
-    ></script>
+
+    <!-- Deferred Google Analytics -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
       }
-      gtag("js", new Date());
-      gtag("config", "G-6XNLZ8VXXR");
+      // Load gtag.js after page load
+      window.addEventListener("load", function () {
+        setTimeout(function () {
+          var script = document.createElement("script");
+          script.src =
+            "https://www.googletagmanager.com/gtag/js?id=G-6XNLZ8VXXR";
+          script.async = true;
+          document.head.appendChild(script);
+          script.onload = function () {
+            gtag("js", new Date());
+            gtag("config", "G-6XNLZ8VXXR");
+          };
+        }, 3000);
+      });
     </script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

@@ -196,14 +196,13 @@
   .about_page_works_grid_right {
     gap: 2rem;
   }
+
+  .about_page_works_steps_grid {
+    max-width: 100%;
+  }
 }
 
 @media screen and (max-width: 600px) {
-  .about_page_works_toggle {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
   .about_page_works_toggle .dashboard-outline_btn,
   .about_page_works_toggle .dashboard-green_btn {
     width: 100%;
@@ -224,5 +223,11 @@
 
   .step_description {
     font-size: 0.875rem;
+  }
+}
+@media screen and (max-width: 350px) {
+  .about_page_works_toggle {
+    flex-direction: column;
+    align-items: center;
   }
 }

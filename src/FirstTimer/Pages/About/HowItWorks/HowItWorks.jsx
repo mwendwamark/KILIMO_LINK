@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import img2 from "../../../../FirstTimer/assets/AboutHero2.jpg";
+import img2 from "../../../../FirstTimer/assets/AboutHero2.webp";
 import "./HowItWorks.css";
 
 const HowItWorks = () => {
@@ -82,22 +82,24 @@ const HowItWorks = () => {
         </div>
 
         <div className="about_page_works_toggle">
-          <button
-            className={`toggle_btn ${
-              activeTab === "farmers" ? "active" : ""
-            }`}
-            onClick={() => setActiveTab("farmers")}
-          >
-            For Farmers
-          </button>
-          <button
-            className={`toggle_btn ${
-              activeTab === "buyers" ? "active" : ""
-            }`}
-            onClick={() => setActiveTab("buyers")}
-          >
-            For Buyers
-          </button>
+          <div>
+            <button
+              className={`toggle_btn ${
+                activeTab === "farmers" ? "active" : ""
+              }`}
+              onClick={() => setActiveTab("farmers")}
+            >
+              For Farmers
+            </button>
+          </div>
+          <div>
+            <button
+              className={`toggle_btn ${activeTab === "buyers" ? "active" : ""}`}
+              onClick={() => setActiveTab("buyers")}
+            >
+              For Buyers
+            </button>
+          </div>
         </div>
 
         <div className="about_page_works_steps_grid">

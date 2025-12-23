@@ -9,7 +9,7 @@
   --text_color: #322f30;
   --grey_alt_color: #f0f4f9;
   --light_grey_color: #808080;
-  --dark_grey_color: #404040;
+  --dark_grey_color: #363636;
 
   --bright_green: #50d050;
   --deep_green: #30a030;
@@ -89,6 +89,16 @@ button {
 
 .section {
   padding: 10rem 0 10rem 0;
+}
+
+/* Loading spinner animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .normal_button {

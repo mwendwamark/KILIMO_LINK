@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import img from "../../../FirstTimer/assets/AboutHero.webp";
 import img1 from "../../../FirstTimer/assets/AboutHero1.webp";
-import img2 from "../../../FirstTimer/assets/AboutHero2.jpg";
+import img2 from "../../../FirstTimer/assets/AboutHero2.webp";
 import { NavLink } from "react-router-dom";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { annotate } from "rough-notation";
@@ -82,7 +82,13 @@ const Hero = () => {
               data-aos="fade-up"
               data-aos-delay="400"
             >
-              <img src={img} alt="Abstract Data Display" />
+              <img
+                src={img}
+                alt="Abstract Data Display"
+                width={350}
+                height={300}
+                loading="lazy"
+              />
               <div className="gallery_item_overlay">
                 <div className="gallery_item_content">
                   <h3 className="gallery_item_title">Direct Farm Sales</h3>
@@ -99,7 +105,13 @@ const Hero = () => {
               data-aos="fade-up"
               data-aos-delay="500"
             >
-              <img src={img1} alt="Minimalist Geometric Composition" />
+              <img
+                src={img1}
+                alt="Minimalist Geometric Composition"
+                width={400}
+                height={340}
+                fetchpriority="high"
+              />
               <div className="gallery_item_overlay">
                 <div className="gallery_item_content">
                   <h3 className="gallery_item_title">Connect with Buyers</h3>
@@ -116,7 +128,13 @@ const Hero = () => {
               data-aos="fade-up"
               data-aos-delay="600"
             >
-              <img src={img2} alt="Abstract 3D Illustration" />
+              <img
+                src={img2}
+                alt="Abstract 3D Illustration"
+                width={350}
+                height={300}
+                loading="lazy"
+              />
               <div className="gallery_item_overlay">
                 <div className="gallery_item_content">
                   <h3 className="gallery_item_title">Fair Trade Platform</h3>
