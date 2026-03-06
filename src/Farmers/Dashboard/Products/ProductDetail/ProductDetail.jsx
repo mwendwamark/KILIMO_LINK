@@ -1,9 +1,10 @@
 // components/Products/ProductDetail.jsx
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { getProduct, deleteProduct } from "../../../../services/api";
 import { formatCurrency } from "../../../../utils/formatters";
 import "./ProductDetail.css";
+import { ArrowLeft } from "lucide-react";
 
 const ProductDetail = ({ farmId }) => {
   const [product, setProduct] = useState(null);
@@ -12,6 +13,14 @@ const ProductDetail = ({ farmId }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const navigate = useNavigate();
   const { productId } = useParams();
+  const location = useLocation();
+
+  // Check if we came from my-listings (via state or URL check)
+  const fromMyListings = location.state?.from === "my-listings";
+  const backTo = fromMyListings
+    ? "/farmers/dashboard/my-listings"
+    : `/farmers/dashboard/farms/${farmId}/products`;
+  const backLabel = fromMyListings ? "Back to My Listings" : "Back to Products";
 
   useEffect(() => {
     fetchProduct();
@@ -77,11 +86,9 @@ const ProductDetail = ({ farmId }) => {
       <div className="product-detail-header">
         <button
           className="dashboard-outline_btn"
-          onClick={() =>
-            navigate(`/farmers/dashboard/farms/${farmId}/products`)
-          }
+          onClick={() => navigate(backTo)}
         >
-          ← Back to Products
+          <ArrowLeft size={16} /> {backLabel}
         </button>
         <div className="product-detail-actions">
           <button

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getProducts, deleteProduct } from "../../../../services/api";
 import { formatCurrency } from "../../../../utils/formatters";
 import "./ProductList.css";
+import { Plus } from "lucide-react";
 
 const ProductsList = ({ farmId }) => {
   const [products, setProducts] = useState([]);
@@ -57,7 +58,7 @@ const ProductsList = ({ farmId }) => {
             navigate(`/farmers/dashboard/farms/${farmId}/products/create`)
           }
         >
-          + Add Product
+          <Plus size={16}/>  Add Product
         </button>
       </div>
 

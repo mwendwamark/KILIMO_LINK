@@ -150,7 +150,11 @@ const ProductCard = ({
   showFarmName = false,
 }) => {
   return (
-    <NavLink className="my-listings-product-card " to={`/farmers/dashboard/farms/${product.farm_id}/products/${product.id}`}>
+    <NavLink
+      className="my-listings-product-card"
+      to={`/farmers/dashboard/farms/${product.farm_id}/products/${product.id}`}
+      state={{ from: "my-listings" }}
+    >
       {product.product_images && product.product_images.length > 0 && (
         <img
           src={product.product_images[0]}
