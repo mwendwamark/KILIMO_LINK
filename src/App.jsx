@@ -8,7 +8,7 @@ import Home from "./FirstTimer/Pages/Home/Home";
 import About from "./FirstTimer/Pages/About/About";
 import RoleSelection from "./FirstTimer/Pages/RoleSelection/RoleSelection";
 import Products from "./FirstTimer/Pages/Products/Products";
-import ProductDetails from "./FirstTimer/Pages/ProductDetails/ProductDetails";
+import BuyerProductDetails from "./FirstTimer/Pages/BuyerProductDetails/BuyerProductDetails";
 import NotFound from "./pages/404/NotFound";
 
 // Lazy load auth pages
@@ -18,40 +18,47 @@ const BuyerSignup = lazy(() => import("./Buyers/Auth/signup/BuyerSignup"));
 const BuyerLogin = lazy(() => import("./Buyers/Auth/login/BuyerLogin"));
 const EmailConfirmed = lazy(() => import("./pages/EmailConfirmed"));
 const CheckEmail = lazy(() => import("./pages/CheckEmail"));
-const ForgotPassword = lazy(() =>
-  import("./pages/ForgotPassword/ForgotPassword")
+const ForgotPassword = lazy(
+  () => import("./pages/ForgotPassword/ForgotPassword"),
 );
-const ResetPassword = lazy(() =>
-  import("./pages/ForgotPassword/ResetPassword")
+const ResetPassword = lazy(
+  () => import("./pages/ForgotPassword/ResetPassword"),
 );
 
 // Lazy load heavy dashboard components
 const Dashboard = lazy(() => import("./Farmers/Dashboard/Dashboard"));
 const MyFarms = lazy(() => import("./Farmers/Dashboard/MyFarms/MyFarms"));
 const FarmDetail = lazy(() => import("./Farmers/Dashboard/MyFarms/FarmDetail"));
-const FarmerProfile = lazy(() =>
-  import("./Farmers/Dashboard/Profile/FarmerProfile")
+const FarmerProfile = lazy(
+  () => import("./Farmers/Dashboard/Profile/FarmerProfile"),
 );
 const BuyerDashboard = lazy(() => import("./Buyers/Dashboard/BuyerDashboard"));
-const BuyerProfile = lazy(() =>
-  import("./Buyers/Dashboard/Profile/BuyerProfile")
+const BuyerProfile = lazy(
+  () => import("./Buyers/Dashboard/Profile/BuyerProfile"),
 );
 
 // Lazy load product components
-const ProductsList = lazy(() =>
-  import("./Farmers/Dashboard/Products/ProductList/ProductList")
+const ProductsList = lazy(
+  () => import("./Farmers/Dashboard/Products/ProductList/ProductList"),
 );
-const ProductsForm = lazy(() =>
-  import("./Farmers/Dashboard/Products/ProductsForm/ProductsForm")
+const ProductsForm = lazy(
+  () => import("./Farmers/Dashboard/Products/ProductsForm/ProductsForm"),
 );
-const ProductDetail = lazy(() =>
-  import("./Farmers/Dashboard/Products/ProductDetail/ProductDetail")
+const FarmerProductDetail = lazy(
+  () =>
+    import("./Farmers/Dashboard/Products/FarmerProductDetail/FarmerProductDetail"),
 );
-const MyListings = lazy(() =>
-  import("./Farmers/Dashboard/MyListings/MyListings")
+const MyListings = lazy(
+  () => import("./Farmers/Dashboard/MyListings/MyListings"),
 );
-const Marketplace = lazy(() =>
-  import("./Farmers/Dashboard/Marketplace/Marketplace")
+const Marketplace = lazy(
+  () => import("./Farmers/Dashboard/Marketplace/Marketplace"),
+);
+const CommunityFeed = lazy(
+  () => import("./Farmers/Dashboard/Community/pages/CommunityFeedPage"),
+);
+const Messaging = lazy(
+  () => import("./Farmers/Dashboard/Community/pages/MessagingPage"),
 );
 
 // Loading fallback component
@@ -115,7 +122,7 @@ const App = () => {
 
           {/* Public Product Routes */}
           <Route path="/products" element={<Products />} />
-          <Route path="/products/:id" element={<ProductDetails />} />
+          <Route path="/products/:id" element={<BuyerProductDetails />} />
 
           <Route path="/farmers/signup" element={<FarmerSignup />} />
           <Route path="/farmers/login" element={<FarmerLogin />} />
@@ -159,7 +166,7 @@ const App = () => {
             />
             <Route
               path="farms/:farmId/products/:productId"
-              element={<ProductDetailWrapper />}
+              element={<FarmerProductDetail />}
             />
             <Route
               path="farms/:farmId/products/:productId/edit"
@@ -169,9 +176,13 @@ const App = () => {
             <Route path="profile" element={<FarmerProfile />} />
             <Route path="resources" element={<div>Resources</div>} />
             <Route path="marketplace" element={<Marketplace />} />
+            <Route
+              path="marketplace/products/:id"
+              element={<BuyerProductDetails dashboardMode={true} />}
+            />
             <Route path="my-listings" element={<MyListings />} />
-            <Route path="community" element={<div>Community</div>} />
-            <Route path="messages" element={<div>Messages</div>} />
+            <Route path="community" element={<CommunityFeed />} />
+            <Route path="messages" element={<Messaging />} />
           </Route>
 
           {/* Buyers Dashboard Routes */}

@@ -302,7 +302,7 @@ export const resetPassword = async (
   token,
   password,
   passwordConfirmation,
-  userType
+  userType,
 ) => {
   try {
     const response = await fetch(`${API_BASE_URL}/${userType}s/password`, {
@@ -671,6 +671,50 @@ export const getPublicProduct = async (id) => {
   }
 };
 
+/**
+ * Get reviews for a product
+ * @param {number} productId - The product ID
+ * @returns {Promise<Object>}
+ */
+export const getProductReviews = async (productId) => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/products/${productId}/reviews`, {
+      headers: { ...getAuthHeader() },
+    });
+    const data = await res.json();
+    return res.ok
+      ? { success: true, data }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+/**
+ * Submit a review for a product
+ * @param {number} productId - The product ID
+ * @param {Object} reviewData - The review data (rating, comment)
+ * @returns {Promise<Object>}
+ */
+export const createProductReview = async (productId, reviewData) => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/products/${productId}/reviews`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...getAuthHeader(),
+      },
+      body: JSON.stringify({ review: reviewData }),
+    });
+    const data = await res.json();
+    return res.ok
+      ? { success: true, data }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
 // ==================== PRODUCTS CRUD ====================
 
 /**
@@ -684,7 +728,7 @@ export const getProducts = async (farmId) => {
       `${API_BASE_URL}/farmers/farms/${farmId}/products`,
       {
         headers: { ...getAuthHeader() },
-      }
+      },
     );
     const data = await res.json();
     return res.ok
@@ -725,7 +769,7 @@ export const getProduct = async (farmId, productId) => {
       `${API_BASE_URL}/farmers/farms/${farmId}/products/${productId}`,
       {
         headers: { ...getAuthHeader() },
-      }
+      },
     );
     const data = await res.json();
     return res.ok
@@ -777,7 +821,7 @@ export const createProduct = async (farmId, payload) => {
           // Don't set Content-Type - let browser set it with boundary
         },
         body: formData,
-      }
+      },
     );
 
     const data = await res.json();
@@ -827,7 +871,7 @@ export const updateProduct = async (farmId, productId, payload) => {
           ...getAuthHeader(),
         },
         body: formData,
-      }
+      },
     );
 
     const data = await res.json();
@@ -852,7 +896,7 @@ export const deleteProduct = async (farmId, productId) => {
       {
         method: "DELETE",
         headers: { ...getAuthHeader() },
-      }
+      },
     );
     const data = await res.json();
     return res.ok
@@ -862,6 +906,306 @@ export const deleteProduct = async (farmId, productId) => {
     return { success: false, error: "Network error" };
   }
 };
+// ==================== COMMUNITY SECTION ====================
+
+/**
+ * Get community posts with pagination and filtering
+ * @param {string} feed - 'all' or 'following'
+ * @param {number} page - Page number
+ * @returns {Promise<Object>}
+ */
+export const getCommunityPosts = async (feed = "all", page = 1) => {
+  try {
+    const res = await fetch(
+      `${API_BASE_URL}/community/posts?feed=${feed}&page=${page}`,
+      {
+        headers: { ...getAuthHeader() },
+      },
+    );
+    const data = await res.json();
+    return res.ok
+      ? { success: true, ...data }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+/**
+ * Get a single community post with comments
+ */
+export const getCommunityPost = async (id) => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/community/posts/${id}`, {
+      headers: { ...getAuthHeader() },
+    });
+    const data = await res.json();
+    return res.ok
+      ? { success: true, ...data }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+/**
+ * Create a new community post
+ */
+export const createCommunityPost = async (payload) => {
+  try {
+    let formData;
+    if (payload instanceof FormData) {
+      formData = payload;
+    } else {
+      formData = new FormData();
+      formData.append("post[content]", payload.content);
+      if (payload.post_images) {
+        payload.post_images.forEach((file) => {
+          formData.append("post[post_images][]", file);
+        });
+      }
+    }
+
+    const res = await fetch(`${API_BASE_URL}/community/posts`, {
+      method: "POST",
+      headers: { ...getAuthHeader() },
+      body: formData,
+    });
+    const data = await res.json();
+    return res.ok
+      ? { success: true, ...data }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+/**
+ * Toggle like on a post
+ */
+export const toggleLikePost = async (postId) => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/community/posts/${postId}/like`, {
+      method: "POST",
+      headers: { ...getAuthHeader() },
+    });
+    const data = await res.json();
+    return res.ok
+      ? { success: true, ...data }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+/**
+ * Get comments for a post
+ */
+export const getPostComments = async (postId, page = 1) => {
+  try {
+    const res = await fetch(
+      `${API_BASE_URL}/community/posts/${postId}/comments?page=${page}`,
+      {
+        headers: { ...getAuthHeader() },
+      },
+    );
+    const data = await res.json();
+    return res.ok
+      ? { success: true, ...data }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+/**
+ * Create a comment or reply
+ */
+export const createComment = async (postId, payload) => {
+  try {
+    const res = await fetch(
+      `${API_BASE_URL}/community/posts/${postId}/comments`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...getAuthHeader(),
+        },
+        body: JSON.stringify({ comment: payload }),
+      },
+    );
+    const data = await res.json();
+    return res.ok
+      ? { success: true, ...data }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+/**
+ * Get public profile of a user
+ */
+export const getCommunityProfile = async (userId) => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/community/users/${userId}`, {
+      headers: { ...getAuthHeader() },
+    });
+    const data = await res.json();
+    return res.ok
+      ? { success: true, ...data }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+/**
+ * Toggle follow a user
+ */
+export const toggleFollowUser = async (userId) => {
+  try {
+    const res = await fetch(
+      `${API_BASE_URL}/community/users/${userId}/follow`,
+      {
+        method: "POST",
+        headers: { ...getAuthHeader() },
+      },
+    );
+    const data = await res.json();
+    return res.ok
+      ? { success: true, ...data }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+/**
+ * Delete a community post
+ */
+export const deleteCommunityPost = async (postId) => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/community/posts/${postId}`, {
+      method: "DELETE",
+      headers: { ...getAuthHeader() },
+    });
+    const data = await res.json();
+    return res.ok
+      ? { success: true, ...data }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+/**
+ * Delete a community comment
+ */
+export const deleteCommunityComment = async (postId, commentId) => {
+  try {
+    const res = await fetch(
+      `${API_BASE_URL}/community/posts/${postId}/comments/${commentId}`,
+      {
+        method: "DELETE",
+        headers: { ...getAuthHeader() },
+      },
+    );
+    const data = await res.json();
+    return res.ok
+      ? { success: true, ...data }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+// ==================== MESSAGING ====================
+
+/**
+ * Get user's conversations
+ */
+export const getConversations = async () => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/community/conversations`, {
+      headers: { ...getAuthHeader() },
+    });
+    const data = await res.json();
+    return res.ok
+      ? { success: true, ...data }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+/**
+ * Start or get a conversation with a user
+ */
+export const startConversation = async (userId) => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/community/conversations`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...getAuthHeader(),
+      },
+      body: JSON.stringify({ user_id: userId }),
+    });
+    const data = await res.json();
+    return res.ok
+      ? { success: true, ...data }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+/**
+ * Get messages for a conversation
+ */
+export const getMessages = async (convoId, page = 1) => {
+  try {
+    const res = await fetch(
+      `${API_BASE_URL}/community/conversations/${convoId}/messages?page=${page}`,
+      {
+        headers: { ...getAuthHeader() },
+      },
+    );
+    const data = await res.json();
+    return res.ok
+      ? { success: true, ...data }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
+/**
+ * Send a message
+ */
+export const sendMessage = async (convoId, body) => {
+  try {
+    const res = await fetch(
+      `${API_BASE_URL}/community/conversations/${convoId}/messages`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...getAuthHeader(),
+        },
+        body: JSON.stringify({ body }),
+      },
+    );
+    const data = await res.json();
+    return res.ok
+      ? { success: true, ...data }
+      : { success: false, error: extractError(data) };
+  } catch (e) {
+    return { success: false, error: "Network error" };
+  }
+};
+
 // ==================== LEGACY API (for other parts of your app) ====================
 
 const API_ENDPOINTS = {

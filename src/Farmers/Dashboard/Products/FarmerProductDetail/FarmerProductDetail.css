@@ -1,0 +1,914 @@
+/* ============================================================
+   FarmerProductDetails.css
+   Prefix: farmer_product_details__
+   Fits inside the Dashboard layout (sidebar + TopDash)
+   ============================================================ */
+
+.farmer_product_details__wrapper {
+  font-family: var(--outfit);
+  color: var(--text_color);
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: slideIn 0.45s ease-out;
+  padding-bottom: 4rem;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ── Toast ── */
+.farmer_product_details__toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--text_color);
+  color: #fff;
+  padding: 0.65rem 1.25rem;
+  border-radius: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--league_spartan);
+  font-size: 0.9rem;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+}
+
+/* ── Delete Modal ── */
+.farmer_product_details__modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9000;
+  padding: 1rem;
+}
+
+.farmer_product_details__modal {
+  background: var(--bg_color);
+  border-radius: 20px;
+  padding: 2.5rem;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.25s ease;
+}
+
+.farmer_product_details__modal h3 {
+  font-family: var(--league_spartan);
+  font-size: 1.3rem;
+  font-weight: var(--fw_medium);
+  color: var(--error_color);
+  margin-bottom: 0.75rem;
+}
+
+.farmer_product_details__modal p {
+  color: var(--light_grey_color);
+  line-height: 1.6;
+  margin-bottom: 1.75rem;
+  font-size: 0.95rem;
+}
+
+.farmer_product_details__modal-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.farmer_product_details__modal-cancel {
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 10px;
+  border: 1px solid var(--grey_alt_color);
+  background: var(--bg_color);
+  color: var(--light_grey_color);
+  font-family: var(--league_spartan);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.farmer_product_details__modal-cancel:hover {
+  background: var(--grey_alt_color);
+}
+
+.farmer_product_details__modal-delete {
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 10px;
+  background: var(--error_color);
+  color: white;
+  font-family: var(--league_spartan);
+  font-weight: var(--fw_medium);
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.farmer_product_details__modal-delete:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ── Top Nav ── */
+.farmer_product_details__top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--grey_alt_color);
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.farmer_product_details__back-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--light_grey_color);
+  font-family: var(--league_spartan);
+  font-size: 0.95rem;
+  font-weight: var(--fw_medium);
+  padding: 0.55rem 1rem;
+  border-radius: 10px;
+  background: var(--white_alt_color);
+  border: 1px solid var(--grey_alt_color);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.farmer_product_details__back-btn:hover {
+  background: var(--grey_alt_color);
+  color: var(--green_color);
+}
+
+.farmer_product_details__top-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.farmer_product_details__share-action {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1rem;
+  border-radius: 10px;
+  background: var(--white_alt_color);
+  border: 1px solid var(--grey_alt_color);
+  color: var(--light_grey_color);
+  font-family: var(--league_spartan);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.farmer_product_details__share-action:hover {
+  background: var(--grey_alt_color);
+  color: var(--text_color);
+}
+
+.farmer_product_details__edit-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 10px;
+  background: var(--green_color);
+  color: white;
+  font-family: var(--league_spartan);
+  font-size: 0.9rem;
+  font-weight: var(--fw_medium);
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(22, 81, 54, 0.15);
+}
+
+.farmer_product_details__edit-btn:hover {
+  background: var(--deep_green);
+  transform: translateY(-1px);
+}
+
+.farmer_product_details__delete-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--error_bg);
+  color: var(--error_color);
+  border: 1px solid var(--error_border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.farmer_product_details__delete-btn:hover {
+  background: var(--error_color);
+  color: white;
+}
+
+/* ── Main Content ── */
+.farmer_product_details__content {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 3rem;
+  margin-bottom: 4rem;
+  align-items: start;
+}
+
+/* Images */
+.farmer_product_details__visuals {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: sticky;
+  top: 90px;
+}
+
+.farmer_product_details__main-image {
+  background: var(--white_alt_color);
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--grey_alt_color);
+}
+
+.farmer_product_details__main-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.farmer_product_details__main-image:hover img {
+  transform: scale(1.03);
+}
+
+.farmer_product_details__no-image {
+  color: var(--light_grey_color);
+  font-size: 0.9rem;
+}
+
+.farmer_product_details__thumbs {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+}
+
+.farmer_product_details__thumbs::-webkit-scrollbar {
+  height: 4px;
+}
+.farmer_product_details__thumbs::-webkit-scrollbar-thumb {
+  background: var(--grey_alt_color);
+  border-radius: 4px;
+}
+
+.farmer_product_details__thumb {
+  width: 70px;
+  height: 70px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.farmer_product_details__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.farmer_product_details__thumb.active {
+  border-color: var(--green_color);
+  box-shadow: 0 2px 8px rgba(22, 81, 54, 0.2);
+}
+
+/* Info */
+.farmer_product_details__info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.farmer_product_details__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.farmer_product_details__category-badge {
+  display: inline-block;
+  padding: 0.3rem 0.9rem;
+  background: var(--light_green_color);
+  color: var(--green_color);
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: var(--fw_bold);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  width: fit-content;
+  font-family: var(--league_spartan);
+}
+
+.farmer_product_details__name {
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  font-weight: var(--fw_bold);
+  color: var(--text_color);
+  line-height: 1.2;
+  margin: 0;
+  font-family: var(--league_spartan);
+}
+
+.farmer_product_details__price {
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-weight: var(--fw_bold);
+  color: var(--green_color);
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.farmer_product_details__price-unit {
+  font-size: 0.95rem;
+  color: var(--light_grey_color);
+  font-weight: var(--fw_regular);
+}
+
+.farmer_product_details__rating-row {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  color: var(--light_grey_color);
+}
+
+/* Sections */
+.farmer_product_details__section {
+  border: 1px solid var(--grey_alt_color);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--bg_color);
+}
+
+.farmer_product_details__section-tab {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.9rem 1.1rem;
+  font-family: var(--league_spartan);
+  font-size: 0.95rem;
+  font-weight: var(--fw_medium);
+  color: var(--text_color);
+  cursor: pointer;
+  background: var(--white_alt_color);
+  transition: background 0.2s;
+}
+
+.farmer_product_details__section-tab:hover {
+  background: var(--grey_alt_color);
+}
+
+.farmer_product_details__section-body {
+  padding: 1.1rem;
+  color: var(--light_grey_color);
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+/* Details grid */
+.farmer_product_details__details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.farmer_product_details__detail-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.75rem;
+  background: var(--white_alt_color);
+  border-radius: 10px;
+  border: 1px solid var(--grey_alt_color);
+}
+
+.farmer_product_details__detail-icon {
+  color: var(--green_color);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.farmer_product_details__detail-card div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.farmer_product_details__detail-card label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--light_grey_color);
+  font-weight: var(--fw_medium);
+}
+
+.farmer_product_details__detail-card span {
+  font-size: 0.9rem;
+  font-weight: var(--fw_medium);
+  color: var(--text_color);
+  text-transform: capitalize;
+}
+
+/* Farm chip */
+.farmer_product_details__farm-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: var(--light_green_color);
+  border-radius: 10px;
+  margin-bottom: 0.75rem;
+}
+
+.farmer_product_details__farm-name {
+  font-family: var(--league_spartan);
+  font-weight: var(--fw_medium);
+  color: var(--text_color);
+  font-size: 0.95rem;
+}
+
+.farmer_product_details__farm-county {
+  font-size: 0.8rem;
+  color: var(--green_color);
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  margin-left: auto;
+}
+
+.farmer_product_details__listing-meta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.farmer_product_details__listing-meta small {
+  font-size: 0.8rem;
+  color: var(--light_grey_color);
+}
+
+/* ── Reviews ── */
+.farmer_product_details__reviews {
+  padding-top: 3rem;
+  border-top: 1px solid var(--grey_alt_color);
+}
+
+.farmer_product_details__reviews-title {
+  font-size: 1.6rem;
+  font-weight: var(--fw_bold);
+  font-family: var(--league_spartan);
+  color: var(--text_color);
+  margin-bottom: 2rem;
+}
+
+.farmer_product_details__reviews-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1.2fr;
+  gap: 2.5rem;
+  align-items: start;
+  margin-bottom: 2.5rem;
+}
+
+.farmer_product_details__rating-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.farmer_product_details__big-score {
+  display: flex;
+  align-items: baseline;
+  gap: 0.15rem;
+}
+
+.farmer_product_details__score-num {
+  font-size: 3.75rem;
+  font-weight: var(--fw_bold);
+  color: var(--text_color);
+  line-height: 1;
+  font-family: var(--league_spartan);
+}
+
+.farmer_product_details__score-denom {
+  font-size: 1.2rem;
+  color: #ccc;
+}
+
+.farmer_product_details__stars-display {
+  display: flex;
+  gap: 0.2rem;
+}
+
+.farmer_product_details__review-count {
+  font-size: 0.85rem;
+  color: var(--light_grey_color);
+}
+
+/* Bars */
+.farmer_product_details__rating-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.farmer_product_details__bar-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.farmer_product_details__bar-label {
+  min-width: 28px;
+  font-size: 0.8rem;
+  color: var(--light_grey_color);
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.farmer_product_details__bar-bg {
+  flex: 1;
+  height: 6px;
+  background: var(--grey_alt_color);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.farmer_product_details__bar-fill {
+  height: 100%;
+  background: var(--text_color);
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+.farmer_product_details__bar-count {
+  font-size: 0.78rem;
+  color: var(--light_grey_color);
+  min-width: 16px;
+  text-align: right;
+}
+
+/* CTA */
+.farmer_product_details__review-cta {
+  background: var(--white_alt_color);
+  border: 1px solid var(--grey_alt_color);
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.farmer_product_details__review-cta h3 {
+  font-family: var(--league_spartan);
+  font-size: 1rem;
+  font-weight: var(--fw_medium);
+  color: var(--text_color);
+  margin-bottom: 0.4rem;
+}
+
+.farmer_product_details__review-cta p {
+  font-size: 0.85rem;
+  color: var(--light_grey_color);
+  margin-bottom: 1.25rem;
+}
+
+.farmer_product_details__write-btn {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1.5px solid var(--text_color);
+  border-radius: 50px;
+  font-family: var(--league_spartan);
+  font-size: 0.9rem;
+  font-weight: var(--fw_medium);
+  cursor: pointer;
+  background: var(--bg_color);
+  color: var(--text_color);
+  transition: all 0.2s;
+}
+
+.farmer_product_details__write-btn:hover {
+  background: var(--text_color);
+  color: white;
+}
+
+.farmer_product_details__own-note {
+  font-size: 0.85rem;
+  color: var(--light_grey_color);
+  font-style: italic;
+  text-align: center;
+}
+
+.farmer_product_details__star-picker {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.farmer_product_details__review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  text-align: left;
+}
+
+.farmer_product_details__review-textarea {
+  width: 100%;
+  padding: 0.75rem 0.875rem;
+  border: 1px solid var(--grey_alt_color);
+  border-radius: 10px;
+  font-family: var(--outfit);
+  font-size: 0.9rem;
+  color: var(--text_color);
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s;
+  background: var(--bg_color);
+}
+
+.farmer_product_details__review-textarea:focus {
+  border-color: var(--green_color);
+}
+
+.farmer_product_details__review-error {
+  color: var(--error_color);
+  font-size: 0.82rem;
+  background: var(--error_bg);
+  padding: 0.4rem 0.75rem;
+  border-radius: 7px;
+}
+
+.farmer_product_details__form-actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.farmer_product_details__cancel-btn {
+  flex: 1;
+  padding: 0.65rem;
+  border-radius: 8px;
+  border: 1px solid var(--grey_alt_color);
+  background: var(--bg_color);
+  color: var(--light_grey_color);
+  font-family: var(--league_spartan);
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.farmer_product_details__cancel-btn:hover {
+  background: var(--grey_alt_color);
+}
+
+.farmer_product_details__submit-btn {
+  flex: 2;
+  padding: 0.65rem;
+  border-radius: 8px;
+  background: var(--green_color);
+  color: white;
+  font-family: var(--league_spartan);
+  font-size: 0.88rem;
+  font-weight: var(--fw_medium);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.farmer_product_details__submit-btn:hover:not(:disabled) {
+  background: var(--deep_green);
+}
+
+.farmer_product_details__submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.farmer_product_details__review-success {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  color: var(--success_color);
+  background: var(--success_bg);
+  padding: 0.5rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+  font-family: var(--league_spartan);
+}
+
+/* Review List */
+.farmer_product_details__review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.farmer_product_details__review-card {
+  padding: 1.25rem;
+  border: 1px solid var(--grey_alt_color);
+  border-radius: 14px;
+  background: var(--bg_color);
+  transition: box-shadow 0.2s;
+}
+
+.farmer_product_details__review-card:hover {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.farmer_product_details__review-header {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  margin-bottom: 0.75rem;
+}
+
+.farmer_product_details__reviewer-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--green_color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--league_spartan);
+  font-weight: var(--fw_bold);
+  font-size: 0.8rem;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.farmer_product_details__reviewer-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.farmer_product_details__reviewer-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.farmer_product_details__reviewer-info strong {
+  font-size: 0.9rem;
+  font-weight: var(--fw_medium);
+  color: var(--text_color);
+}
+
+.farmer_product_details__reviewer-role {
+  font-size: 0.75rem;
+  color: var(--green_color);
+  text-transform: capitalize;
+  font-weight: var(--fw_medium);
+}
+
+.farmer_product_details__review-stars {
+  display: flex;
+  gap: 0.15rem;
+}
+
+.farmer_product_details__review-date {
+  font-size: 0.78rem;
+  color: var(--light_grey_color);
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.farmer_product_details__review-body {
+  font-size: 0.9rem;
+  color: var(--light_grey_color);
+  line-height: 1.65;
+  padding-left: calc(36px + 0.875rem);
+}
+
+/* No Reviews */
+.farmer_product_details__no-reviews {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 3rem 2rem;
+  color: var(--light_grey_color);
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* Loading / Error */
+.farmer_product_details__loading,
+.farmer_product_details__error {
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-family: var(--outfit);
+  color: var(--light_grey_color);
+}
+
+.farmer_product_details__spinner {
+  width: 38px;
+  height: 38px;
+  border: 3px solid var(--grey_alt_color);
+  border-top-color: var(--green_color);
+  border-radius: 50%;
+  animation: spin 0.85s linear infinite;
+}
+
+.farmer_product_details__error button {
+  padding: 0.6rem 1.25rem;
+  background: var(--green_color);
+  color: white;
+  border-radius: 3rem;
+  font-family: var(--league_spartan);
+  cursor: pointer;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .farmer_product_details__content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .farmer_product_details__visuals {
+    position: static;
+    max-width: 480px;
+  }
+  .farmer_product_details__reviews-grid {
+    grid-template-columns: 1fr 1.3fr;
+    gap: 2rem;
+  }
+  .farmer_product_details__review-cta {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .farmer_product_details__visuals {
+    max-width: 100%;
+  }
+  .farmer_product_details__details-grid {
+    grid-template-columns: 1fr;
+  }
+  .farmer_product_details__reviews-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .farmer_product_details__top-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .farmer_product_details__top-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  .farmer_product_details__review-body {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .farmer_product_details__name {
+    font-size: 1.4rem;
+  }
+  .farmer_product_details__price {
+    font-size: 1.2rem;
+  }
+  .farmer_product_details__share-action span {
+    display: none;
+  }
+  .farmer_product_details__edit-btn span {
+    display: none;
+  }
+}

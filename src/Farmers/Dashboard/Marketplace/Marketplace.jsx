@@ -74,7 +74,7 @@ const Marketplace = () => {
   }, [filters, currentPage]);
 
   const handleProductClick = (productId) => {
-    navigate(`/products/${productId}`);
+    navigate(`/farmers/dashboard/marketplace/products/${productId}`);
   };
 
   const handleRemoveFilter = (key) => {
