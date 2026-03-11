@@ -152,7 +152,7 @@ const ProductCard = ({
   return (
     <NavLink
       className="my-listings-product-card"
-      to={`/farmers/dashboard/farms/${product.farm_id}/products/${product.id}`}
+      to={`/farmers/dashboard/farms/${product.farm_id || product.farm?.id}/products/${product.id}`}
       state={{ from: "my-listings" }}
     >
       {product.product_images && product.product_images.length > 0 && (
@@ -178,26 +178,35 @@ const ProductCard = ({
           </span>
         </div>
       </div>
-      {/* <div className="product-actions">
+      <div className="product-actions" onClick={(e) => e.preventDefault()}>
         <button
           className="dashboard-outline_btn"
-          onClick={() => onView(product.farm_id, product.id)}
+          onClick={(e) => {
+            e.stopPropagation();
+            onView(product.farm_id || product.farm?.id, product.id);
+          }}
         >
           View
         </button>
         <button
           className="dashboard-edit_btn"
-          onClick={() => onEdit(product.farm_id, product.id)}
+          onClick={(e) => {
+            e.stopPropagation();
+            onEdit(product.farm_id || product.farm?.id, product.id);
+          }}
         >
           Edit
         </button>
         <button
           className="dashboard-delete_btn"
-          onClick={() => onDelete(product.farm_id, product.id)}
+          onClick={(e) => {
+            e.stopPropagation();
+            onDelete(product.farm_id || product.farm?.id, product.id);
+          }}
         >
           Delete
         </button>
-      </div> */}
+      </div>
     </NavLink>
   );
 };

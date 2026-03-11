@@ -18,6 +18,8 @@ import {
   MessageSquare,
   X,
   Check,
+  Edit3,
+  Trash2,
 } from "lucide-react";
 import {
   getPublicProduct,
@@ -25,6 +27,7 @@ import {
   createProductReview,
   getCurrentUser,
   getAuthToken,
+  deleteProduct,
 } from "../../../services/api";
 import { formatCurrency } from "../../../utils/formatters";
 import "./BuyerProductDetails.css";
@@ -51,6 +54,8 @@ const BuyerProductDetails = ({ dashboardMode = false }) => {
   const [reviewError, setReviewError] = useState("");
   const [reviewSuccess, setReviewSuccess] = useState(false);
   const [shareToast, setShareToast] = useState(false);
+  const [deleteConfirm, setDeleteConfirm] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   const currentUser = getCurrentUser();
   const authToken = getAuthToken();
@@ -143,6 +148,18 @@ const BuyerProductDetails = ({ dashboardMode = false }) => {
     setReviewLoading(false);
   };
 
+  const handleDelete = async () => {
+    setDeleting(true);
+    const result = await deleteProduct(product.farm_id || product.farm?.id, id);
+    if (result.success) {
+      if (dashboardMode) navigate("/farmers/dashboard/my-listings");
+      else navigate("/products");
+    } else {
+      alert(`Error: ${result.error}`);
+      setDeleting(false);
+    }
+  };
+
   const avgRating = reviews.length
     ? (reviews.reduce((s, r) => s + r.rating, 0) / reviews.length).toFixed(1)
     : 0;
@@ -190,18 +207,74 @@ const BuyerProductDetails = ({ dashboardMode = false }) => {
         </div>
       )}
 
+      {/* Delete Confirmation Modal */}
+      {deleteConfirm && (
+        <div className="buyer_product_details__modal-overlay">
+          <div className="buyer_product_details__modal">
+            <h3>Delete Product?</h3>
+            <p>
+              This will permanently remove{" "}
+              <strong>{product.product_name}</strong>. This action cannot be
+              undone.
+            </p>
+            <div className="buyer_product_details__modal-actions">
+              <button
+                className="buyer_product_details__modal-cancel"
+                onClick={() => setDeleteConfirm(false)}
+                disabled={deleting}
+              >
+                Cancel
+              </button>
+              <button
+                className="buyer_product_details__modal-delete"
+                onClick={handleDelete}
+                disabled={deleting}
+              >
+                {deleting ? "Deleting..." : "Yes, Delete"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div
         className={`buyer_product_details__page container ${!dashboardMode ? "below_navbar" : ""}`}
       >
-        {dashboardMode && (
-          <button
-            className="buyer_product_details__back-btn"
-            onClick={handleBack}
-          >
-            <ArrowLeft size={17} />
-            Back to Marketplace
-          </button>
-        )}
+        <div className="buyer_product_details__top-controls">
+          {dashboardMode && (
+            <button
+              className="buyer_product_details__back-btn"
+              onClick={handleBack}
+            >
+              <ArrowLeft size={17} />
+              Back to Marketplace
+            </button>
+          )}
+
+          {/* Owner Actions */}
+          {isOwnProduct && (
+            <div className="buyer_product_details__owner-actions">
+              <button
+                className="buyer_product_details__edit-btn"
+                onClick={() =>
+                  navigate(
+                    `/farmers/dashboard/farms/${product.farm_id || product.farm?.id}/products/${id}/edit`,
+                  )
+                }
+              >
+                <Edit3 size={17} />
+                <span>Edit Listing</span>
+              </button>
+              <button
+                className="buyer_product_details__delete-btn"
+                onClick={() => setDeleteConfirm(true)}
+              >
+                <Trash2 size={17} />
+                <span>Delete</span>
+              </button>
+            </div>
+          )}
+        </div>
 
         {/* Breadcrumb - only on public pages */}
         {!dashboardMode && (

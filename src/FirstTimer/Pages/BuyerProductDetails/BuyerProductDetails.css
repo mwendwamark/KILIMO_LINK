@@ -99,6 +99,169 @@
   max-width: 200px;
 }
 
+/* Edit/Delete Controls */
+.buyer_product_details__top-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.buyer_product_details__back-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--white_alt_color);
+  border: 1px solid var(--grey_alt_color);
+  border-radius: 8px;
+  color: var(--text_color);
+  font-family: var(--outfit);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.buyer_product_details__back-btn:hover {
+  background: var(--grey_alt_color);
+  transform: translateX(-3px);
+}
+
+.buyer_product_details__owner-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-left: auto;
+}
+
+.buyer_product_details__edit-btn,
+.buyer_product_details__delete-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-family: var(--league_spartan);
+  font-size: 0.9rem;
+  font-weight: var(--fw_medium);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.buyer_product_details__edit-btn {
+  background: var(--light_green_color);
+  color: var(--green_color);
+  border: 1px solid rgba(22, 81, 54, 0.2);
+}
+
+.buyer_product_details__edit-btn:hover {
+  background: var(--green_color);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.buyer_product_details__delete-btn {
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1px solid rgba(220, 38, 38, 0.2);
+}
+
+.buyer_product_details__delete-btn:hover {
+  background: #dc2626;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Modal Overlay */
+.buyer_product_details__modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 1.5rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.buyer_product_details__modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  animation: modalIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.buyer_product_details__modal h3 {
+  font-family: var(--league_spartan);
+  font-size: 1.5rem;
+  font-weight: var(--fw_bold);
+  color: var(--text_color);
+}
+
+.buyer_product_details__modal p {
+  color: var(--light_grey_color);
+  line-height: 1.6;
+}
+
+.buyer_product_details__modal-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.buyer_product_details__modal-cancel,
+.buyer_product_details__modal-delete {
+  flex: 1;
+  padding: 0.8rem;
+  border-radius: 12px;
+  font-family: var(--league_spartan);
+  font-size: 1rem;
+  font-weight: var(--fw_medium);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.buyer_product_details__modal-cancel {
+  background: var(--grey_alt_color);
+  color: var(--text_color);
+  border: none;
+}
+
+.buyer_product_details__modal-delete {
+  background: #dc2626;
+  color: white;
+  border: none;
+}
+
+.buyer_product_details__modal-delete:hover:not(:disabled) {
+  background: #b91c1c;
+}
+
+.buyer_product_details__modal-delete:disabled {
+  opacity: 0.6;
+}
+
 /* Two-column layout */
 .buyer_product_details__layout {
   display: grid;

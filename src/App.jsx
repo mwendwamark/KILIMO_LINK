@@ -108,7 +108,7 @@ const ProductFormEditWrapper = () => {
 
 const ProductDetailWrapper = () => {
   const { farmId } = useParams();
-  return <ProductDetail farmId={farmId} />;
+  return <FarmerProductDetail farmId={farmId} />;
 };
 
 const App = () => {
@@ -166,7 +166,7 @@ const App = () => {
             />
             <Route
               path="farms/:farmId/products/:productId"
-              element={<FarmerProductDetail />}
+              element={<ProductDetailWrapper />}
             />
             <Route
               path="farms/:farmId/products/:productId/edit"
